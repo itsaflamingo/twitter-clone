@@ -41,5 +41,14 @@ body {
     font-weight: bold;
     color: white;
 }
+/* HEADER */
+#header {
+    width: 100vw;
+    height: 10vh;
+    display: flex;
+}
+#logo {
+    height: 90%;
+}
 
 

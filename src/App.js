@@ -5,10 +5,11 @@ import Profile from "./components/Profile";
 import Dashboard from "./components/Dashboard";
 
 function App() {
+
   return (
     <BrowserRouter >
       <Routes>
-        <Route path='/signIn' element={<SignInPg />}/>
+        <Route path='/' element={<SignInPg />}/>
         <Route path='/dashboard' element={<Dashboard />} />
         <Route path='/profile' element={<Profile />} />
       </Routes>

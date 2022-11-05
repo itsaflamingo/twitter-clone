@@ -1,16 +1,23 @@
 import logo from '../images/twitter.webp'
-import { selectAccountInfo, selectError, selectStatus, fetchUser } from "./SignInPgSlice"
-import { useEffect, useState } from 'react';
+import { fetchUser } from "./SignInPgSlice"
+import { useNavigate } from 'react-router-dom';
+import { selectUser, selectError, selectStatus } from "./SignInPgSlice"
 import { useSelector, useDispatch } from "react-redux"
+import { useEffect } from 'react';
 
-export default function SignInPg(props) {
+export default function SignInPg() {
 
-    const account = useSelector((state) => state.user.user);
-    const dispatch = useDispatch();
-
+    const user = useSelector(selectUser);
     const status = useSelector(selectStatus);
     const error = useSelector(selectError);
-    const info = useSelector(selectAccountInfo);
+    const dispatch = useDispatch();
+
+    const nav = useNavigate();
+
+    useEffect(() => {
+        if(status !== 'succeed') return;
+        nav('/dashboard');
+    }, [status])
 
     return (
         <div id='sign-in-container'>

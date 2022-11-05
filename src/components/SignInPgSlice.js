@@ -45,22 +45,22 @@ const accountSlice = createSlice({
     initialState,
     extraReducers: (builder) => {
             builder.addCase(fetchUser.pending,  (state) => {
-                state.status = 'loading'
+                state.status = 'loading';
             })
             builder.addCase(fetchUser.fulfilled,  (state, action) => {
-                state.status = 'succeed'
+                state.status = 'succeed';
                 state.user = action.payload;
             })
             builder.addCase(fetchUser.rejected, (state, action) => {
-                state.status = 'failed'
-                state.error = action.error.message
+                state.status = 'failed';
+                state.error = action.error.message;
             })
     }
 })
 
-export const selectAccountInfo = (state) => state.user;     
-export const selectStatus = (state) => state.status;
-export const selectError = (state) => state.error;
+export const selectUser = (state) => state.user.user;     
+export const selectStatus = (state) => state.user.status;
+export const selectError = (state) => state.user.error;
 
 export {fetchUser}
 export default accountSlice.reducer;

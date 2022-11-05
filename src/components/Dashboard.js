@@ -1,8 +1,15 @@
+import HigherOrderComponent from "./HigherOrderComponent";
+import CreateTweet from './CreateTweet'
+import DisplayTweets from "./DisplayTweets";
+
 function Dashboard() {
     return(
-        <div></div>
+        <div id='dashboard'>
+            <CreateTweet />
+            <DisplayTweets />
+        </div>
     )
 }
 
-export default Dashboard;
+export default HigherOrderComponent(Dashboard);
 
