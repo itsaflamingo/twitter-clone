@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { useEffect, useState } from "react";
 import { getTweets } from "./retrieveFromCloud";
 import { storeTweets } from "./storeInCloud";
+import uniqid from 'uniqid'
 
 export default function CreateTweet() {
 
@@ -12,7 +13,9 @@ export default function CreateTweet() {
     const user = useSelector(selectUser);
     const dispatch = useDispatch();
 
+    // Input hold the onChange handler for tweet. 
     const [input, setInput] = useState('');
+    // When submit button clicked, input gets placed in tweet.
     const [tweet, setTweet] = useState({
         name: user.displayName,
         date: '',
@@ -21,7 +24,8 @@ export default function CreateTweet() {
         likes: 0,
         retweets: 0,
         words: 0,
-        id: 0,
+        id: uniqid(),
+        comments: []
     })
 
     const getDate = () => {
@@ -44,8 +48,9 @@ export default function CreateTweet() {
 
     useEffect(() => {
         if(tweet.text === '') return;
+        // When new tweet added, it is added to state tweets array
         dispatch(addTweet(tweet));
-        storeTweets(tweet);
+        // storeTweets(tweet);
     }, [tweet])
 
     useEffect(() => {

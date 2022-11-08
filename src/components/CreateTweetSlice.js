@@ -1,6 +1,7 @@
 import { createAction, createReducer } from "@reduxjs/toolkit";
 
 const initialState = [];
+
 const add = createAction('addTweet');
 const remove = createAction('deleteTweet');
 
