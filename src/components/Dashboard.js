@@ -3,6 +3,9 @@ import CreateTweet from './CreateTweet'
 import DisplayTweets from "./DisplayTweets";
 
 function Dashboard() {
+
+    
+
     return(
         <div id='dashboard'>
             <CreateTweet />

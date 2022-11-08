@@ -46,9 +46,34 @@ body {
     width: 100vw;
     height: 10vh;
     display: flex;
+    justify-content: space-between;
 }
 #logo {
     height: 90%;
 }
-
+#menu {
+    display: flex;
+}
+#logo, #menu {
+    margin: 1rem 1.5rem;
+}
+/* TWEET DISPLAY */
+#app {
+    height: 100vh;
+    width: 100vw;
+}
+#dashboard {
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+}
+#create-tweet {
+    height: 60%;
+    width: 80%;
+}
+#tweet-display {
+    border: 1px solid black;
+    height: 60%;
+    width: 40%;
+}
 

@@ -49,7 +49,7 @@ const accountSlice = createSlice({
             })
             builder.addCase(fetchUser.fulfilled,  (state, action) => {
                 state.status = 'succeed';
-                state.user = action.payload;
+                state.user = JSON.parse(action.payload);
             })
             builder.addCase(fetchUser.rejected, (state, action) => {
                 state.status = 'failed';

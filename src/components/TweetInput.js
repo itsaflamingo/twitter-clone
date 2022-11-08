@@ -1,14 +1,18 @@
-
+import { getAdditionalUserInfo } from "firebase/auth";
+import { useState } from "react";
 
 export default function TweetInput(props) {
-    const { type } = props;
+    const { type, setInput } = props;
+
+    const setTweetInput = (e) => setInput(e.target.value);
+
     return (
         <form>
-            <label for='tweet'>Create Tweet</label>
+            <label htmlFor='tweet'>Create Tweet</label>
             <input 
             type={type}
-            value=''
-            id='tweet' />
+            id='tweet' 
+            onChange={(e) => setTweetInput(e)} />
         </form>
     )
 }

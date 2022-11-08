@@ -5,15 +5,17 @@ export default function Header() {
 
     const nav = useNavigate();
     const goHome = () => nav('/dashboard');
-    
+
     return (
         <div id='header'>
             <img id='logo' 
                 src={logo} 
                 alt='logo' 
                 onClick={() => goHome()}/>
-            <div>Search</div>
-            <div>Account</div>
+            <div id='menu'>
+                <div>Search</div>
+                <div>Account</div>
+            </div>
         </div>
     )
 }

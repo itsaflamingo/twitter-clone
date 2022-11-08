@@ -5,7 +5,7 @@ export default function HigherOrderComponent(WrappedComponent) {
     return function EnhanceComponent() {
         
     return(
-        <div>
+        <div id='app'>
             <Header />
             <WrappedComponent />
         </div>
