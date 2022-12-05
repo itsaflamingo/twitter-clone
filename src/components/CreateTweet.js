@@ -47,6 +47,7 @@ export default function CreateTweet() {
             text: input,
             date: getDate()
         })
+        setInput('');
     }
 
     useEffect(() => {
@@ -82,10 +83,7 @@ export default function CreateTweet() {
 
     return(
         <div id='create-tweet'>
-            <TweetInput setInput={setInput} />
-            <button 
-            type='submit'
-            onClick={(e) => handleSubmit(e)}>Submit</button>
+            <TweetInput setInput={setInput} handleSubmit={handleSubmit} input={input} />
         </div>
     )
 }
