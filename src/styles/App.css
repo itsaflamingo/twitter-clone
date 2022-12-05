@@ -76,4 +76,14 @@ body {
     height: 60%;
     width: 40%;
 }
-
+/* TWEET */
+.tweet-btns {
+    display: flex;
+}
+.retweet-div, .like-div {
+    height: 5%;
+    width: 5%;
+}
+.like, .retweet {
+    height: 90%;
+}

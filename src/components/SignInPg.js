@@ -21,28 +21,24 @@ export default function SignInPg() {
     useEffect(() => {
         if(status !== 'succeed') return;
         nav('/dashboard');
+        getdbUsers();
         isInDatabase(user);
     }, [status])
 
     useEffect(() => {
         // Retrieve users from database
-        const getdbUsers = async() => {
-            let dbUsers;
-            await getUsers().then((res) => dbUsers = res);
-            console.log(dbUsers)
-            dbUsers.forEach((thisUser) => {
-                if(user.displayName === thisUser.displayName) return;
-                
-                dispatch(addUser(user))
-            });
-        }
         getdbUsers();
     }, [])
 
+    const getdbUsers = async() => {
+        let dbUsers;
+        await getUsers().then((res) => dbUsers = res);
+        dispatch(addUser(dbUsers))
+    }
+
     const isInDatabase = (user) => {
 
-        const thisUser = users.users.filter((obj) => obj.user.displayName === user.displayName);
-        console.log(thisUser);
+        const thisUser = users.filter((obj) => obj.user.displayName === user.displayName);
 
         if(thisUser.length === 0) {
             //Store in database & add to users array

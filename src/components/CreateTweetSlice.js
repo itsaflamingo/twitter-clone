@@ -21,13 +21,13 @@ function deleteTweet(state, obj) {
 const tweetsReducer = createReducer(initialState, (builder) => {
     builder
         .addCase(add, (state, action) => {
-            state.concat(action.payload);
+            return [...state, action.payload].reverse();
         })  
         .addCase(remove, (state, action) => {
             deleteTweet(state, action.payload);
         })
     })
 
-export const tweetsSelector = (state) => state;
+export const tweetsSelector = (state) => state.tweets;
 export {addTweet};
 export default tweetsReducer;

@@ -26,7 +26,11 @@ export default function CreateTweet() {
         words: 0,
         id: uniqid(),
         comments: []
-    })
+    });
+
+    useEffect(() => {
+        console.log(input);
+    }, [input]);
 
     const getDate = () => {
         let yourDate = new Date();
@@ -37,31 +41,44 @@ export default function CreateTweet() {
     }
 
     const handleSubmit = (e) => {
-        e.preventDefault()
+        e.preventDefault();
         setTweet({
             ...tweet, 
             text: input,
             date: getDate()
         })
-        setInput('');
     }
 
     useEffect(() => {
         if(tweet.text === '') return;
         // When new tweet added, it is added to state tweets array
         dispatch(addTweet(tweet));
-        // storeTweets(tweet);
+        console.log('tweet added');
+        storeTweets(tweet);
+        setTweet({
+            ...tweet,
+            text: '',
+            date: ''
+        })
     }, [tweet])
 
     useEffect(() => {
-        // retrieve tweets from database
-        const getdbTweets = async() => {
-            let dbTweets;
-            await getTweets().then((res) => dbTweets = res);
-            dispatch(addTweet(dbTweets));
-        }
+        // retrieve tweets from database, fires once
         getdbTweets();        
     }, [])
+
+    const getdbTweets = async() => {
+            let dbTweets;
+
+            await getTweets().then((res) => dbTweets = res);
+            dbTweets.forEach((tweet) => {
+                // if tweet already exists in tweets, don't retrieve from database
+                const isPresent = tweets.some(obj => obj.date === tweet.tweet.date)
+                if (isPresent === true) return;
+                // if above is false, retrieve from database
+                dispatch(addTweet(tweet.tweet));
+            })
+        }
 
     return(
         <div id='create-tweet'>

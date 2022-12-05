@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { addTweet, tweetsSelector } from "./CreateTweetSlice";
 import uniqid from 'uniqid';
@@ -13,10 +13,12 @@ export default function DisplayTweets() {
         <div id='tweet-display'>
             {tweets.map((tweet) => {
                 return (<div className="tweet" key={uniqid()}>
-                    {tweet}
-                    <div>
+                    <div className="user-name">{tweet.name}</div>
+                    {tweet.text}
+                    <div className="tweet-btns">
                         <LikeCounter />
                         <RetweetCounter />
+                        {tweet.date}
                     </div>
                 </div>)
             })}

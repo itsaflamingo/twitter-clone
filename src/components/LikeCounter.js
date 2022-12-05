@@ -4,7 +4,7 @@ import heart from '../images/heart.svg'
 function LikeCounter() {
     return (
         <div className="like-div">
-            <img src={heart} alt='like-btn' />
+            <img className='like' src={heart} alt='like-btn' />
         </div>
     )
 }
