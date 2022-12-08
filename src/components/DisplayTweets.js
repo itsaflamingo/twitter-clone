@@ -7,7 +7,10 @@ import RetweetCounter from "./RetweetCounter";
 
 export default function DisplayTweets() {
     
-    const tweets = useSelector(tweetsSelector);
+    const [tweets, setTweets] = useState([]);
+    const unmodifiableTweets = useSelector(tweetsSelector);
+    
+    console.log(unmodifiableTweets);
 
     return (
         <div id='tweet-display'>
@@ -16,7 +19,7 @@ export default function DisplayTweets() {
                     <div className="user-name">{tweet.name}</div>
                     {tweet.text}
                     <div className="tweet-btns">
-                        <LikeCounter />
+                        <LikeCounter tweet={tweet} />
                         <RetweetCounter />
                         {tweet.date}
                     </div>

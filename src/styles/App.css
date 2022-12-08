@@ -67,6 +67,9 @@ body {
     display: flex;
     flex-direction: column;
 }
+.likelike {
+    width: 20px;
+}
 #create-tweet {
     height: 60%;
     width: 80%;

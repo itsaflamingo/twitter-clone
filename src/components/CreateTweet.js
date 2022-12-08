@@ -24,13 +24,8 @@ export default function CreateTweet() {
         likes: 0,
         retweets: 0,
         words: 0,
-        id: uniqid(),
         comments: []
     });
-
-    useEffect(() => {
-        console.log(input);
-    }, [input]);
 
     const getDate = () => {
         let yourDate = new Date();
@@ -45,7 +40,8 @@ export default function CreateTweet() {
         setTweet({
             ...tweet, 
             text: input,
-            date: getDate()
+            date: getDate(),
+            id: uniqid()
         })
         setInput('');
     }
@@ -54,7 +50,6 @@ export default function CreateTweet() {
         if(tweet.text === '') return;
         // When new tweet added, it is added to state tweets array
         dispatch(addTweet(tweet));
-        console.log('tweet added');
         storeTweets(tweet);
         setTweet({
             ...tweet,
@@ -64,26 +59,47 @@ export default function CreateTweet() {
     }, [tweet])
 
     useEffect(() => {
-        // retrieve tweets from database, fires once
-        getdbTweets();        
+        let ignore = false;
+        
+        const getdbTweets = async() => {
+            let usedId = [];        
+            const json = await getTweets();
+            if(!ignore) {
+                addNewTweetToDatabase(json, usedId);
+            }
+        }
+
+        getdbTweets();
+
+        return() => {
+            ignore = true;
+        }
     }, [])
 
-    const getdbTweets = async() => {
-            let dbTweets;
-
-            await getTweets().then((res) => dbTweets = res);
-            dbTweets.forEach((tweet) => {
+        function addNewTweetToDatabase(res, usedId) {
+            res.forEach((tweet) => {
                 // if tweet already exists in tweets, don't retrieve from database
-                const isPresent = tweets.some(obj => obj.date === tweet.tweet.date)
-                if (isPresent === true) return;
-                // if above is false, retrieve from database
+                const isPresent = usedId.filter(id => {
+                    console.log(id, tweet.tweet.id)
+                    return id === tweet.tweet.id
+                });
+                
+                if(!usedId.includes(tweet.tweet.id)) usedId.push(tweet.tweet.id);
+
+                console.log(isPresent)
+                if (isPresent.length > 0) return;
+                // if above is false, retrieve from database.
                 dispatch(addTweet(tweet.tweet));
-            })
-        }
+        })}
 
     return(
         <div id='create-tweet'>
-            <TweetInput setInput={setInput} handleSubmit={handleSubmit} input={input} />
+            <TweetInput setInput={setInput} input={input} />
+            <div id='tweet-add-ons'>
+            <button 
+                type='submit'
+                onClick={(e) => handleSubmit(e)}>Submit</button>
+            </div>
         </div>
     )
 }

@@ -14,8 +14,8 @@ function addTweet(obj) {
 
 function deleteTweet(state, obj) {
     const tweet = state.filter(() => state.id === obj.id);
-            const index = state.indexOf(tweet);
-            state.splice(index, 1);
+        const index = state.indexOf(tweet);
+        state.splice(index, 1);
 }
 
 const tweetsReducer = createReducer(initialState, (builder) => {
@@ -29,5 +29,5 @@ const tweetsReducer = createReducer(initialState, (builder) => {
     })
 
 export const tweetsSelector = (state) => state.tweets;
-export {addTweet};
+export { addTweet };
 export default tweetsReducer;

@@ -1,5 +1,5 @@
 export default function TweetInput(props) {
-    const { type, setInput, handleSubmit, input } = props;
+    const { type, setInput, input } = props;
 
     const setTweetInput = (e) => setInput(e.target.value);
 
@@ -12,9 +12,6 @@ export default function TweetInput(props) {
                 id='tweet' 
                 value={input}
                 onChange={(e) => setTweetInput(e)} />
-                <button 
-                type='submit'
-                onClick={(e) => handleSubmit(e)}>Submit</button>
             </form>
         </div>
     )

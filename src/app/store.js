@@ -12,4 +12,4 @@ import usersReducer from '../components/allUsersSlice'
     }
   });
   
-  export {store};
+  export { store };
