@@ -1,15 +1,15 @@
 import TweetInput from "./TweetInput";
 import {selectUser} from './SignInPgSlice'
-import { addTweet, tweetsSelector } from "./CreateTweetSlice";
+import { addTweet } from "./CreateTweetSlice";
 import { useSelector, useDispatch } from "react-redux"
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { getTweets } from "./retrieveFromCloud";
 import { storeTweets } from "./storeInCloud";
 import uniqid from 'uniqid'
 
+
 export default function CreateTweet() {
 
-    const tweets = useSelector(tweetsSelector);
     const user = useSelector(selectUser);
     const dispatch = useDispatch();
 
@@ -26,6 +26,7 @@ export default function CreateTweet() {
         words: 0,
         comments: []
     });
+    const [usedId, dispatchUsedId] = useReducer(addToUsedId, { state: [] });
 
     const getDate = () => {
         let yourDate = new Date();
@@ -58,14 +59,14 @@ export default function CreateTweet() {
         })
     }, [tweet])
 
+    // Will run more than once because there is a closure inside the callback function.
     useEffect(() => {
         let ignore = false;
         
         const getdbTweets = async() => {
-            let usedId = [];        
             const json = await getTweets();
             if(!ignore) {
-                addNewTweetToDatabase(json, usedId);
+                retrieveTweetsFromDatabase(json, usedId);
             }
         }
 
@@ -76,19 +77,16 @@ export default function CreateTweet() {
         }
     }, [])
 
-        function addNewTweetToDatabase(res, usedId) {
+        function retrieveTweetsFromDatabase(res, usedId) {
             res.forEach((tweet) => {
-                // if tweet already exists in tweets, don't retrieve from database
-                const isPresent = usedId.filter(id => {
-                    console.log(id, tweet.tweet.id)
-                    return id === tweet.tweet.id
-                });
-                
-                if(!usedId.includes(tweet.tweet.id)) usedId.push(tweet.tweet.id);
+                // check if tweet already exists.
+                const isPresent = usedId.state.includes(tweet.tweet.id);
 
-                console.log(isPresent)
-                if (isPresent.length > 0) return;
-                // if above is false, retrieve from database.
+                // if tweet exists don't add to database. 
+                if (isPresent === true) return;
+
+                // else add to database, & to included tweets.
+                dispatchUsedId({ type: 'add tweet', value: tweet.tweet.id });
                 dispatch(addTweet(tweet.tweet));
         })}
 
@@ -102,4 +100,14 @@ export default function CreateTweet() {
             </div>
         </div>
     )
+}
+
+function addToUsedId(state, action) {
+    switch(action.type) {
+        case 'add tweet': 
+        return {
+            state: [...state.state, action.value]
+        };
+        default: return;
+    }
 }

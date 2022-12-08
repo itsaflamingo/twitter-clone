@@ -4,11 +4,22 @@ const initialState = [];
 
 const add = createAction('addTweet');
 const remove = createAction('deleteTweet');
+const update = createAction('updateTweet');
 
 function addTweet(obj) {
     return {
         type: 'addTweet',
         payload: obj
+    }
+}
+
+function updateTweet(index, updatedValues) {
+    return {
+        type: 'updateTweet',
+        payload: {
+            index,
+            updatedValues
+        }
     }
 }
 
@@ -26,8 +37,19 @@ const tweetsReducer = createReducer(initialState, (builder) => {
         .addCase(remove, (state, action) => {
             deleteTweet(state, action.payload);
         })
+        .addCase(update, (state, action) => {
+            return state.map((tweet, index) => {
+                if(index === action.payload.index) {
+                    return {
+                        ...state,
+                        ...action.payload.updatedValues
+                    }
+                }
+                return tweet;
+            });
+        })
     })
 
 export const tweetsSelector = (state) => state.tweets;
-export { addTweet };
+export { addTweet, updateTweet };
 export default tweetsReducer;

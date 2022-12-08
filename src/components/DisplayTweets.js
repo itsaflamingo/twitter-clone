@@ -7,10 +7,8 @@ import RetweetCounter from "./RetweetCounter";
 
 export default function DisplayTweets() {
     
-    const [tweets, setTweets] = useState([]);
-    const unmodifiableTweets = useSelector(tweetsSelector);
+    const tweets = useSelector(tweetsSelector);
     
-    console.log(unmodifiableTweets);
 
     return (
         <div id='tweet-display'>
