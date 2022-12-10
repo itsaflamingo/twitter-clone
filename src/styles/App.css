@@ -1,3 +1,6 @@
+* {
+    --twitter-blue: #1D9BF0;
+}
 body {
     margin: 0;
 }
@@ -43,13 +46,13 @@ body {
 }
 /* HEADER */
 #header {
-    width: 100vw;
-    height: 10vh;
+    width: 20vw;
+    height: 100vh;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
 }
 #logo {
-    height: 90%;
+    width: 30%;
 }
 #menu {
     display: flex;
@@ -61,25 +64,25 @@ body {
 #app {
     height: 100vh;
     width: 100vw;
+    display: flex;
 }
 #dashboard {
-    height: 60%;
+    height: 100%;
+    width: 40%;
     display: flex;
     flex-direction: column;
 }
 .likelike {
     width: 20px;
 }
-#create-tweet {
-    height: 60%;
-    width: 80%;
-}
 #tweet-display {
-    border: 1px solid black;
     height: 60%;
-    width: 40%;
+    width: 45%;
 }
 /* TWEET */
+.tweet {
+    position: relative;
+}
 .tweet-btns {
     display: flex;
 }
@@ -89,4 +92,25 @@ body {
 }
 .like, .retweet {
     height: 90%;
+}
+#tweet {
+    height: 15vh;
+    width: 100%;
+}
+/* CREATE TWEET */
+#create-tweet {
+    border-bottom: 1px solid black;
+    max-width: 500px;
+}
+.submit-tweet {
+    width: 100px;
+    height: 30px;
+    border-radius: 30px;
+    border: none;
+    background-color: var(--twitter-blue);
+    color: white;
+}
+/* RETWEET */
+.retweet-pop-up {
+    position: absolute;
 }

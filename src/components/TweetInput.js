@@ -1,12 +1,13 @@
+
 export default function TweetInput(props) {
     const { type, setInput, input } = props;
 
     const setTweetInput = (e) => setInput(e.target.value);
 
     return (
-        <div id='create-tweet'>
+        <div id='tweet-container'>
             <form>
-                <label htmlFor='tweet'>Create Tweet</label>
+                <label htmlFor='tweet' />
                 <input 
                 type={type}
                 id='tweet' 

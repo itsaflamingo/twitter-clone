@@ -6,6 +6,8 @@ import { useEffect, useReducer, useState } from "react";
 import { getTweets } from "./retrieveFromCloud";
 import { storeTweets } from "./storeInCloud";
 import uniqid from 'uniqid'
+import CreateTweetOptions from "./CreateTweetOptions";
+import getDate from "./getDate";
 
 
 export default function CreateTweet() {
@@ -26,15 +28,8 @@ export default function CreateTweet() {
         words: 0,
         comments: []
     });
-    const [usedId, dispatchUsedId] = useReducer(addToUsedId, { state: [] });
 
-    const getDate = () => {
-        let yourDate = new Date();
-        const date = yourDate.toISOString().split('T')[0];
-        const time = yourDate.toISOString().split('T')[1];
-        
-        return `${date} : ${time}`
-    }
+    const [usedId, dispatchUsedId] = useReducer(addToUsedId, { state: [] });
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -94,9 +89,7 @@ export default function CreateTweet() {
         <div id='create-tweet'>
             <TweetInput setInput={setInput} input={input} />
             <div id='tweet-add-ons'>
-            <button 
-                type='submit'
-                onClick={(e) => handleSubmit(e)}>Submit</button>
+                <CreateTweetOptions handleSubmit={handleSubmit} />
             </div>
         </div>
     )

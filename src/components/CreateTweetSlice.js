@@ -41,7 +41,7 @@ const tweetsReducer = createReducer(initialState, (builder) => {
             return state.map((tweet, index) => {
                 if(index === action.payload.index) {
                     return {
-                        ...state,
+                        ...tweet,
                         ...action.payload.updatedValues
                     }
                 }
