@@ -11,11 +11,11 @@ export default function DisplayTweets() {
 
     return (
         <div id='tweet-display'>
-            {tweets.map((tweet) => {
+            {tweets.map((tweet, index) => {
                 return (
                     <div className="tweet-wrapper" key={tweet.id}>
-                        <DisplayTweet tweet={tweet} showRetweet={setShowRetweetDiv} />                
-                        {showRetweetDiv && <RetweetPopUp tweet={tweet} />}
+                        <DisplayTweet tweet={tweet} showRetweet={() => setShowRetweetDiv(index)} />                
+                        {showRetweetDiv === index && <RetweetPopUp tweet={tweet} setShowRetweet={setShowRetweetDiv} />}
                     </div>
                 )
             })}

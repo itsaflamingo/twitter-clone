@@ -20,7 +20,7 @@ function deleteUser(state, obj) {
 const usersReducer = createReducer(initialState, (builder) => {
     builder
         .addCase(add, (state, action) => {
-            return state.concat(action.payload)
+            return state.concat(action.payload);
         })  
         .addCase(remove, (state, action) => {
             deleteUser(state, action.payload);

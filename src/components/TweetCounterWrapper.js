@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { tweetsSelector } from "./CreateTweetSlice";
 import { updateTweet } from "./CreateTweetSlice";
@@ -8,6 +8,7 @@ export default function TweetCounterWrapper(WrappedComponent) {
     return function Counter(props) {
 
         const { tweet, showRetweet } = props;
+        const [input, setInput] = useState('');
 
         useEffect(() => {
             storeTweets(tweet);
@@ -30,6 +31,7 @@ export default function TweetCounterWrapper(WrappedComponent) {
 
         const retweetCounter = (tweet) => {
             showRetweet(true);
+            
             // same as like counter
             const updatedRetweets = tweet.retweets + 1;
 
@@ -39,6 +41,10 @@ export default function TweetCounterWrapper(WrappedComponent) {
             dispatch(updateTweet(index, { retweets: updatedRetweets }))
         }
         
+        const handleSubmit = () => {
+
+        }
+
         return (
             <WrappedComponent tweet={tweet} likesCounter={likesCounter} retweetCounter={retweetCounter} />
         )

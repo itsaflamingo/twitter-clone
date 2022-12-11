@@ -26,7 +26,8 @@ export default function CreateTweet() {
         likes: 0,
         retweets: 0,
         words: 0,
-        comments: []
+        comments: [],
+        retweet: []
     });
 
     const [usedId, dispatchUsedId] = useReducer(addToUsedId, { state: [] });
