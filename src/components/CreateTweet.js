@@ -26,11 +26,8 @@ export default function CreateTweet() {
         likes: 0,
         retweets: 0,
         words: 0,
-        comments: [],
-        retweet: []
+        comments: []
     });
-
-    const [usedId, dispatchUsedId] = useReducer(addToUsedId, { state: [] });
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -55,37 +52,6 @@ export default function CreateTweet() {
         })
     }, [tweet])
 
-    // Will run more than once because there is a closure inside the callback function.
-    useEffect(() => {
-        let ignore = false;
-        
-        const getdbTweets = async() => {
-            const json = await getTweets();
-            if(!ignore) {
-                retrieveTweetsFromDatabase(json, usedId);
-            }
-        }
-
-        getdbTweets();
-
-        return() => {
-            ignore = true;
-        }
-    }, [])
-
-        function retrieveTweetsFromDatabase(res, usedId) {
-            res.forEach((tweet) => {
-                // check if tweet already exists.
-                const isPresent = usedId.state.includes(tweet.tweet.id);
-
-                // if tweet exists don't add to database. 
-                if (isPresent === true) return;
-
-                // else add to database, & to included tweets.
-                dispatchUsedId({ type: 'add tweet', value: tweet.tweet.id });
-                dispatch(addTweet(tweet.tweet));
-        })}
-
     return(
         <div id='create-tweet'>
             <TweetInput setInput={setInput} input={input} />
@@ -94,14 +60,4 @@ export default function CreateTweet() {
             </div>
         </div>
     )
-}
-
-function addToUsedId(state, action) {
-    switch(action.type) {
-        case 'add tweet': 
-        return {
-            state: [...state.state, action.value]
-        };
-        default: return;
-    }
 }

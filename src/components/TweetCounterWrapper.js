@@ -8,7 +8,6 @@ export default function TweetCounterWrapper(WrappedComponent) {
     return function Counter(props) {
 
         const { tweet, showRetweet } = props;
-        const [input, setInput] = useState('');
 
         useEffect(() => {
             storeTweets(tweet);
@@ -39,10 +38,6 @@ export default function TweetCounterWrapper(WrappedComponent) {
             const index = tweets.findIndex(findTweet);
             
             dispatch(updateTweet(index, { retweets: updatedRetweets }))
-        }
-        
-        const handleSubmit = () => {
-
         }
 
         return (
