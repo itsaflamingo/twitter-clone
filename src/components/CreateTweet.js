@@ -45,7 +45,6 @@ export default function CreateTweet(props) {
 
     useEffect(() => {
         if(tweet.text === '') return;
-        console.log(showRetweet)
         showRetweet(() => false);
         // When new tweet added, it is added to state tweets array
         dispatch(addTweet(tweet));
