@@ -1,16 +1,17 @@
 import TweetInput from "./TweetInput";
-import {selectUser} from './SignInPgSlice'
+import { selectUser } from './SignInPgSlice'
 import { addTweet } from "./CreateTweetSlice";
 import { useSelector, useDispatch } from "react-redux"
-import { useEffect, useReducer, useState } from "react";
-import { getTweets } from "./retrieveFromCloud";
+import { useEffect, useState } from "react";
 import { storeTweets } from "./storeInCloud";
 import uniqid from 'uniqid'
 import CreateTweetOptions from "./CreateTweetOptions";
 import getDate from "./getDate";
 
 
-export default function CreateTweet() {
+export default function CreateTweet(props) {
+
+    const { retweet, showRetweet } = props;
 
     const user = useSelector(selectUser);
     const dispatch = useDispatch();
@@ -26,7 +27,8 @@ export default function CreateTweet() {
         likes: 0,
         retweets: 0,
         words: 0,
-        comments: []
+        comments: [],
+        retweet: []
     });
 
     const handleSubmit = (e) => {
@@ -35,20 +37,24 @@ export default function CreateTweet() {
             ...tweet, 
             text: input,
             date: getDate(),
-            id: uniqid()
+            id: uniqid(),
+            retweet
         })
         setInput('');
     }
 
     useEffect(() => {
         if(tweet.text === '') return;
+        console.log(showRetweet)
+        showRetweet(() => false);
         // When new tweet added, it is added to state tweets array
         dispatch(addTweet(tweet));
         storeTweets(tweet);
         setTweet({
             ...tweet,
             text: '',
-            date: ''
+            date: '',
+            retweet: []
         })
     }, [tweet])
 

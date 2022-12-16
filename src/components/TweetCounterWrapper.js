@@ -29,7 +29,7 @@ export default function TweetCounterWrapper(WrappedComponent) {
         }
 
         const retweetCounter = (tweet) => {
-            showRetweet(true);
+            showRetweet(false);
             
             // same as like counter
             const updatedRetweets = tweet.retweets + 1;
@@ -41,7 +41,7 @@ export default function TweetCounterWrapper(WrappedComponent) {
         }
 
         return (
-            <WrappedComponent tweet={tweet} likesCounter={likesCounter} retweetCounter={retweetCounter} />
+            <WrappedComponent tweet={tweet} likesCounter={likesCounter} retweetCounter={retweetCounter} showRetweet={showRetweet} />
         )
     }
 }

@@ -8,7 +8,6 @@ import addToSetTweets from "./addToSetTweets";
 import { getTweets } from "./retrieveFromCloud";
 import { addTweet } from "./CreateTweetSlice";
 
-
 function Dashboard() {
 
     const tweets = useSelector(tweetsSelector);
@@ -53,7 +52,7 @@ function Dashboard() {
 
     return(
         <div id='dashboard'>
-            <CreateTweet />
+            <CreateTweet retweet={[]} showRetweet={null} />
             {showTweets && (<DisplayTweets />)}
         </div>
     )
