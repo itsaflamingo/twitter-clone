@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 import { usersSelector, addUser } from './allUsersSlice';
 import { storeUsers } from './storeInCloud';
 import { getUsers } from './retrieveFromCloud';
+import getDate from './getDate'
 
 export default function SignInPg() {
 
@@ -21,7 +22,9 @@ export default function SignInPg() {
     useEffect(() => {
         if(status !== 'succeed') return;
         nav('/dashboard');
+        // Retrieve users from database
         getdbUsers();
+        // Add to Redux 
         isInDatabase(user);
     }, [status])
 
@@ -30,10 +33,14 @@ export default function SignInPg() {
         getdbUsers();
     }, [])
 
+    useEffect(() => {
+        if(user.length === 0) return;
+    }, [user])
+
     const getdbUsers = async() => {
         let dbUsers;
         await getUsers().then((res) => dbUsers = res);
-        dispatch(addUser(dbUsers))
+        dispatch(addUser(dbUsers));
     }
 
     const isInDatabase = (user) => {

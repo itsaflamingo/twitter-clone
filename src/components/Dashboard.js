@@ -1,4 +1,4 @@
-import HigherOrderComponent from "./HigherOrderComponent";
+import AddMenuAndAside from "./AddMenuAndAside";
 import CreateTweet from './CreateTweet'
 import DisplayTweets from "./DisplayTweets";
 import { useState, useEffect, useReducer } from "react";
@@ -14,7 +14,6 @@ function Dashboard() {
     const [showTweets, setShowTweets] = useState(true);
     const dispatch = useDispatch();
     const [usedId, dispatchUsedId] = useReducer(addToSetTweets, { state: [] });
-
 
     useState(() => {
         if(tweets.length === 0) return;
@@ -52,11 +51,14 @@ function Dashboard() {
 
     return(
         <div id='dashboard'>
+            <div id='header'>
+                <h2>Home</h2>
+            </div>
             <CreateTweet retweet={[]} showRetweet={null} />
             {showTweets && (<DisplayTweets />)}
         </div>
     )
 }
 
-export default HigherOrderComponent(Dashboard);
+export default AddMenuAndAside(Dashboard);
 

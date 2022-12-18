@@ -45,7 +45,7 @@ body {
     color: white;
 }
 /* HEADER */
-#header {
+#menu {
     width: 20vw;
     height: 100vh;
     display: flex;
@@ -54,10 +54,11 @@ body {
 #logo {
     width: 30%;
 }
-#menu {
+#menu-options {
     display: flex;
+    flex-direction: column;
 }
-#logo, #menu {
+#logo, #menu-options {
     margin: 1rem 1.5rem;
 }
 /* TWEET DISPLAY */
@@ -65,12 +66,15 @@ body {
     height: 100vh;
     width: 100vw;
     display: flex;
+    justify-content: center;
 }
 #dashboard {
     height: 100%;
     width: 40%;
     display: flex;
     flex-direction: column;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
 }
 .likelike {
     width: 20px;
@@ -96,11 +100,14 @@ body {
 #tweet {
     height: 15vh;
     width: 100%;
+    border: none;
+    margin: 0;
+    padding: 0;
 }
 /* CREATE TWEET */
 #create-tweet {
     border-bottom: 1px solid black;
-    max-width: 500px;
+    width: 100%;
 }
 .submit-tweet {
     width: 100px;
@@ -117,4 +124,34 @@ body {
     border: 1px solid black;
     top: 30%;
     left: 50%;
+}
+/* PROFILE */
+#profile {
+    height: 100%;
+    width: 40%;
+    border: 1px solid grey;
+}
+#profile-pictures {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+#profile-pictures > * {
+    border: 1px solid grey;
+}
+#cover-photo {
+    height: 150px;
+}
+#user-photo {
+    position: absolute;
+    height: 120px;
+    width: 120px;
+    border-radius: 50%;
+    top: 60%;
+    left: 5%;
+}
+.profile-picture {
+    max-width: 100%;
+    overflow: hidden;
+    border-radius: 50%;
 }

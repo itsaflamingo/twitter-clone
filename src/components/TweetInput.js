@@ -12,6 +12,7 @@ export default function TweetInput(props) {
                 type={type}
                 id='tweet' 
                 value={input}
+                placeholder="What's happening?"
                 onChange={(e) => setTweetInput(e)} />
             </form>
         </div>

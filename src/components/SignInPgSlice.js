@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { GoogleAuthProvider, signInWithPopup, getAuth } from 'firebase/auth';
 import { app } from "./firebaseConfig";
+import addUserInfo  from './addUserInfo';
 
 const initialState  = {
     status: '',
@@ -50,6 +51,7 @@ const accountSlice = createSlice({
             builder.addCase(fetchUser.fulfilled,  (state, action) => {
                 state.status = 'succeed';
                 state.user = JSON.parse(action.payload);
+                state.user = addUserInfo(state.user);
             })
             builder.addCase(fetchUser.rejected, (state, action) => {
                 state.status = 'failed';
@@ -62,5 +64,5 @@ export const selectUser = (state) => state.user.user;
 export const selectStatus = (state) => state.user.status;
 export const selectError = (state) => state.user.error;
 
-export {fetchUser}
+export { fetchUser }
 export default accountSlice.reducer;

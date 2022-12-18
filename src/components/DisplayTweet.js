@@ -9,7 +9,7 @@ export default function DisplayTweet(props) {
         <div className="tweet" key={tweet.id}>
                 <div className="user-name">{tweet.name}</div>
                     {tweet.text}
-                {/* DisplayTweet only renders if tweet is not an array */}
+                {/* DisplayTweet only renders if tweet is not an array, filtering out empty retweets */}
                 {!Array.isArray(tweet.retweet) && (<DisplayTweet tweet={tweet.retweet} showRetweet={showRetweet} />)}
                 <div className="tweet-btns">
                     <LikeCounter tweet={tweet} />
