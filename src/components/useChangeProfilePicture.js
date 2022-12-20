@@ -1,9 +1,14 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import defaultPicture from '../images/twitter-user-default.png'
 
-function useChangeProfilePicture() {
+function useChangeProfilePicture(insertPicture = 'none') {
     
-    const [picture, setPicture] = useState(defaultPicture);
+    const [picture, setPicture] = useState(insertPicture);
+
+    useEffect(() => {
+        if(insertPicture === 'none') return setPicture(defaultPicture);
+        setPicture(insertPicture);
+    }, [insertPicture])
 
     return picture;
 }

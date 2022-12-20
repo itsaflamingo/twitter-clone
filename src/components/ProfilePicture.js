@@ -6,7 +6,7 @@ export default function ProfilePicture() {
 
     return (
         <div id='user-photo'>
-            <img class='profile-picture' src={picture} alt='default profile'/>
+            <img className='profile-picture' src={picture} alt='default profile'/>
         </div>
     )
 }
