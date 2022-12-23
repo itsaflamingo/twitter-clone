@@ -31,6 +31,7 @@ export default function SignInPg() {
         if('personalInfo' in user === false) return;
         if(user.personalInfo.hasAccount === true) {
             nav('/dashboard');
+            storeUsers(user);
         }
     }, [user])
 
@@ -71,8 +72,6 @@ export default function SignInPg() {
                 ...profileInfo
             }
         }))
-        storeUsers(user);
-        console.log(user);
     }
 
     return (

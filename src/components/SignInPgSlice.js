@@ -68,7 +68,7 @@ const accountSlice = createSlice({
                 state.error = action.error.message;
             })
             builder.addCase(edit, (state, action) => {
-                state.user = {...state.user, ...action.payload}
+                state.user = {...action.payload}
             })
     }
 })
