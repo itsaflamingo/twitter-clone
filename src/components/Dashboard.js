@@ -55,7 +55,7 @@ function Dashboard() {
                 <h2>Home</h2>
             </div>
             <CreateTweet retweet={[]} showRetweet={null} />
-            {showTweets && (<DisplayTweets />)}
+            {showTweets && (<DisplayTweets tweets={tweets} />)}
         </div>
     )
 }

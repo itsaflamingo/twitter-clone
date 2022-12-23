@@ -1,12 +1,11 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
-import { tweetsSelector } from "./CreateTweetSlice";
 import DisplayTweet from "./DisplayTweet";
 import RetweetPopUp from "./RetweetPopUp";
 
-export default function DisplayTweets() {
+export default function DisplayTweets(props) {
     
-    const tweets = useSelector(tweetsSelector);
+    // Pass tweets in as props rather than with useSelector to allow component reusability
+    const { tweets } = props;
     const [showRetweetDiv, setShowRetweetDiv] = useState(false);    
 
     return (

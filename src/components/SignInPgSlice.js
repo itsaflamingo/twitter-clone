@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, createAction } from "@reduxjs/toolkit";
 import { GoogleAuthProvider, signInWithPopup, getAuth } from 'firebase/auth';
 import { app } from "./firebaseConfig";
 import addUserInfo  from './addUserInfo';
@@ -7,6 +7,15 @@ const initialState  = {
     status: '',
     user: [],
     error: null
+}
+
+const edit = createAction('editUser');
+
+function editUser(obj) {
+    return {
+        type: 'editUser',
+        payload: obj
+    }
 }
 
 const provider = new GoogleAuthProvider();
@@ -44,6 +53,7 @@ const fetchUser = createAsyncThunk(
 const accountSlice = createSlice({
     name: 'account/fetchUser',
     initialState,
+    reducers: {},
     extraReducers: (builder) => {
             builder.addCase(fetchUser.pending,  (state) => {
                 state.status = 'loading';
@@ -57,6 +67,9 @@ const accountSlice = createSlice({
                 state.status = 'failed';
                 state.error = action.error.message;
             })
+            builder.addCase(edit, (state, action) => {
+                state.user = {...state.user, ...action.payload}
+            })
     }
 })
 
@@ -64,5 +77,5 @@ export const selectUser = (state) => state.user.user;
 export const selectStatus = (state) => state.user.status;
 export const selectError = (state) => state.user.error;
 
-export { fetchUser }
+export { fetchUser, editUser }
 export default accountSlice.reducer;

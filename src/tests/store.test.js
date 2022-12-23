@@ -1,4 +1,4 @@
-import reducers from '../../store';
+import reducers from '../../reducers';
 
 test('reducers', () => {
   let state;

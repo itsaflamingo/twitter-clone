@@ -6,6 +6,8 @@ import { useEffect } from 'react';
 
 function Profile() {
 
+    
+
     return(
         <div id='profile'>
             <ProfilePictures />
