@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { storeTweets } from "./storeInCloud";
 import uniqid from 'uniqid'
 import CreateTweetOptions from "./CreateTweetOptions";
-import getDate from "./getDate";
+import getDateTime from "./getDateTime";
 
 
 export default function CreateTweet(props) {
@@ -36,7 +36,7 @@ export default function CreateTweet(props) {
         setTweet({
             ...tweet, 
             text: input,
-            date: getDate(),
+            date: getDateTime().getDateAndTime(),
             id: uniqid(),
             retweet
         })

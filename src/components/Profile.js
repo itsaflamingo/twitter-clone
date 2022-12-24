@@ -3,6 +3,7 @@ import ProfilePictures from './ProfilePictures';
 import FollowersAndFollowing from './FollowersAndFollowing';
 import RenderPersonalOrOtherProfile from './RenderPersonalOrOtherProfile';
 import { useEffect } from 'react';
+import DisplayUserInfo from './DisplayUserInfo';
 
 function Profile() {
 
@@ -12,9 +13,7 @@ function Profile() {
         <div id='profile'>
             <ProfilePictures />
             <RenderPersonalOrOtherProfile />
-            <div id='user-info'>
-
-            </div>
+            <DisplayUserInfo />
             <FollowersAndFollowing />
             <div id='user-tweets'>
 

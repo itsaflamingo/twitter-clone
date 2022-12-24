@@ -1,4 +1,4 @@
-import getDate from "./getDate"
+import getDateTime from "./getDateTime"
 
 export default function addUserInfo(user) {
     if('followers' in user === false) {
@@ -6,7 +6,7 @@ export default function addUserInfo(user) {
             personalInfo: {
                 hasAccount: false,
                 description: '',
-                dateJoined: getDate(),
+                dateJoined: getDateTime().getOnlyDate(),
                 location: '',
                 handle: '',
                 profileInfo: {

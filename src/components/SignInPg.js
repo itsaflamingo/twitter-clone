@@ -3,7 +3,7 @@ import { fetchUser, editUser } from "./SignInPgSlice"
 import { useNavigate } from 'react-router-dom';
 import { selectUser, selectError, selectStatus } from "./SignInPgSlice"
 import { useSelector, useDispatch } from "react-redux"
-import { useEffect, useState } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 import { usersSelector, addUser, editUsers } from './allUsersSlice';
 import { storeUsers } from './storeInCloud';
 import { getUsers } from './retrieveFromCloud';
@@ -31,6 +31,7 @@ export default function SignInPg() {
         if('personalInfo' in user === false) return;
         if(user.personalInfo.hasAccount === true) {
             nav('/dashboard');
+            // Only store user in database after it has been changed.
             storeUsers(user);
         }
     }, [user])
@@ -52,8 +53,13 @@ export default function SignInPg() {
         const thisUser = users.filter((obj) => obj.user.email === user.email);
 
         if(thisUser.length === 0) return true;
-        // if user already exists exit
-        return false;
+        // if user already exists, set thisUser to user and return false.
+        dispatch(editUser({
+            ...user, 
+            personalInfo: {
+                ...thisUser[0].user.personalInfo,
+            }}))
+        return user.personalInfo.hasAccount;
     }
 
     const saveToDatabase = (e, user, profileInfo) => {
