@@ -1,5 +1,5 @@
 import TweetCounterWrapper from "./TweetCounterWrapper"
-import retweet from '../images/retweet.svg'
+import retweet from '../../images/retweet.svg'
 
 function RetweetCounter(props) {
 

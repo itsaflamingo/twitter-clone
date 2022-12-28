@@ -1,4 +1,4 @@
-import ProfilePicture from "./ProfilePicture";
+import ProfilePicture from "../Profile/ProfilePicture";
 
 export default function UploadPicture() {
     return (

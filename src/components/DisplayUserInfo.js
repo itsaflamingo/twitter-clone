@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux"
-import { selectUser } from "./SignInPgSlice"
+import { selectUser } from "./Sign_In_Page/SignInPgSlice"
 
 export default function DisplayUserInfo() {
 

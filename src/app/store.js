@@ -1,14 +1,18 @@
 import { configureStore } from '@reduxjs/toolkit'
-import accountReducer from '../components/SignInPgSlice';
-import tweetsReducer from '../components/CreateTweetSlice'
-import usersReducer from '../components/allUsersSlice'
+import accountReducer from '../components/Sign_In_Page/SignInPgSlice';
+import tweetsReducer from '../components/Dashboard/CreateTweetSlice'
+import usersReducer from '../components/Dashboard/allUsersSlice'
+import userTweetsReducer from '../components/Dashboard/userTweetsSlice';
+import storeTweetIdReducer from '../components/Dashboard/storeTweetIdSlice';
   
   // STORE -> GLOBALIZED STATE
   let store = configureStore({
     reducer: {
       users: usersReducer,
       user: accountReducer,
-      tweets: tweetsReducer
+      tweets: tweetsReducer,
+      userTweets: userTweetsReducer,
+      tweetIds: storeTweetIdReducer
     }
   });
   

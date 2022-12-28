@@ -1,4 +1,4 @@
-import { useChangeProfilePicture } from './useChangeProfilePicture'
+import { useChangeProfilePicture } from '../Sign_In_Page/useChangeProfilePicture'
 
 export default function ProfilePicture() {
 

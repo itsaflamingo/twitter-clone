@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, createAction } from "@reduxjs/toolkit";
 import { GoogleAuthProvider, signInWithPopup, getAuth } from 'firebase/auth';
-import { app } from "./firebaseConfig";
+import { app } from "../firebaseConfig";
 import addUserInfo  from './addUserInfo';
 
 const initialState  = {

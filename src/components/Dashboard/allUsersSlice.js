@@ -1,20 +1,20 @@
 import { createAction, createReducer } from "@reduxjs/toolkit";
 
 const initialState = [];
-const add = createAction('addUser'); 
-const remove = createAction('deleteUser');
-const edit = createAction('editUsers');
+const ADD_TO_ALL_USERS = createAction('ADD_TO_ALL_USERS'); 
+const REMOVE_FROM_ALL_USERS = createAction('REMOVE_TO_ALL_USERS');
+const EDIT_ALL_USERS = createAction('editUsers');
 
 function addUser(obj) {
     return {
-        type: 'addUser',
+        type: 'ADD_TO_ALL_USERS',
         payload: obj
     }
 }
 
 function editUsers(obj) {
     return {
-        type: 'editUsers',
+        type: 'EDIT_ALL_USERS',
         payload: obj
     }
 }
@@ -27,16 +27,16 @@ function deleteUser(state, obj) {
 
 const usersReducer = createReducer(initialState, (builder) => {
     builder
-        .addCase(add, (state, action) => {
+        .addCase(ADD_TO_ALL_USERS, (state, action) => {
             return state.concat(action.payload);
         })  
-        .addCase(edit, (state, action) => {
+        .addCase(EDIT_ALL_USERS, (state, action) => {
             return state.concat({
                 ...state,
                 ...action.payload
             })
         })
-        .addCase(remove, (state, action) => {
+        .addCase(REMOVE_FROM_ALL_USERS, (state, action) => {
             deleteUser(state, action.payload);
         })
     })

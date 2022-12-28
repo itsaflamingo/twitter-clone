@@ -1,5 +1,5 @@
-import TweetCounterWrapper from "./TweetCounterWrapper"
-import heart from '../images/heart.svg'
+import TweetCounterWrapper from "../DisplayTweet/TweetCounterWrapper"
+import heart from '../../images/heart.svg'
 
 function LikeCounter(props) {
 

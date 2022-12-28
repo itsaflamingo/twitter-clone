@@ -1,12 +1,11 @@
-import logo from '../images/twitter.webp'
-import { fetchUser, editUser } from "./SignInPgSlice"
+import logo from '../../images/twitter.webp'
+import { fetchUser, editUser, selectUser, selectError, selectStatus } from "./SignInPgSlice"
 import { useNavigate } from 'react-router-dom';
-import { selectUser, selectError, selectStatus } from "./SignInPgSlice"
 import { useSelector, useDispatch } from "react-redux"
 import { useEffect, useReducer, useState } from 'react';
-import { usersSelector, addUser, editUsers } from './allUsersSlice';
-import { storeUsers } from './storeInCloud';
-import { getUsers } from './retrieveFromCloud';
+import { usersSelector, addUser, editUsers } from '../Dashboard/allUsersSlice';
+import { storeUsers } from '../storeInCloud';
+import { getUsers } from '../retrieveFromCloud';
 import SignUp from './SignUp';
 
 export default function SignInPg() {
@@ -50,6 +49,7 @@ export default function SignInPg() {
     // If user is in database, return true, else add new user and return false
     const isInDatabase = (user) => {
 
+        // Returns array with nested object
         const thisUser = users.filter((obj) => obj.user.email === user.email);
 
         if(thisUser.length === 0) return true;
@@ -59,6 +59,7 @@ export default function SignInPg() {
             personalInfo: {
                 ...thisUser[0].user.personalInfo,
             }}))
+        // If has account, it will return true, otherwise false and account will be created.
         return user.personalInfo.hasAccount;
     }
 

@@ -1,4 +1,4 @@
-import DisplayTweet from "./DisplayTweet";
+import DisplayTweet from "../DisplayTweet/DisplayTweet";
 import CreateTweet from "./CreateTweet";
 
 export default function RetweetPopUp(props) {

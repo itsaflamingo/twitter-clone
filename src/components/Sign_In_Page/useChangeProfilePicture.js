@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import defaultPicture from '../images/twitter-user-default.png'
+import defaultPicture from '../../images/twitter-user-default.png'
 
 function useChangeProfilePicture(insertPicture = 'none') {
     

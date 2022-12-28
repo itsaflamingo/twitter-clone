@@ -1,4 +1,4 @@
-import getDateTime from "./getDateTime"
+import getDateTime from "../getDateTime"
 
 export default function addUserInfo(user) {
     if('followers' in user === false) {

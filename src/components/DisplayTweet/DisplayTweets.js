@@ -1,6 +1,6 @@
 import { useState } from "react";
 import DisplayTweet from "./DisplayTweet";
-import RetweetPopUp from "./RetweetPopUp";
+import RetweetPopUp from "../Dashboard/RetweetPopUp";
 
 export default function DisplayTweets(props) {
     
