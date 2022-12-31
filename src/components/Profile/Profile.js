@@ -13,8 +13,7 @@ import { useLocation } from 'react-router-dom';
 import { ProfileProvider } from './profileContext';
 import { tweetsSelector } from '../Dashboard/CreateTweetSlice';
 
-
-function Profile(props) {
+function Profile() {
 
     // Redux selectors
     const userTweets = useSelector(userTweetsSelector);
@@ -31,25 +30,21 @@ function Profile(props) {
 
     useEffect(() => {
         if(location.state === user.personalInfo.name) return;
-
-        const chosenUser = users.filter(_user => _user.user.personalInfo.name === location.state);
-        setUser(chosenUser[0].user);
+        setUser(changeUser(users, location)[0].user);
     }, [])
 
     useEffect(() => {
-        changeUserTweets(allTweets, user);
+        setTweets(changeUserTweets(allTweets, user));
     }, [user])
 
-    const changeUserTweets = (tweets, user) => {
-        const arr = tweets.filter(tweet => tweet.name === user.personalInfo.name);
-        setTweets(arr);
-    }
+    const changeUser = (users, location) => users.filter(user => user.user.personalInfo.name === location.state)
+    const changeUserTweets = (tweets, user) => tweets.filter(tweet => tweet.name === user.personalInfo.name);
 
     return(
         <ProfileProvider value={user}>
             <div id='profile'>
                 <ProfilePictures />
-                <RenderPersonalOrOtherProfile />
+                <RenderPersonalOrOtherProfile userName={location.state} />
                 <DisplayUserInfo />
                 <FollowersAndFollowing />
                 <DisplayTweets tweets={tweets} />
