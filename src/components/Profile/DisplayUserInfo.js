@@ -5,7 +5,7 @@ export default function DisplayUserInfo() {
 
     // use context provided by Profile.js
     const { user } = useContext(ProfileContext);
-    
+        
     return (
         <div id='user-info'>
             <h2>{user.personalInfo.name}</h2>

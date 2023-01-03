@@ -2,7 +2,7 @@ import AddMenuAndAside from '../AddMenuAndAside'
 import ProfilePictures from './ProfilePictures';
 import FollowersAndFollowing from '../FollowersAndFollowing';
 import RenderPersonalOrOtherProfile from './RenderPersonalOrOtherProfile';
-import { useEffect, useReducer, useState } from 'react';
+import { useEffect, useState } from 'react';
 import DisplayUserInfo from './DisplayUserInfo';
 import DisplayTweets from '../DisplayTweet/DisplayTweets';
 import { useDispatch, useSelector } from 'react-redux';
@@ -31,7 +31,7 @@ function Profile() {
 
     useEffect(() => {
         if(location.state === user.personalInfo.name) return;
-        setUser(changeUser(users, location)[0].user);
+        setUser(changeUser(users, location)[0]);
     }, [])
 
     useEffect(() => {
@@ -46,17 +46,31 @@ function Profile() {
     const updateUser = (obj) => setUser(obj);
 
     const editAllUsers = () => {
-        // Find which object in users array corresponds to current user
-        const findUser = (_user) => _user.personalInfo.name === user.personalInfo.name;
+        // Find which object in users array corresponds to follower and followed
+        const findFollowed = (_user) => _user.personalInfo.name === user.personalInfo.name;
+        const findFollower = (_user) => _user.personalInfo.name === userSelector.personalInfo.name;
 
-        const index = users.findIndex(findUser);
+        // Find index of each of these objects in users array
+        const followedIndex = users.findIndex(findFollowed);
+        const followerIndex = users.findIndex(findFollower);
 
-        dispatch(editUsers(index, {
+        // Edit both follower and follower counts in respective objects
+        dispatch(editUsers(followedIndex, {
             ...user,
             personalInfo: {
                 ...user.personalInfo,
                 profileInfo: {
                     ...user.personalInfo.profileInfo
+                }
+            }
+        }))
+
+        dispatch(editUsers(followerIndex, {
+            ...userSelector,
+            personalInfo: {
+                ...userSelector.personalInfo,
+                profileInfo: {
+                    ...userSelector.personalInfo.profileInfo
                 }
             }
         }))

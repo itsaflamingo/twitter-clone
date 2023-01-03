@@ -12,7 +12,7 @@ const usersReducer = createReducer([], (builder) => {
             return state.concat(action.payload);
         })  
         .addCase(EDIT_ALL_USERS, (state, action) => {
-            state.map((user, index) => {
+            return state.map((user, index) => {
                 if(index === action.payload.index) {
                     return {
                         ...user, 
