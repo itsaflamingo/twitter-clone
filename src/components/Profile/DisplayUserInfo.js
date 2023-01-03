@@ -1,12 +1,10 @@
 import { useContext } from "react";
-import { useSelector } from "react-redux"
-import { selectUser } from "../Sign_In_Page/SignInPgSlice"
 import { ProfileContext } from "./profileContext";
 
 export default function DisplayUserInfo() {
 
     // use context provided by Profile.js
-    const user = useContext(ProfileContext);
+    const { user } = useContext(ProfileContext);
     
     return (
         <div id='user-info'>

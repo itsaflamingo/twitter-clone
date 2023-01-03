@@ -2,13 +2,13 @@ import AddMenuAndAside from '../AddMenuAndAside'
 import ProfilePictures from './ProfilePictures';
 import FollowersAndFollowing from '../FollowersAndFollowing';
 import RenderPersonalOrOtherProfile from './RenderPersonalOrOtherProfile';
-import { useEffect, useState } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 import DisplayUserInfo from './DisplayUserInfo';
 import DisplayTweets from '../DisplayTweet/DisplayTweets';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { userTweetsSelector } from '../Dashboard/userTweetsSlice';
 import { selectUser } from "../Sign_In_Page/SignInPgSlice"
-import { usersSelector } from '../Dashboard/allUsersSlice';
+import { editUsers, usersSelector } from '../Dashboard/allUsersSlice';
 import { useLocation } from 'react-router-dom';
 import { ProfileProvider } from './profileContext';
 import { tweetsSelector } from '../Dashboard/CreateTweetSlice';
@@ -20,6 +20,7 @@ function Profile() {
     const users = useSelector(usersSelector);
     const userSelector = useSelector(selectUser);
     const allTweets = useSelector(tweetsSelector);
+    const dispatch = useDispatch();
 
     // User and tweets change based on profile click
     const [user, setUser] = useState(userSelector);
@@ -35,13 +36,34 @@ function Profile() {
 
     useEffect(() => {
         setTweets(changeUserTweets(allTweets, user));
+        editAllUsers();
     }, [user])
 
-    const changeUser = (users, location) => users.filter(user => user.user.personalInfo.name === location.state)
+    const changeUser = (users, location) => users.filter(user => user.personalInfo.name === location.state);
+
     const changeUserTweets = (tweets, user) => tweets.filter(tweet => tweet.name === user.personalInfo.name);
 
+    const updateUser = (obj) => setUser(obj);
+
+    const editAllUsers = () => {
+        // Find which object in users array corresponds to current user
+        const findUser = (_user) => _user.personalInfo.name === user.personalInfo.name;
+
+        const index = users.findIndex(findUser);
+
+        dispatch(editUsers(index, {
+            ...user,
+            personalInfo: {
+                ...user.personalInfo,
+                profileInfo: {
+                    ...user.personalInfo.profileInfo
+                }
+            }
+        }))
+    }
+
     return(
-        <ProfileProvider value={user}>
+        <ProfileProvider value={{user, updateUser}}>
             <div id='profile'>
                 <ProfilePictures />
                 <RenderPersonalOrOtherProfile userName={location.state} />

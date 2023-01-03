@@ -20,5 +20,5 @@ function storeTweetId(id) {
 }
 
 export const tweetIdsSelector = (state) => state.tweetIds;
-export { storeTweetId }
+export { storeTweetId };
 export default storeTweetIdReducer;

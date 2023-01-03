@@ -4,7 +4,7 @@ import UploadPicture from "./UploadPicture";
 
 export default function SignUp(props) {
 
-    const { saveToDatabase, user} = props;
+    const { saveToDatabase, user } = props;
     
     const [profileInfo, setProfileInfo] = useState({
         hasAccount: true,

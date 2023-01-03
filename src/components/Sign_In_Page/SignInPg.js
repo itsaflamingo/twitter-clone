@@ -2,8 +2,8 @@ import logo from '../../images/twitter.webp'
 import { fetchUser, editUser, selectUser, selectError, selectStatus } from "./SignInPgSlice"
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux"
-import { useEffect, useReducer, useState } from 'react';
-import { usersSelector, addUser, editUsers } from '../Dashboard/allUsersSlice';
+import { useEffect, useState } from 'react';
+import { usersSelector, addUser } from '../Dashboard/allUsersSlice';
 import { storeUsers } from '../storeInCloud';
 import { getUsers } from '../retrieveFromCloud';
 import SignUp from './SignUp';
@@ -50,27 +50,27 @@ export default function SignInPg() {
     const isInDatabase = (user) => {
 
         // Returns array with nested object
-        const thisUser = users.filter((obj) => obj.user.email === user.email);
+        const thisUser = users.filter((obj) => obj.email === user.email);
 
         if(thisUser.length === 0) return true;
-        // if user already exists, set thisUser to user and return false.
+        // if user already exists, combine user and personalInfo section of thisUser and return false.
         dispatch(editUser({
             ...user, 
             personalInfo: {
-                ...thisUser[0].user.personalInfo,
+                ...thisUser[0].personalInfo,
             }}))
-        // If has account, it will return true, otherwise false and account will be created.
+        // If has account, it will return true and navigate to dashboard, otherwise false and account will be created.
         return user.personalInfo.hasAccount;
     }
 
     const saveToDatabase = (e, user, profileInfo) => {
         e.preventDefault();
         //Store in database & add to users array
-        dispatch(editUsers({
+        dispatch(addUser({
             ...user,
             personalInfo: {
-            ...user.personalInfo,
-            ...profileInfo
+                ...user.personalInfo,
+                ...profileInfo
         }}));
         dispatch(editUser({
             ...user,

@@ -7,7 +7,7 @@ async function getUsers() {
     const querySnapshot = await getDocs(query(collection(db, "users")));
     const docArr = [];
     querySnapshot.forEach((doc) => {
-    docArr.push(doc.data());
+    docArr.push(doc.data().user);
   });
     return docArr;
   }
