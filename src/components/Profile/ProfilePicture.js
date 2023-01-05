@@ -5,8 +5,7 @@ import { ProfileContext } from './profileContext';
 export default function ProfilePicture() {
 
     const user = useContext(ProfileContext);
-    console.log(user);
-    const picture = useChangeProfilePicture();
+    const picture = useChangeProfilePicture(user.user.personalInfo.profileInfo.profilePicture);
 
     return (
         <div className='user-photo'>

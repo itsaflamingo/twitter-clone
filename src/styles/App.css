@@ -287,10 +287,18 @@ input:focus {
     top: 60%;
     left: 2%;
 }
-.profile-picture {
-    max-width: 100%;
-    overflow: hidden;
+.user-photo {
+    height: 100%;
     border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.profile-picture {
+    object-fit: cover;
+    clip-path: circle(50%);
+    height: 130px;
+    width: 130px;
 }
 .follow-btn, .edit-btn {
     border: none;
