@@ -13,7 +13,7 @@ export default function SignUp(props) {
         name: '',
         handle: '',
         description: '',
-        photoURL: ''
+        profilePicture: ''
     });
 
     const [errors, setErrors] = useState({
@@ -88,7 +88,7 @@ export default function SignUp(props) {
                 break;
             case 'Add Image URL':
                 if(validator.isURL(word)) {
-                    setProfileInfo({...profileInfo, photoURL: word})
+                    setProfileInfo({...profileInfo, profilePicture: word})
                     setErrors({
                         ...errors,
                         linkError: ''

@@ -64,26 +64,35 @@ export default function SignInPg() {
         return user.personalInfo.hasAccount;
     }
 
-    const saveToDatabase = (e, user, profileInfo) => {
+    const saveToDatabase = (e, user, userInfo) => {
         e.preventDefault();
 
-        if (hasProfanity(profileInfo.name) === true || 
-            hasProfanity(profileInfo.handle) === true ||
-            hasProfanity(profileInfo.description) === true) return;
+        if (hasProfanity(userInfo.name) === true || 
+            hasProfanity(userInfo.handle) === true ||
+            hasProfanity(userInfo.description) === true) return;
             
         //Store in database & add to users array
         dispatch(addUser({
             ...user,
             personalInfo: {
                 ...user.personalInfo,
-                ...profileInfo
+                ...userInfo,
+                profileInfo: {
+                    ...user.personalInfo.profileInfo,
+                    profilePicture: userInfo.profilePicture
+                }
         }}))
+
         dispatch(editUser({
             ...user,
             personalInfo: {
                 ...user.personalInfo,
-                ...profileInfo
-            }
+                ...userInfo,
+                profileInfo: {
+                    ...user.personalInfo.profileInfo,
+                    profilePicture: userInfo.profilePicture
+                }
+        }
         }))
     }
 
