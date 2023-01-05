@@ -1,5 +1,5 @@
 import FollowButton from './FollowButton';
-import EditProfileButton from '../EditProfileButton';
+import EditProfileButton from './EditProfileButton';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../Sign_In_Page/SignInPgSlice';
 

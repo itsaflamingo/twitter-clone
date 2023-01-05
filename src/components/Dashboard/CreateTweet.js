@@ -22,6 +22,7 @@ export default function CreateTweet(props) {
     // When submit button clicked, input gets placed in tweet.
     const [tweet, setTweet] = useState({
         name: user.displayName,
+        handle: `@${user.personalInfo.handle}`,
         date: '',
         text: '',
         image: '',
@@ -29,7 +30,7 @@ export default function CreateTweet(props) {
         retweets: 0,
         words: 0,
         comments: [],
-        retweet: []
+        retweet: [],
     });
 
     const handleSubmit = (e) => {
@@ -37,7 +38,7 @@ export default function CreateTweet(props) {
         setTweet({
             ...tweet, 
             text: input,
-            date: getDateTime().getDateAndTime(),
+            date: getDateTime().getOnlyDate(),
             id: uniqid(),
             retweet
         })

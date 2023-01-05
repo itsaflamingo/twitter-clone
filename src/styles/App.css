@@ -1,5 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 * {
     --twitter-blue: #1D9BF0;
+    --grey: #EFF3F4;
+    --font-grey: #536471;
+    --medium-grey: #CFD9DE;
+    font-family: 'Roboto', sans-serif;
 }
 body {
     margin: 0;
@@ -17,7 +22,7 @@ body {
 #sign-in-box {
     height: 80vh;
     width: 40vw;
-    border: 1px solid grey;
+    border: 1px solid var(--grey);
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -48,22 +53,69 @@ body {
 #sign-up {
     position: absolute;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    top: 40%;
+
+    top: 20%;
     left: 40%;
-    height: 300px;
+    height: 400px;
     width: 300px;
     background-color: white;
-    border: 1px solid grey;
+    border: 1px solid black;
+    border-radius: 20px;
 }
-#upload-picture #user-photo {
+#sign-up form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+#sign-up button {
+    width: 40%;
+    align-self: center;
+    height: 30px;
+    border: none;
+    font-weight: 700;
+    font-size: 15px;
+    background-color: #27A1FC;
+    border-radius: 20px;
+    color: white;
+}
+.error {
+    font-size: 14px;
+    color: red;
+}
+#upload-picture .user-photo {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+#upload-picture .profile-picture:hover {
+    opacity: 0.8;
+}
+#upload-picture .profile-picture {
     width: 150px;
+}
+.notClickable {
+    pointer-events: none;
+}
+.upload-picture-container {
+    position: relative;
+}
+.add-img-text {
+    position: absolute;
+    top: 45%;
+    left: 33%;
+    color: black;
+    font-weight: 700;
+    font-size: 18px;
+    z-index: 10;
+    display: flex;
+    width: 90px;
+    text-align: center;
 }
 /* HEADER */
 #menu {
-    width: 20vw;
+    width: 15vw;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -90,8 +142,8 @@ body {
     width: 40%;
     display: flex;
     flex-direction: column;
-    border-left: 1px solid black;
-    border-right: 1px solid black;
+    border-left: 1px solid var(--grey);
+    border-right: 1px solid var(--grey);
 }
 .likelike {
     width: 20px;
@@ -101,18 +153,48 @@ body {
     width: 45%;
 }
 /* TWEET */
+#tweet-display {
+    width: 100%;
+}
+.tweet-wrapper {
+    border-top: 1px solid var(--grey);
+    border-bottom: 1px solid var(--grey);
+    padding: 10px;
+}
 .tweet {
     position: relative;
+    max-width: 100%;
+    background-color: rgb(255, 255, 255);
+}
+.tweet-content {
+    display: flex;
+}
+.tweet-written {
+    margin: 0 10px;
+    width: 70%;
+}
+.tweet .user-photo {
+    width: 50px;
 }
 .tweet-btns {
     display: flex;
+    justify-content: space-around;
 }
 .retweet-div, .like-div {
     height: 5%;
-    width: 5%;
+    display: flex;
+    margin: 0 10px;
+    align-items: center;
+    gap: 5px;
+}
+#profile .retweet-div, #profile .like-div {
+    width: 3.5%;
+}
+#dashboard .retweet-div, #dashboard .like-div {
+    width: 4.8%;
 }
 .like, .retweet {
-    height: 90%;
+    height: 100%;
 }
 #tweet {
     height: 15vh;
@@ -121,10 +203,19 @@ body {
     margin: 0;
     padding: 0;
 }
+.delete-tweet {
+    position: absolute;
+    top: 5%;
+    left: 95%;
+    border: none;
+    background-color: white;
+    color: var(--font-grey);
+}
 /* CREATE TWEET */
 #create-tweet {
-    border-bottom: 1px solid black;
-    width: 100%;
+    border-bottom: 1px solid var(--grey);
+    width: 95%;
+    padding: 10px;
 }
 .submit-tweet {
     width: 100px;
@@ -134,19 +225,48 @@ body {
     background-color: var(--twitter-blue);
     color: white;
 }
+input:focus {
+    outline: none;
+}
 /* RETWEET */
 .retweet-pop-up {
     position: absolute;
     z-index: 10;
-    border: 1px solid black;
+    border: 1px solid var(--grey);
     top: 30%;
-    left: 50%;
+    left: 40%;
+    width: 400px;
+    background-color: white;
+    border-radius: 20px;
+}
+.retweet-pop-up .tweet {
+    padding: 10px;
+    z-index: 10;
+    border-radius: 20px;
+}
+.retweet-pop-up .delete-tweet {
+    left: 92%;
+}
+.retweet-pop-up .tweet-options {
+    display: flex;
+    justify-content: flex-end;
+}
+.tweet-written .tweet {
+    border: 1px solid var(--grey);
+    margin: 5px;
+    width: 100%;
+    padding: 10px;
+}
+.tweet-written .delete-tweet {
+    display: none;
 }
 /* PROFILE */
 #profile {
     height: 100%;
-    width: 40%;
-    border: 1px solid grey;
+    width: 50%;
+    border: 1px solid var(--grey);
+    display: flex;
+    flex-direction: column;
 }
 #profile-pictures {
     display: flex;
@@ -159,16 +279,38 @@ body {
 #cover-photo {
     height: 150px;
 }
-#profile #user-photo {
+#profile-pictures .user-photo {
     position: absolute;
-    height: 120px;
-    width: 120px;
+    width: 130px;
+    height: 130px;
     border-radius: 50%;
     top: 60%;
-    left: 5%;
+    left: 2%;
 }
 .profile-picture {
     max-width: 100%;
     overflow: hidden;
     border-radius: 50%;
+}
+.follow-btn, .edit-btn {
+    border: none;
+    height: 50px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 15px;
+}
+.edit-btn {
+    background-color: white;
+    border: 1px solid var(--medium-grey);
+}
+.edit-btn:hover {
+    background-color: var(--grey);
+}
+#profile .follow-btn, #profile .edit-btn {
+    margin-top: 35px;
+    margin-left: 350px;
+    width: 25%;
+}
+#user-info, #followers-following{
+    margin-left: 30px;
 }

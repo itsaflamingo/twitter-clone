@@ -1,5 +1,5 @@
 export default function EditProfileButton() {
     return (
-        <button>Edit Profile</button>
+        <button className="edit-btn">Edit profile</button>
     )
 }

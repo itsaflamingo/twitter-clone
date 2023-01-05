@@ -1,6 +1,6 @@
 export default function Input(props) {
 
-    const { type, onChange, id } = props;
+    const { type, onChange, id, pattern } = props;
 
     return (
         <div className="input">
@@ -8,6 +8,7 @@ export default function Input(props) {
             <input 
             type={type}
             id={id}
+            pattern={pattern}
             onChange={(e) => onChange(e)}></input>
         </div>
     )

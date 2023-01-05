@@ -12,6 +12,7 @@ import { editUsers, usersSelector } from '../Dashboard/allUsersSlice';
 import { useLocation } from 'react-router-dom';
 import { ProfileProvider } from './profileContext';
 import { tweetsSelector } from '../Dashboard/CreateTweetSlice';
+import { storeUsers } from '../storeInCloud';
 
 function Profile() {
 
@@ -43,6 +44,7 @@ function Profile() {
 
     const changeUserTweets = (tweets, user) => tweets.filter(tweet => tweet.name === user.personalInfo.name);
 
+    // Function to change user through context API.
     const updateUser = (obj) => setUser(obj);
 
     const editAllUsers = () => {
@@ -74,6 +76,9 @@ function Profile() {
                 }
             }
         }))
+
+        storeUsers(user);
+        storeUsers(userSelector);
     }
 
     return(

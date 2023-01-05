@@ -56,7 +56,7 @@ export default function FollowButton() {
     
 
     return (
-        <button
+        <button className="follow-btn"
         onClick={() => follow()}>{buttonName}</button>
     )
 }

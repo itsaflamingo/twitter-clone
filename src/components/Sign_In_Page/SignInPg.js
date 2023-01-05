@@ -7,6 +7,7 @@ import { usersSelector, addUser } from '../Dashboard/allUsersSlice';
 import { storeUsers } from '../storeInCloud';
 import { getUsers } from '../retrieveFromCloud';
 import SignUp from './SignUp';
+import hasProfanity from '../hasProfanity';
 
 export default function SignInPg() {
 
@@ -65,13 +66,18 @@ export default function SignInPg() {
 
     const saveToDatabase = (e, user, profileInfo) => {
         e.preventDefault();
+
+        if (hasProfanity(profileInfo.name) === true || 
+            hasProfanity(profileInfo.handle) === true ||
+            hasProfanity(profileInfo.description) === true) return;
+            
         //Store in database & add to users array
         dispatch(addUser({
             ...user,
             personalInfo: {
                 ...user.personalInfo,
                 ...profileInfo
-        }}));
+        }}))
         dispatch(editUser({
             ...user,
             personalInfo: {
