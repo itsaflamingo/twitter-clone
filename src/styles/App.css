@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 * {
     --twitter-blue: #1D9BF0;
-    --grey: #EFF3F4;
-    --font-grey: #536471;
+    --grey: #f1f5f6;
+    --font-grey: #616c74;
     --medium-grey: #CFD9DE;
     font-family: 'Roboto', sans-serif;
 }
@@ -80,7 +80,7 @@ body {
     border: none;
     font-weight: 700;
     font-size: 15px;
-    background-color: #27A1FC;
+    background-color: var(--twitter-blue);
     border-radius: 20px;
     color: white;
 }
@@ -109,6 +109,9 @@ body {
     font-size: 14px;
 }
 /* HEADER */
+#header {
+    margin: -9px 10px;
+}
 #menu {
     width: 15vw;
     height: 100vh;
@@ -125,6 +128,15 @@ body {
 #logo, #menu-options {
     margin: 1rem 1.5rem;
 }
+.visit-profile {
+    display: flex;
+    align-items: center;
+    font-weight: 900;
+    font-size: 20px;
+}
+.user-icon {
+    width: 20px;
+}
 /* TWEET DISPLAY */
 #app {
     height: 100vh;
@@ -139,6 +151,7 @@ body {
     flex-direction: column;
     border-left: 1px solid var(--grey);
     border-right: 1px solid var(--grey);
+    position: relative;
 }
 #tweet-display {
     height: 60%;
@@ -169,13 +182,17 @@ body {
     width: 50px;
     height: 50px;
 }
-.tweet .profile-picture {
+.tweet .profile-picture, .recommended-user .profile-picture {
     max-width: 100%;
     max-height: 100%;
 }
 .tweet-btns {
     display: flex;
     justify-content: space-around;
+}
+.user-name-handle {
+    display: flex;
+    gap: 5px;
 }
 .retweet-div, .like-div {
     height: 5%;
@@ -194,11 +211,12 @@ body {
     width: 18px;
 }
 #tweet {
-    height: 15vh;
+    height: 8vh;
     width: 100%;
     border: none;
     margin: 0;
     padding: 0;
+    font-size: 18px;
 }
 .delete-tweet {
     position: absolute;
@@ -208,11 +226,31 @@ body {
     background-color: white;
     color: var(--font-grey);
 }
+.tweet-date {
+    color: var(--font-grey);
+}
 /* CREATE TWEET */
 #create-tweet {
     border-bottom: 1px solid var(--grey);
     width: 95%;
     padding: 10px;
+}
+.tweet-options {
+    display: flex;
+    justify-content: flex-end;
+}
+.picture-create-tweet {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+.picture-create-tweet .user-photo {
+    height: 70px;
+    width: 70px;
+}
+.picture-create-tweet .profile-picture {
+    max-width: 100%;
+    max-height: 100%;
 }
 .submit-tweet {
     width: 100px;
@@ -323,4 +361,87 @@ input:focus {
 }
 #user-info, #followers-following{
     margin-left: 30px;
+}
+.calendar {
+    width: 30px;
+}
+.font-grey {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.font-grey {
+    color: var(--font-grey);
+}
+.follow-display {
+    border: none;
+    height: 30px;
+    font-size: 15px;
+    background-color: white;
+    margin: 5px;
+}
+.follow-quantity {
+    font-weight: 900;
+}
+.follow-title {
+    color: var(--font-grey);
+}
+/* SEARCH */
+.search {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid var(--medium-grey);
+    border-radius: 20px;
+    height: 40px;
+    width: 250px;
+    position: absolute;
+    left: 100%;
+    margin-left: 30px;
+}
+.search-icon {
+    width: 20px;
+}
+.search-btn {
+    border: none;
+    background-color: transparent;
+}
+.search input {
+    border: none;
+    width: 210px;
+}
+/* RECOMMENDED USERS */
+#recommended-users {
+    margin-top: 100px;
+    background-color: var(--grey);
+    border-radius: 20px;
+    max-height: 500px;
+    margin-left: 20px;
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.recommended-user {
+    height: 80px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.recommended-user .user-photo {
+    height: 50px;
+    width: 50px;
+}
+.follow {
+    height: 30px;
+    width: 80px;
+    border: none;
+    background-color: var(--twitter-blue);
+    border-radius: 20px;
+    font-weight: 700;
+    color: white;
+}
+.name {
+    font-weight: 700;
 }

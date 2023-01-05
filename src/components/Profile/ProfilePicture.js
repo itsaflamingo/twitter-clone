@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { useChangeProfilePicture } from '../Sign_In_Page/useChangeProfilePicture'
 import { ProfileContext } from './profileContext';
 
@@ -6,28 +6,25 @@ export default function ProfilePicture(props) {
 
     const { tweetImage = '' } = props;
     const user = useContext(ProfileContext);
-    let value = useRef({profile: '', cover: ''});
-    const picture = useChangeProfilePicture(value.current);
-
-    useEffect(() => {
-        if (user === undefined) return;
-        if('user' in user) {
-            value.current = {
-                profile: user.user.personalInfo.profileInfo.profilePicture,
-                cover: user.user.personalInfo.profileInfo.coverPhoto
-            };
-        }
-    }, [])
+    const [value, setValue] = useState({profile: '', cover: ''});
+    const picture = useChangeProfilePicture(value);
 
     useEffect(() => {
         if(tweetImage.length > 0) {
-            value.current = {
+            setValue({
                 profile: tweetImage,
                 cover: ''
-            }
-            return;
+            })
         }
-    }, [tweetImage])
+
+        if (user === undefined) return;
+        if('user' in user) {
+            setValue({
+                profile: user.user.personalInfo.profileInfo.profilePicture,
+                cover: user.user.personalInfo.profileInfo.coverPhoto
+            })
+        }
+    }, [])
 
     return (
         <div className='user-photo'>

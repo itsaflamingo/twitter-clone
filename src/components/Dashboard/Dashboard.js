@@ -1,23 +1,23 @@
 import AddMenuAndAside from "../AddMenuAndAside";
 import CreateTweet from './CreateTweet'
 import DisplayTweets from "../DisplayTweet/DisplayTweets";
-import { useState, useEffect, useReducer } from "react";
+import { useState, useEffect } from "react";
 import { tweetsSelector } from "./CreateTweetSlice";
 import { useSelector, useDispatch } from "react-redux";
-import { getTweets } from "../retrieveFromCloud";
-import { addTweet } from "./CreateTweetSlice";
 import { selectUser } from "../Sign_In_Page/SignInPgSlice"
 import { userAddTweets } from "./userTweetsSlice";
 import useGetTweetsFromDatabase from "./useGetTweetsFromDatabase";
 import { userTweetsSelector } from "./userTweetsSlice";
+import Search from "../Search";
 
 function Dashboard() {
 
-    const tweets = useSelector(tweetsSelector);
+    const allTweets = useSelector(tweetsSelector);
     const user = useSelector(selectUser);
     const userTweets = useSelector(userTweetsSelector);
 
     const [showTweets, setShowTweets] = useState(true);
+    const [tweets, setTweets] = useState(allTweets)
 
     const dispatch = useDispatch();
 
@@ -38,11 +38,20 @@ function Dashboard() {
         addToUserTweets(filterUserTweets(tweets, user));
     }, [tweets])
 
+    const onSubmit = (e, input) => {
+        e.preventDefault();
+
+        setTweets(filterTweets(input))
+    }
+
+    const filterTweets = (input) => allTweets.filter((tweet) => tweet.text === input)
+
     return (
         <div id='dashboard'>
             <div id='header'>
                 <h2>Home</h2>
             </div>
+            <Search onSubmit={onSubmit} />
             <CreateTweet retweet={[]} showRetweet={null} />
             {showTweets && (<DisplayTweets tweets={tweets} />)}
         </div>

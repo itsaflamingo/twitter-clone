@@ -8,6 +8,7 @@ import uniqid from 'uniqid'
 import CreateTweetOptions from "./CreateTweetOptions";
 import getDateTime from "../getDateTime";
 import { userAddTweets } from "./userTweetsSlice";
+import ProfilePicture from "../Profile/ProfilePicture";
 
 
 export default function CreateTweet(props) {
@@ -63,7 +64,10 @@ export default function CreateTweet(props) {
 
     return(
         <div id='create-tweet'>
-            <TweetInput setInput={setInput} input={input} />
+            <div className="picture-create-tweet">
+                <ProfilePicture tweetImage={user.personalInfo.profileInfo.profilePicture} />
+                <TweetInput setInput={setInput} input={input} />
+            </div>
             <div id='tweet-add-ons'>
                 <CreateTweetOptions handleSubmit={handleSubmit} />
             </div>

@@ -19,9 +19,11 @@ export default function DisplayTweet(props) {
             <div className="tweet-content">
             <ProfilePicture tweetImage={tweet.picture} />
             <div className="tweet-written">
-                <div className="user-name"
+                <div className="user-name-handle"
                 onClick={(e) => navigateToProfile(e)}
-                id={tweet.name}>{tweet.name} {tweet.handle}
+                id={tweet.name}>
+                <span className='name'>{tweet.name} </span> 
+                <span className='font-grey'>{tweet.handle}</span>
                 </div>
                     {tweet.text}
                     {/* DisplayTweet only renders if tweet is not an array, filtering out empty retweets */}

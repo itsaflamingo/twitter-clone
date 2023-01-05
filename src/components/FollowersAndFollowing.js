@@ -7,8 +7,14 @@ export default function FollowersAndFollowing() {
 
     return (
         <div id='followers-following'>
-                <button>{user.personalInfo.profileInfo.followers} Followers</button>
-                <button>{user.personalInfo.profileInfo.following} Following</button>
+                <button className='follow-display'>
+                    <span class='follow-quantity'>{user.personalInfo.profileInfo.followers} </span>
+                    <span class='follow-title'>Followers</span>
+                </button>
+                <button className='follow-display'>
+                    <span class='follow-quantity'>{user.personalInfo.profileInfo.following} </span> 
+                    <span class='follow-title'>Following</span>
+                </button>
             </div>
     )
 }

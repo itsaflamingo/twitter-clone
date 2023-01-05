@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { ProfileContext } from "./profileContext";
+import calendar from '../../images/icons8-calendar-100.png'
 
 export default function DisplayUserInfo() {
 
@@ -9,9 +10,20 @@ export default function DisplayUserInfo() {
     return (
         <div id='user-info'>
             <h2>{user.personalInfo.name}</h2>
-            <p>@{user.personalInfo.handle}</p>
+            <p>
+                <span className="font-grey">
+                    @{user.personalInfo.handle}
+                    </span>
+            </p>
             <p>{user.personalInfo.description}</p>
-            <p>Joined {user.personalInfo.dateJoined}</p>
+            <div className="date-joined">
+                <p>
+                    <span className="font-grey">
+                        <img class='calendar' src={calendar} alt='calendar' />
+                        Joined {user.personalInfo.dateJoined}
+                        </span>
+                </p>
+            </div>
             </div>
     )
 }

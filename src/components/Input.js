@@ -4,7 +4,7 @@ export default function Input(props) {
 
     return (
         <div className="input">
-            <label htmlFor={id}>{id}: </label>
+            <label htmlFor={id}>{id} </label>
             <input 
             type={type}
             id={id}

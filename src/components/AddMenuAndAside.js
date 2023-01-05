@@ -1,5 +1,6 @@
 import Menu from "./Menu"
-import Trending from "./Trending";
+import Search from "./Search";
+import RecommendedUsers from "./RecommendedUsers";
 
 export default function AddMenuAndAside(WrappedComponent) {
     return function EnhanceComponent() {
@@ -8,7 +9,7 @@ export default function AddMenuAndAside(WrappedComponent) {
         <div id='app'>
             <Menu />
             <WrappedComponent />
-            <Trending />
+            <RecommendedUsers />
         </div>
     )}
 
