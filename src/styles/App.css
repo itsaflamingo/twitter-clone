@@ -57,9 +57,13 @@ body {
     justify-content: center;
 
     top: 20%;
-    left: 40%;
+    /* Ensure div is centered on page by subtracting 1/2 of its width from middle of the page */
+    left: 50%;
+    margin-left: -175px;
+
     height: 400px;
-    width: 300px;
+    width: 350px;
+
     background-color: white;
     border: 1px solid black;
     border-radius: 20px;
@@ -93,7 +97,7 @@ body {
     opacity: 0.8;
 }
 #upload-picture .profile-picture {
-    width: 150px;
+    width: 130px;
 }
 .notClickable {
     pointer-events: none;
@@ -101,17 +105,8 @@ body {
 .upload-picture-container {
     position: relative;
 }
-.add-img-text {
-    position: absolute;
-    top: 45%;
-    left: 33%;
-    color: black;
-    font-weight: 700;
-    font-size: 18px;
-    z-index: 10;
-    display: flex;
-    width: 90px;
-    text-align: center;
+#sign-up label {
+    font-size: 14px;
 }
 /* HEADER */
 #menu {
@@ -175,6 +170,11 @@ body {
 }
 .tweet .user-photo {
     width: 50px;
+    height: 50px;
+}
+.tweet .profile-picture {
+    max-width: 100%;
+    max-height: 100%;
 }
 .tweet-btns {
     display: flex;
@@ -276,7 +276,12 @@ input:focus {
 #profile-pictures > * {
     border: 1px solid grey;
 }
-#cover-photo {
+.cover-photo {
+    object-fit: cover;
+    height: 150px;
+    width: 100%;
+}
+.cover-photo-container {
     height: 150px;
 }
 #profile-pictures .user-photo {

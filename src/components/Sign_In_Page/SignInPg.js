@@ -71,7 +71,7 @@ export default function SignInPg() {
             hasProfanity(userInfo.handle) === true ||
             hasProfanity(userInfo.description) === true) return;
 
-        const { profilePicture, ...rest} = userInfo;
+        const { profilePicture, coverPhoto, ...rest} = userInfo;
             
         //Store in database & add to users array
         dispatch(addUser({
@@ -82,6 +82,7 @@ export default function SignInPg() {
                 profileInfo: {
                     ...user.personalInfo.profileInfo,
                     profilePicture,
+                    coverPhoto,
                 }
         }}))
 
@@ -92,7 +93,8 @@ export default function SignInPg() {
                 ...rest,
                 profileInfo: {
                     ...user.personalInfo.profileInfo,
-                    profilePicture
+                    profilePicture,
+                    coverPhoto,
                 }
         }
         }))

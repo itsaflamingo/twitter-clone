@@ -13,7 +13,8 @@ export default function SignUp(props) {
         name: '',
         handle: '',
         description: '',
-        profilePicture: ''
+        profilePicture: '',
+        coverPhoto: ''
     });
 
     const [errors, setErrors] = useState({
@@ -86,7 +87,7 @@ export default function SignUp(props) {
                     });
                 }
                 break;
-            case 'Add Image URL':
+            case 'Add Profile Picture':
                 if(validator.isURL(word)) {
                     setProfileInfo({...profileInfo, profilePicture: word})
                     setErrors({
@@ -103,6 +104,23 @@ export default function SignUp(props) {
                 }
 
                 break;
+            case 'Add Cover Photo':
+                if(validator.isURL(word)) {
+                    setProfileInfo({...profileInfo, coverPhoto: word})
+                    setErrors({
+                        ...errors,
+                        linkError: ''
+                    });
+                }
+                else {
+                    setErrors({
+                        ...errors,
+                        linkError: 'Please enter a valid URL'
+                    });
+                    return;
+                }
+    
+                    break;
             default: return;
         }
     } 
@@ -126,23 +144,26 @@ export default function SignUp(props) {
             <form>
                 <div className="upload-picture-container">
                     <UploadPicture />
-                    <span className='add-img-text'>Click To Add Image</span>
                 </div>
                 <div id='add-name'>
                     <span className='error'>{errors.nameError}</span>
-                    <Input type='text' onChange={onChangeInput} id='Full Name' pattern='/^[a-zA-Z]+ [a-zA-Z]+$/' />
+                    <Input type='text' onChange={onChangeInput} id='Full Name' pattern='/^[a-zA-Z]+ [a-zA-Z]+$/' placeholder='Jane Doe' />
                 </div>
                 <div id='add-handle'>
                     <span className='error'>{errors.handleError}</span>
-                    <Input type='text' onChange={onChangeInput} id='Handle' />
+                    <Input type='text' onChange={onChangeInput} id='Handle' placeholder='' />
                 </div>
                 <div id='add-description'>
                     <span className='error'>{errors.descriptionError}</span>
-                    <Input type='textarea' onChange={onChangeInput} id='Description' />
+                    <Input type='textarea' onChange={onChangeInput} id='Description' placeholder='' />
                 </div>
                 <div id='add-URL'>
                     <span className='error'>{errors.linkError}</span>
-                    <Input type='url' onChange={onChangeInput} id='Add Image URL' />
+                    <Input type='url' onChange={onChangeInput} id='Add Profile Picture' placeholder='https://www.fakelink.com' />
+                </div>
+                <div id='add-cover-photo'>
+                <span className='error'>{errors.linkError}</span>
+                    <Input type='url' onChange={onChangeInput} id='Add Cover Photo' placeholder='https://www.fakelink.com'/>
                 </div>
                 <button type='submit'
                 onClick={(e) => saveToDatabase(e, user, profileInfo)}className={isNotClickable}>Submit</button>
