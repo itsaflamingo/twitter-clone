@@ -140,9 +140,6 @@ body {
     border-left: 1px solid var(--grey);
     border-right: 1px solid var(--grey);
 }
-.likelike {
-    width: 20px;
-}
 #tweet-display {
     height: 60%;
     width: 45%;
@@ -194,7 +191,7 @@ body {
     width: 4.8%;
 }
 .like, .retweet {
-    height: 100%;
+    width: 18px;
 }
 #tweet {
     height: 15vh;
@@ -321,7 +318,7 @@ input:focus {
 }
 #profile .follow-btn, #profile .edit-btn {
     margin-top: 35px;
-    margin-left: 350px;
+    margin-left: 70%;
     width: 25%;
 }
 #user-info, #followers-following{

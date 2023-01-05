@@ -23,6 +23,7 @@ export default function CreateTweet(props) {
     const [tweet, setTweet] = useState({
         name: user.displayName,
         handle: `@${user.personalInfo.handle}`,
+        picture: user.personalInfo.profileInfo.profilePicture,
         date: '',
         text: '',
         image: '',

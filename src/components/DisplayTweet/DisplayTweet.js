@@ -17,7 +17,7 @@ export default function DisplayTweet(props) {
     return (
         <div className="tweet" key={tweet.id}>
             <div className="tweet-content">
-            <ProfilePicture />
+            <ProfilePicture tweetImage={tweet.picture} />
             <div className="tweet-written">
                 <div className="user-name"
                 onClick={(e) => navigateToProfile(e)}
