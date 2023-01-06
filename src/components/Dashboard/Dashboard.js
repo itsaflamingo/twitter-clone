@@ -17,7 +17,7 @@ function Dashboard() {
     const userTweets = useSelector(userTweetsSelector);
 
     const [showTweets, setShowTweets] = useState(true);
-    const [tweets, setTweets] = useState(allTweets)
+    const [tweets, setTweets] = useState([]);
 
     const dispatch = useDispatch();
 
@@ -25,6 +25,11 @@ function Dashboard() {
     const filterUserTweets = (tweets, user) => tweets.filter(tweet =>  tweet.name === user.personalInfo.name)
     
     useGetTweetsFromDatabase();
+
+    useEffect(() => {
+        if(allTweets.length === 0) return;
+        setTweets(allTweets);
+    }, [allTweets])
 
     useEffect(() => {
         if(tweets.length === 0) return;
@@ -44,7 +49,7 @@ function Dashboard() {
         setTweets(filterTweets(input))
     }
 
-    const filterTweets = (input) => allTweets.filter((tweet) => tweet.text === input)
+    const filterTweets = (input) => allTweets.filter((tweet) => tweet.text === input || tweet.name.toLowerCase() === input.toLowerCase() || tweet.handle.toLowerCase() === input.toLowerCase());
 
     return (
         <div id='dashboard'>

@@ -15,8 +15,8 @@ function RecommendedUsers() {
                         <div className="recommended-user">
                             <ProfilePicture tweetImage={user.personalInfo.profileInfo.profilePicture} />
                             <div className="user-info">
-                                <p class='name'>{user.personalInfo.name}</p>
-                                <p class='font-grey'>@{user.personalInfo.handle}</p>
+                                <p className='name'>{user.personalInfo.name}</p>
+                                <p className='font-grey'>@{user.personalInfo.handle}</p>
                             </div>
                             <button className="follow">Follow</button>
                         </div>
