@@ -10,13 +10,15 @@ export default function ProfilePicture(props) {
     const picture = useChangeProfilePicture(value);
 
     useEffect(() => {
-        if(tweetImage.length > 0) {
+        if(tweetImage.length > 0) { 
             setValue({
                 profile: tweetImage,
                 cover: ''
             })
         }
+    }, [])
 
+    useEffect(() => {
         if (user === undefined) return;
         if('user' in user) {
             setValue({
@@ -24,7 +26,7 @@ export default function ProfilePicture(props) {
                 cover: user.user.personalInfo.profileInfo.coverPhoto
             })
         }
-    }, [])
+    }, [user])
 
     return (
         <div className='user-photo'>

@@ -11,8 +11,8 @@ import { userAddTweets } from "./userTweetsSlice";
 import ProfilePicture from "../Profile/ProfilePicture";
 import determineTweetOrderNumber from "./determineTweetOrderNumber";
 
-const initialTweetState = (user, tweets) => {
-    const tweet = {
+const initialTweetState = (user) => {
+    return {
         name: user.personalInfo.name,
         handle: `@${user.personalInfo.handle}`,
         picture: user.personalInfo.profileInfo.profilePicture,
@@ -26,7 +26,6 @@ const initialTweetState = (user, tweets) => {
         retweet: [],
         spot: 0
     }
-    return tweet;
 }
 
 export default function CreateTweet(props) {
@@ -40,7 +39,7 @@ export default function CreateTweet(props) {
     // Input hold the onChange handler for tweet. 
     const [input, setInput] = useState('');
     // When submit button clicked, input gets placed in tweet.
-    const [tweet, setTweet] = useState(initialTweetState(user, tweets));
+    const [tweet, setTweet] = useState(initialTweetState(user));
 
     const handleSubmit = (e) => {
         e.preventDefault();
