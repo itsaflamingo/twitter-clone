@@ -16,7 +16,7 @@ export default function CoverPhoto() {
                 cover: user.user.personalInfo.profileInfo.coverPhoto
             };
         }
-    }, [])
+    }, [user])
 
     return (
         <div className='cover-photo-container'>
