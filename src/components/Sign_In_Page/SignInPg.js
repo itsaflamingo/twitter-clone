@@ -8,6 +8,7 @@ import { storeUsers } from '../storeInCloud';
 import { getUsers } from '../retrieveFromCloud';
 import SignUp from './SignUp';
 import hasProfanity from '../hasProfanity';
+import Footer from '../Footer';
 
 export default function SignInPg() {
 
@@ -116,6 +117,7 @@ export default function SignInPg() {
                     onClick={() => dispatch(fetchUser())}>Sign In</button>
                 </div>
             </div>
+            <Footer />
         </div>
     )
 }

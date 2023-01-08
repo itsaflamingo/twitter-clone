@@ -4,7 +4,7 @@ export default function orderTweets(copyTweets, tweets) {
 
     while(finalArr.length < tweets.length) {
         const lowestValue = copyTweets.reduce((a, b) => {
-            if(a.spot <= b.spot) {
+            if(a.spot >= b.spot) {
                 return a
             }
             else {

@@ -20,6 +20,10 @@ body {
     align-items: center;
     background-color: var(--twitter-blue);
 }
+#sign-in-container footer {
+    position: absolute;
+    top: 90%;
+}
 #sign-in-box {
     height: 50vh;
     width: 40vw;
@@ -451,4 +455,19 @@ input:focus {
 }
 .name {
     font-weight: 700;
+}
+/* FOOTER */
+footer {
+    width: 100%;
+    height: 75px;
+    justify-content: center;
+    gap: 5px;
+}
+footer, .links {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.links {
+    max-height: 100%;
 }

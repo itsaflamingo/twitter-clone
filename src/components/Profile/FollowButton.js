@@ -11,8 +11,8 @@ export default function FollowButton() {
     const userFollowing = useSelector(selectUser);
     const { user, updateUser } = useContext(ProfileContext);
     
-    const [following, setFollowing] = useState(0);
-    const [followers, setFollowers] = useState(0);
+    const [following, setFollowing] = useState([]);
+    const [followers, setFollowers] = useState([]);
 
     const dispatch = useDispatch();
 
@@ -49,9 +49,9 @@ export default function FollowButton() {
         editFollowed();
     }
 
-    const editFollowing = () => setFollowing(userFollowing.personalInfo.profileInfo.following + 1);
+    const editFollowing = () => setFollowing(userFollowing.personalInfo.profileInfo.following.concat({...user.personalInfo}));
 
-    const editFollowed = () => setFollowers(user.personalInfo.profileInfo.followers + 1);
+    const editFollowed = () => setFollowers(user.personalInfo.profileInfo.followers.concat({...userFollowing.personalInfo}));
     
 
     return (

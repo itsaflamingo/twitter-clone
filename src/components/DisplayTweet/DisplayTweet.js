@@ -10,7 +10,6 @@ export default function DisplayTweet(props) {
 
     const navigateToProfile = (e) => {
         const target = e.target.id;
-
         navigate('/profile', { state: target });
     }
     
@@ -22,7 +21,7 @@ export default function DisplayTweet(props) {
                 <div className="user-name-handle"
                 onClick={(e) => navigateToProfile(e)}
                 id={tweet.name}>
-                <span className='name'>{tweet.name} </span> 
+                <span className='name' id={tweet.name}>{tweet.name} </span> 
                 <span className='font-grey'>{tweet.handle}</span>
                 </div>
                     {tweet.text}

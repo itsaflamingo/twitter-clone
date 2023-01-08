@@ -12,7 +12,7 @@ import ProfilePicture from "../Profile/ProfilePicture";
 import determineTweetOrderNumber from "./determineTweetOrderNumber";
 
 const initialTweetState = (user, tweets) => {
-    return {
+    const tweet = {
         name: user.personalInfo.name,
         handle: `@${user.personalInfo.handle}`,
         picture: user.personalInfo.profileInfo.profilePicture,
@@ -24,8 +24,9 @@ const initialTweetState = (user, tweets) => {
         words: 0,
         comments: [],
         retweet: [],
-        spot: determineTweetOrderNumber(tweets)
+        spot: 0
     }
+    return tweet;
 }
 
 export default function CreateTweet(props) {
@@ -48,6 +49,7 @@ export default function CreateTweet(props) {
             text: input,
             date: getDateTime().getOnlyDate(),
             id: uniqid(),
+            spot: determineTweetOrderNumber(tweets),
             retweet
         })
         setInput('');
