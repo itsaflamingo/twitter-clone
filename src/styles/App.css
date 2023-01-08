@@ -18,32 +18,39 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: var(--twitter-blue);
 }
 #sign-in-box {
-    height: 80vh;
+    height: 50vh;
     width: 40vw;
     border: 1px solid var(--grey);
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    background-color: var(--grey);
+    border-radius: 20px;
 }
 #sign-in-logo {
-    height: 25vh;
-    width: calc(25vh / 1);
+    height: 15vh;
+    width: calc(15vh / 1);
+    display: flex;
 }
 #heading-btn {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    height: 30%;
+    height: 40%;
     width: 100%;
+}
+#heading-btn h1 {
+    color: var(--font-grey);
 }
 #sign-in {
     border: none;
     background-color: rgb(176, 88, 249);
-    height: 25%;
+    height: 50px;
     width: 35%;
     border-radius: 30px;
     font-size: 1rem;

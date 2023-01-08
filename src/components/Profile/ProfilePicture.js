@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useChangeProfilePicture } from '../Sign_In_Page/useChangeProfilePicture'
 import { ProfileContext } from './profileContext';
 

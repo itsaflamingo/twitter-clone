@@ -22,7 +22,7 @@ function Dashboard() {
     const dispatch = useDispatch();
 
     const addToUserTweets = (filteredTweets) => dispatch(userAddTweets(filteredTweets));
-    const filterUserTweets = (tweets, user) => tweets.filter(tweet =>  tweet.name === user.personalInfo.name)
+    const filterUserTweets = (tweets, user) => tweets.filter(tweet =>  tweet.name === user.personalInfo.name);
     
     useGetTweetsFromDatabase();
 
@@ -38,8 +38,7 @@ function Dashboard() {
     }, [tweets])
 
     useEffect(() => {
-        if(tweets.length === 0 ||
-            userTweets.length > 0) return;
+        if(tweets.length === 0 || userTweets.length > 0) return;
         addToUserTweets(filterUserTweets(tweets, user));
     }, [tweets])
 

@@ -50,7 +50,6 @@ export default function FollowButton() {
     }
 
     const editFollowing = () => setFollowing(userFollowing.personalInfo.profileInfo.following + 1);
-    
 
     const editFollowed = () => setFollowers(user.personalInfo.profileInfo.followers + 1);
     
