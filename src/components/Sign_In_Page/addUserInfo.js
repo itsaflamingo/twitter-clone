@@ -10,8 +10,8 @@ export default function addUserInfo(user) {
                 location: '',
                 handle: '',
                 profileInfo: {
-                    followers: 0,
-                    following: 0,
+                    followers: [],
+                    following: [],
                     likes: 0,
                     profilePicture: '',
                     coverPhoto: '',

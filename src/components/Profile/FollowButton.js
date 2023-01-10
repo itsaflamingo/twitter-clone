@@ -11,27 +11,23 @@ export default function FollowButton() {
     const userFollowing = useSelector(selectUser);
     const { user, updateUser } = useContext(ProfileContext);
     
+    // Refers to userFollowing's following array
     const [following, setFollowing] = useState([]);
+    // Refers to user's followers array
     const [followers, setFollowers] = useState([]);
 
     const dispatch = useDispatch();
 
-    const buttonName = useToggleFollowButton(following);
+    const buttonName = useToggleFollowButton(followers, userFollowing);
 
     useEffect(() => {
-        dispatch(editUser({
-            ...userFollowing, 
-            personalInfo: {
-                ...userFollowing.personalInfo,
-                profileInfo: { 
-                    ...userFollowing.personalInfo.profileInfo,
-                    following,
-                }
-            }
-        }))
-    }, [following]) 
+        if(user === undefined) return;
+        setFollowers(user.personalInfo.profileInfo.followers);
+        setFollowing(userFollowing.personalInfo.profileInfo.following);
+    }, [user])
 
     useEffect(() => {
+        if(('followers' in followers && followers === user.personalInfo.followers) || followers.length === 0) return;
         updateUser({
             ...user,
             personalInfo: {
@@ -44,14 +40,28 @@ export default function FollowButton() {
         })
     }, [followers])
 
+    useEffect(() => {
+        if(('following' in following && following === userFollowing.personalInfo.following) || following.length === 0) return;
+        dispatch(editUser({
+            ...userFollowing, 
+            personalInfo: {
+                ...userFollowing.personalInfo,
+                profileInfo: { 
+                    ...userFollowing.personalInfo.profileInfo,
+                    following,
+                }
+            }
+        }))
+    }, [following]) 
+
     const follow = () => {
+        editFollowers();
         editFollowing();
-        editFollowed();
     }
 
-    const editFollowing = () => setFollowing(userFollowing.personalInfo.profileInfo.following.concat({...user.personalInfo}));
+    const editFollowers = () => setFollowers(user.personalInfo.profileInfo.followers.concat({...userFollowing.personalInfo}));
 
-    const editFollowed = () => setFollowers(user.personalInfo.profileInfo.followers.concat({...userFollowing.personalInfo}));
+    const editFollowing = () => setFollowing(userFollowing.personalInfo.profileInfo.following.concat({...user.personalInfo}));
     
 
     return (

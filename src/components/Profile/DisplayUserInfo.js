@@ -19,7 +19,7 @@ export default function DisplayUserInfo() {
             <div className="date-joined">
                 <p>
                     <span className="font-grey">
-                        <img class='calendar' src={calendar} alt='calendar' />
+                        <img className='calendar' src={calendar} alt='calendar' />
                         Joined {user.personalInfo.dateJoined}
                         </span>
                 </p>
