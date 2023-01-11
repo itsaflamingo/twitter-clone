@@ -69,7 +69,6 @@ const accountSlice = createSlice({
             })
             builder.addCase(edit, (state, action) => {
                 state.user = {...action.payload};
-                console.log(state.user);
             })
     }
 })

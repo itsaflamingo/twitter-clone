@@ -4,6 +4,7 @@ import { doc, getFirestore, setDoc } from "firebase/firestore";
 const db = getFirestore(app);
 
 async function storeUsers(user) {
+    console.log(user);
     await setDoc(doc(db, 'users', user.email), {
         user
     })
