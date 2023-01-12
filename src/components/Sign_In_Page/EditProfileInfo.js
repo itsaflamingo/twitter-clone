@@ -4,7 +4,7 @@ import Input from "../Input"
 import UploadPicture from "./UploadPicture";
 import validator from 'validator'
 
-export default function SignUp(props) {
+export default function EditProfileInfo(props) {
 
     const { saveToDatabase, user } = props;
     

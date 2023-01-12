@@ -1,9 +1,7 @@
 import { useContext, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { selectUser } from "../Sign_In_Page/SignInPgSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { selectUser, editUser } from "../Sign_In_Page/SignInPgSlice";
 import { ProfileContext } from "./profileContext";
-import { useDispatch } from "react-redux";
-import { editUser } from "../Sign_In_Page/SignInPgSlice";
 import useToggleFollowButton from "./useToggleFollowButton";
 
 export default function FollowButton() {
@@ -31,7 +29,6 @@ export default function FollowButton() {
     }, [user])
 
     useEffect(() => {
-        console.log(followers, user)
         if(followers.length === user.personalInfo.profileInfo.followers.length) return;
         updateUser({
             ...user,
@@ -83,7 +80,6 @@ export default function FollowButton() {
         // If userFollowing is within followers array and button == following, this means they want to unfollow
         if(filteredArray.length < user.personalInfo.profileInfo.followers.length && buttonName === 'Following') {
             // unfollow
-            console.log('array followers filtered', filteredArray);
             return setFollowers(filteredArray);
         }
         const newObj = returnModifiedObject(userFollowing);
@@ -98,7 +94,6 @@ export default function FollowButton() {
         const followingArray = userFollowing.personalInfo.profileInfo.following;
         // If user is within followers array and button == following, this means they want to unfollow
         if(filteredArray.length < followingArray.length && buttonName === 'Following') {
-            console.log('array following filtered', filteredArray);
             return setFollowing(filteredArray);
         }
 

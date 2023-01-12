@@ -40,6 +40,10 @@ function Profile() {
         editAllUsers();
     }, [user])
 
+    useEffect(() => {
+        editAllUsers()
+    }, [userSelector, allTweets])
+
     const changeUser = (users, location) => users.filter(user => user.personalInfo.name === location.state);
 
     const changeUserTweets = (tweets, user) => tweets.filter(tweet => tweet.name === user.personalInfo.name);
@@ -81,7 +85,7 @@ function Profile() {
         storeUsers(userSelector);
     }
 
-    return(
+    return (
         <ProfileProvider value={{user, updateUser}}>
             <div id='profile'>
                 <ProfilePictures />

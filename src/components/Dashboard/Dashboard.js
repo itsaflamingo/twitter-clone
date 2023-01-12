@@ -22,7 +22,7 @@ function Dashboard() {
     const dispatch = useDispatch();
 
     const addToUserTweets = (filteredTweets) => dispatch(userAddTweets(filteredTweets));
-    const filterUserTweets = (tweets, user) => tweets.filter(tweet =>  tweet.name === user.personalInfo.name);
+    const filterUserTweets = (tweets, user) => tweets.filter(tweet => tweet.id === user.personalInfo.id);
     
     useGetTweetsFromDatabase();
 

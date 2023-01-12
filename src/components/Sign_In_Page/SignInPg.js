@@ -6,9 +6,9 @@ import { useEffect, useState } from 'react';
 import { usersSelector, addUser } from '../Dashboard/allUsersSlice';
 import { storeUsers } from '../storeInCloud';
 import { getUsers } from '../retrieveFromCloud';
-import SignUp from './SignUp';
-import hasProfanity from '../hasProfanity';
+import EditProfileInfo from './EditProfileInfo';
 import Footer from '../Footer';
+import addUserInfoToUser from '../addUserInfoToUser';
 
 export default function SignInPg() {
 
@@ -65,45 +65,17 @@ export default function SignInPg() {
         return user.personalInfo.hasAccount;
     }
 
-    const saveToDatabase = (e, user, userInfo) => {
-        e.preventDefault();
-
-        if (hasProfanity(userInfo.name) === true || 
-            hasProfanity(userInfo.handle) === true ||
-            hasProfanity(userInfo.description) === true) return;
-
-        const { profilePicture, coverPhoto, ...rest} = userInfo;
-            
+    const saveNewUserToDatabase = (e, user, userInfo) => {
         //Store in database & add to users array
-        dispatch(addUser({
-            ...user,
-            personalInfo: {
-                ...user.personalInfo,
-                ...rest,
-                profileInfo: {
-                    ...user.personalInfo.profileInfo,
-                    profilePicture,
-                    coverPhoto,
-                }
-        }}))
-
-        dispatch(editUser({
-            ...user,
-            personalInfo: {
-                ...user.personalInfo,
-                ...rest,
-                profileInfo: {
-                    ...user.personalInfo.profileInfo,
-                    profilePicture,
-                    coverPhoto,
-                }
-        }
-        }))
+        const newUser = addUserInfoToUser(e, user, userInfo);
+        //Store in database & add to users array
+        dispatch(addUser(newUser));
+        dispatch(editUser(newUser));
     }
 
     return (
         <div id='sign-in-container'>
-            {hasAccount && (<SignUp user={user} saveToDatabase={saveToDatabase} />)}
+            {hasAccount && (<EditProfileInfo user={user} saveToDatabase={saveNewUserToDatabase} />)}
             <div id='sign-in-box'>
                 <div id='sign-in-logo'
                 style={{
