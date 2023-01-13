@@ -9,10 +9,12 @@ import { getUsers } from '../retrieveFromCloud';
 import EditProfileInfo from './EditProfileInfo';
 import Footer from '../Footer';
 import addUserInfoToUser from '../addUserInfoToUser';
+import useAuth from './useAuth';
 
 export default function SignInPg() {
 
     const [hasAccount, setHasAccount] = useState(false);
+    const { isSignedIn } = useAuth();
 
     const user = useSelector(selectUser);
     const status = useSelector(selectStatus);
@@ -29,13 +31,13 @@ export default function SignInPg() {
     }, [status])
 
     useEffect(() => {
-        if('personalInfo' in user === false) return;
-        if(user.personalInfo.hasAccount === true) {
+        if('personalInfo' in user === false || isSignedIn === false) return;
+        if(isSignedIn && user.personalInfo.hasAccount === true) {
             nav('/dashboard');
             // Only store user in database after it has been changed.
             storeUsers(user);
         }
-    }, [user])
+    }, [user, isSignedIn])
 
     useEffect(() => {
         // Retrieve users from database
@@ -50,7 +52,6 @@ export default function SignInPg() {
 
     // If user is in database, return true, else add new user and return false
     const isInDatabase = (user) => {
-
         // Returns array with nested object
         const thisUser = users.filter((obj) => obj.email === user.email);
 
@@ -75,7 +76,7 @@ export default function SignInPg() {
 
     return (
         <div id='sign-in-container'>
-            {hasAccount && (<EditProfileInfo user={user} saveToDatabase={saveNewUserToDatabase} />)}
+            { hasAccount && (<EditProfileInfo user={user} saveToDatabase={saveNewUserToDatabase} />) }
             <div id='sign-in-box'>
                 <div id='sign-in-logo'
                 style={{

@@ -30,7 +30,7 @@ export default function EditProfileButton() {
                     ...tweet,
                     name: updatedUser.personalInfo.name,
                     picture: updatedUser.personalInfo.profileInfo.profilePicture,
-                    handle: updatedUser.personalInfo.handle,
+                    handle: `@${updatedUser.personalInfo.handle}`,
                   }
                 dispatch(updateTweet(index, newTweet));
                 return newTweet;

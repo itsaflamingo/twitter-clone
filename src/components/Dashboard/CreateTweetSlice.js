@@ -5,6 +5,7 @@ const initialState = [];
 const ADD_TWEET = createAction('ADD_TWEET');
 const DELETE_TWEET = createAction('DELETE_TWEET');
 const UPDATE_TWEET = createAction('UPDATE_TWEET');
+const CHANGE_TWEETS = createAction('CHANGE_TWEETS');
 
 function addTweet(obj) {
     return {
@@ -20,6 +21,13 @@ function updateTweet(index, updatedValues) {
             index,
             updatedValues
         }
+    }
+}
+
+function changeTweets(newTweets) {
+    return {
+        type: 'CHANGE_TWEETS',
+        payload: newTweets
     }
 }
 
@@ -51,8 +59,11 @@ const tweetsReducer = createReducer(initialState, (builder) => {
                 return tweet;
             });
         })
+        .addCase(CHANGE_TWEETS, (state, action) => {
+            return state = action.payload;
+        })
     })
 
 export const tweetsSelector = (state) => state.tweets;
-export { addTweet, updateTweet };
+export { addTweet, updateTweet, changeTweets };
 export default tweetsReducer;

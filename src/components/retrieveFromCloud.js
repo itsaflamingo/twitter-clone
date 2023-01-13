@@ -1,5 +1,6 @@
 import { app } from "./firebaseConfig";
 import { getFirestore, getDocs, query, collection, limit } from "firebase/firestore"; 
+import { doc, deleteDoc } from "firebase/firestore";
 
 const db = getFirestore(app);
 
@@ -21,4 +22,8 @@ async function getTweets() {
     return docArr;
 }
 
-export { getUsers, getTweets }
+async function deleteTweet(id) {
+  await deleteDoc(doc(db, "tweets", id));
+}
+
+export { getUsers, getTweets, deleteTweet }

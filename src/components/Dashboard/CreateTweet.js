@@ -16,6 +16,7 @@ const initialTweetState = (user) => {
         name: user.personalInfo.name,
         handle: `@${user.personalInfo.handle}`,
         picture: user.personalInfo.profileInfo.profilePicture,
+        email: user.email,
         date: '',
         text: '',
         image: '',
@@ -49,7 +50,7 @@ export default function CreateTweet(props) {
             date: getDateTime().getOnlyDate(),
             id: uniqid(),
             spot: determineTweetOrderNumber(tweets),
-            retweet
+            retweet,
         })
         setInput('');
     }

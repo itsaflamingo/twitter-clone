@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, createAction } from "@reduxjs/toolkit";
-import { GoogleAuthProvider, signInWithPopup, getAuth } from 'firebase/auth';
-import { app } from "../firebaseConfig";
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { auth } from "../firebaseConfig";
 import addUserInfo  from './addUserInfo';
 
 const initialState  = {
@@ -9,12 +9,47 @@ const initialState  = {
     error: null
 }
 
-const edit = createAction('editUser');
+const RESET_USER = createAction('RESET_USER');
+const EDIT_USER = createAction('EDIT_USER');
+
+const accountSlice = createSlice({
+    name: 'account/fetchUser',
+    initialState,
+    reducers: {},
+    extraReducers: (builder) => {
+            builder.addCase(fetchUser.pending,  (state) => {
+                state.status = 'loading';
+            })
+            builder.addCase(fetchUser.fulfilled,  (state, action) => {
+                state.status = 'succeed';
+                state.user = JSON.parse(action.payload);
+                state.user = addUserInfo(state.user);
+            })
+            builder.addCase(fetchUser.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.error.message;
+            })
+            builder.addCase(EDIT_USER, (state, action) => {
+                state.user = {...action.payload};
+            })
+            builder.addCase(RESET_USER, (state) => {
+                state.user = [];
+                state.status = '';
+                state.error = null;             
+            })
+    }
+})
 
 function editUser(obj) {
     return {
-        type: 'editUser',
+        type: 'EDIT_USER',
         payload: obj
+    }
+}
+
+function resetUser() {
+    return {
+        type: 'RESET_USER'
     }
 }
 
@@ -24,7 +59,6 @@ const fetchUser = createAsyncThunk(
     'account/fetchUser', 
     async() => {
         let userInfo; 
-        const auth = getAuth(app);
             await signInWithPopup(auth, provider)
                   .then((result) => {
                     // This gives you a Google Access Token. You can use it to access the Google API.
@@ -50,32 +84,10 @@ const fetchUser = createAsyncThunk(
         return JSON.stringify(userInfo);
     })
 
-const accountSlice = createSlice({
-    name: 'account/fetchUser',
-    initialState,
-    reducers: {},
-    extraReducers: (builder) => {
-            builder.addCase(fetchUser.pending,  (state) => {
-                state.status = 'loading';
-            })
-            builder.addCase(fetchUser.fulfilled,  (state, action) => {
-                state.status = 'succeed';
-                state.user = JSON.parse(action.payload);
-                state.user = addUserInfo(state.user);
-            })
-            builder.addCase(fetchUser.rejected, (state, action) => {
-                state.status = 'failed';
-                state.error = action.error.message;
-            })
-            builder.addCase(edit, (state, action) => {
-                state.user = {...action.payload};
-            })
-    }
-})
 
 export const selectUser = (state) => state.user.user;     
 export const selectStatus = (state) => state.user.status;
 export const selectError = (state) => state.user.error;
 
-export { fetchUser, editUser }
+export { fetchUser, editUser, resetUser }
 export default accountSlice.reducer;

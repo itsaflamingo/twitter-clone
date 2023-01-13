@@ -119,7 +119,6 @@ export default function EditProfileInfo(props) {
                     });
                     return;
                 }
-    
                     break;
             default: return;
         }
