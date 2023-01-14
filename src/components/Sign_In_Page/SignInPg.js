@@ -32,6 +32,7 @@ export default function SignInPg() {
 
     useEffect(() => {
         if('personalInfo' in user === false || isSignedIn === false) return;
+        
         if(isSignedIn && user.personalInfo.hasAccount === true) {
             nav('/dashboard');
             // Only store user in database after it has been changed.

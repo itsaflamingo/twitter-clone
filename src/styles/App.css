@@ -76,7 +76,6 @@ body {
     width: 350px;
 
     background-color: white;
-    border: 1px solid black;
     border-radius: 20px;
     z-index: 10;
 }
@@ -125,7 +124,7 @@ body {
     margin: -9px 10px;
 }
 #menu {
-    width: 15vw;
+    width: 250px;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -136,15 +135,27 @@ body {
 #menu-options {
     display: flex;
     flex-direction: column;
+    gap: 10px;
 }
 #logo, #menu-options {
     margin: 1rem 1.5rem;
 }
-.visit-profile {
+.menu-btn {
     display: flex;
     align-items: center;
-    font-weight: 900;
+    height: 50px;
+    border-radius: 20px;
+    border: none;
+    gap: 10px;
+
     font-size: 20px;
+    background-color: white;
+}
+.menu-btn:hover {
+    background-color: var(--grey);
+}
+.menu-btn > img {
+    width: 30px;
 }
 .user-icon {
     width: 20px;
@@ -319,9 +330,6 @@ input:focus {
     display: flex;
     flex-direction: column;
     position: relative;
-}
-#profile-pictures > * {
-    border: 1px solid grey;
 }
 .cover-photo {
     object-fit: cover;

@@ -1,4 +1,3 @@
-import { deleteUser } from 'firebase/auth';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import deleteAccount from '../images/delete-account.png';
@@ -42,7 +41,7 @@ export default function DeleteAccount() {
     }
     
     return (
-        <button className='menu-button'
+        <button className='menu-btn'
         onClick={() => signOutAndDeleteUser()}>
             <img className='user-icon' src={deleteAccount} alt='delete account' />
                 Delete Account

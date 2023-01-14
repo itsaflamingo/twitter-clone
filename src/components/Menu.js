@@ -22,14 +22,16 @@ export default function Menu() {
                 alt='logo' 
                 onClick={() => goHome()}/>
             <div id='menu-options'>
-                <div>
+                <button className='menu-btn'
+                onClick={() => goHome()}>
                     <img className='user-icon' src={home} alt='home' />
                     Home
-                    </div>
-                <div className='visit-profile' onClick={() => visitProfile()}>
+                    </button>
+                <button className='menu-btn' 
+                onClick={() => visitProfile()}>
                     <img className='user-icon' src={userIcon} alt='user' />
                     Profile
-                    </div>
+                    </button>
                 <SignOut />
                 <DeleteAccount />
             </div>
