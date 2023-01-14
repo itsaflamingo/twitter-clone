@@ -104,9 +104,6 @@ body {
     display: flex;
     justify-content: center;
 }
-#upload-picture .profile-picture:hover {
-    opacity: 0.8;
-}
 #upload-picture .profile-picture {
     width: 130px;
 }
@@ -130,7 +127,7 @@ body {
     flex-direction: column;
 }
 #logo {
-    width: 30%;
+    width: 20%;
 }
 #menu-options {
     display: flex;
@@ -155,7 +152,7 @@ body {
     background-color: var(--grey);
 }
 .menu-btn > img {
-    width: 30px;
+    width: 25px;
 }
 .user-icon {
     width: 20px;
@@ -202,12 +199,8 @@ body {
     width: 70%;
 }
 .tweet .user-photo {
-    width: 50px;
-    height: 50px;
-}
-.tweet .profile-picture, .recommended-user .profile-picture {
-    max-width: 100%;
-    max-height: 100%;
+    width: 70px;
+    height: 70px;
 }
 .tweet-btns {
     display: flex;
@@ -271,17 +264,19 @@ body {
     height: 70px;
     width: 70px;
 }
-.picture-create-tweet .profile-picture {
+.profile-picture {
     max-width: 100%;
     max-height: 100%;
 }
 .submit-tweet {
-    width: 100px;
-    height: 30px;
+    width: 90px;
+    height: 38px;
     border-radius: 30px;
     border: none;
     background-color: var(--twitter-blue);
     color: white;
+    font-weight: 900;
+    font-size: 15px;
 }
 input:focus {
     outline: none;
@@ -310,10 +305,13 @@ input:focus {
     justify-content: flex-end;
 }
 .tweet-written .tweet {
+    display: flex;
+    flex-direction: column;
     border: 1px solid var(--grey);
     margin: 5px;
     width: 100%;
     padding: 10px;
+    gap: 10px;
 }
 .tweet-written .delete-tweet {
     display: none;
@@ -360,12 +358,17 @@ input:focus {
     height: 130px;
     width: 130px;
 }
+.profile-btns {
+    max-width: 600px;
+}
 .follow-btn, .edit-btn {
     border: none;
     height: 50px;
     border-radius: 20px;
     font-weight: 700;
     font-size: 15px;
+    background-color: black;
+    color: white;
 }
 .edit-btn {
     background-color: white;
@@ -376,7 +379,7 @@ input:focus {
 }
 #profile .follow-btn, #profile .edit-btn {
     margin-top: 35px;
-    margin-left: 70%;
+    margin-left: 600px;
     width: 25%;
 }
 #user-info, #followers-following{
@@ -411,13 +414,15 @@ input:focus {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border: 1px solid var(--medium-grey);
     border-radius: 20px;
     height: 40px;
     width: 250px;
     position: absolute;
     left: 100%;
     margin-left: 30px;
+    margin-top: 30px;
+    background-color: var(--grey);
+    padding: 0 10px;
 }
 .search-icon {
     width: 20px;
@@ -429,6 +434,7 @@ input:focus {
 .search input {
     border: none;
     width: 210px;
+    background-color: var(--grey);
 }
 /* RECOMMENDED USERS */
 #recommended-users {
@@ -464,6 +470,9 @@ input:focus {
 }
 .name {
     font-weight: 700;
+}
+.name:hover {
+    cursor: pointer;
 }
 /* FOOTER */
 footer {

@@ -104,7 +104,10 @@ export default function FollowButton() {
     
 
     return (
-        <button className="follow-btn"
-        onClick={() => follow()}>{buttonName}</button>
+        <div className="profile-btns">
+            <button className="follow-btn"
+                onClick={() => follow()}>{buttonName}
+                </button>
+        </div>
     )
 }

@@ -12,8 +12,8 @@ export default function Search(props) {
     
 
     return (
-        <div className="search">
-            <Input type='search' onChange={onChange} />
+        <div className="search" tabIndex='1'>
+            <Input type='search' onChange={onChange} placeholder='Search Twitter' />
             <button type='submit' className='search-btn' 
             onClick={(e) => onSubmit(e, searchInput)}>
                 <img className='search-icon' src={search} alt='search' />

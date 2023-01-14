@@ -24,7 +24,7 @@ export default function DisplayTweet(props) {
                 <span className='name' id={tweet.name}>{tweet.name} </span> 
                 <span className='font-grey'>{tweet.handle}</span>
                 </div>
-                    {tweet.text}
+                    <p>{tweet.text}</p>
                     {/* DisplayTweet only renders if tweet is not an array, filtering out empty retweets */}
                     {!Array.isArray(tweet.retweet) && (<DisplayTweet tweet={tweet.retweet} showRetweet={showRetweet} />)}
                 </div>

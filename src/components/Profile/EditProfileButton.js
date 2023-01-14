@@ -40,7 +40,7 @@ export default function EditProfileButton() {
     }
 
     return (
-        <div className="edit-profile">
+        <div className="profile-btns">
             <button className="edit-btn" onClick={() => setSeeEditProfile(!seeEditProfile)}>Edit profile</button>
             {seeEditProfile && (<EditProfileInfo saveToDatabase={saveEditedInfoToDatabase} user={user} />)}
         </div>
