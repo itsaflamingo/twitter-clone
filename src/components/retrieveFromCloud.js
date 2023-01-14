@@ -26,4 +26,8 @@ async function deleteTweet(id) {
   await deleteDoc(doc(db, "tweets", id));
 }
 
-export { getUsers, getTweets, deleteTweet }
+async function deleteUserFromDb(email) {
+  await deleteDoc(doc(db, 'users', email))
+}
+
+export { getUsers, getTweets, deleteTweet, deleteUserFromDb }
