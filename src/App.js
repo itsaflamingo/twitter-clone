@@ -7,7 +7,7 @@ import Dashboard from "./components/Dashboard/Dashboard";
 function App() {
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Routes>
         <Route path='/' element={<SignInPg />}/>
         <Route path='/dashboard' element={<Dashboard />} />

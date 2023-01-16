@@ -49,11 +49,12 @@ body {
     width: 100%;
 }
 #heading-btn h1 {
+    text-align: center;
     color: var(--font-grey);
 }
 #sign-in {
     border: none;
-    background-color: rgb(176, 88, 249);
+    background-color: rgb(165, 84, 232);
     height: 50px;
     width: 35%;
     border-radius: 30px;

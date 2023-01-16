@@ -11,6 +11,14 @@ import Footer from '../Footer';
 import addUserInfoToUser from '../addUserInfoToUser';
 import useAuth from './useAuth';
 
+function checkIsUserInDatabase(user, users) {
+        // Returns array with nested object
+        const thisUser = users.filter((obj) => obj.email === user.email);
+
+        if(thisUser.length === 0) return false;
+        return thisUser[0];
+}
+
 export default function SignInPg() {
 
     const [hasAccount, setHasAccount] = useState(false);
@@ -26,8 +34,8 @@ export default function SignInPg() {
 
     useEffect(() => {
         if(status !== 'succeed') return;
-        // isInDatabase adds unknown user to Redux, returns boolean depending on whether user exists or not.
-        setHasAccount(isInDatabase(user));
+        // IfAddToDatabase adds unknown user to Redux, returns boolean depending on whether user exists or not.
+        setHasAccount(ifAddToDatabase(user, users));
     }, [status])
 
     useEffect(() => {
@@ -45,33 +53,32 @@ export default function SignInPg() {
         getUsersFromDatabase();
     }, [])
 
-    const getUsersFromDatabase = async() => {
-        let dbUsers;
-        await getUsers().then((res) => dbUsers = res);
-        dispatch(addUser(dbUsers));
-    }
+    const getUsersFromDatabase = async() => await getUsers().then((res) => dispatch(addUser(res)));
 
     // If user is in database, return true, else add new user and return false
-    const isInDatabase = (user) => {
-        // Returns array with nested object
-        const thisUser = users.filter((obj) => obj.email === user.email);
+    const ifAddToDatabase = (user, users) => {
+        // If exists, will return object, otherwise will return false.
+        const existingUser = checkIsUserInDatabase(user, users);
 
-        if(thisUser.length === 0) return true;
-        // if user already exists, combine user and personalInfo section of thisUser and return false.
+        if(existingUser === false) return true;
+
+        // If user already exists, combine user and personalInfo section of existingUser and return false.
         dispatch(editUser({
             ...user, 
             personalInfo: {
-                ...thisUser[0].personalInfo,
+                ...existingUser.personalInfo,
             }}))
+            
         // If has account, it will return true and navigate to dashboard, otherwise false and account will be created.
         return user.personalInfo.hasAccount;
     }
 
     const saveNewUserToDatabase = (e, user, userInfo) => {
-        //Store in database & add to users array
+        // Store in database & add to users array
         const newUser = addUserInfoToUser(e, user, userInfo);
-        //Store in database & add to users array
+        // Store in database & add to users array
         dispatch(addUser(newUser));
+        // Add to current user array
         dispatch(editUser(newUser));
     }
 
