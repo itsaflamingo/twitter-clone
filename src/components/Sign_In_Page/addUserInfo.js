@@ -1,8 +1,7 @@
 import getDateTime from "../getDateTime"
 
 export default function addUserInfo(user) {
-    if('followers' in user === false) {
-        return user = {...user, 
+        return {...user, 
             personalInfo: {
                 hasAccount: false,
                 description: '',
@@ -18,5 +17,4 @@ export default function addUserInfo(user) {
                 }
             },
         }
-    }
 }

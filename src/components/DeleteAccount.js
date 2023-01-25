@@ -21,7 +21,6 @@ export default function DeleteAccount() {
             nav('/');
             deleteUserTweets(tweets, signedInUser);
         })
-        console.log(signedInUser);
         await deleteUserFromDb(signedInUser.email).then(() => {
             dispatch(resetUser());
         });

@@ -1,73 +1,147 @@
 import React from 'react';
 import '@testing-library/jest-dom'
-import { render as rtlRender, fireEvent, waitFor, screen } from '@testing-library/react';
+import { fireEvent, waitFor, screen, cleanup } from '@testing-library/react';
 import SignInPg from '../components/Sign_In_Page/SignInPg';
-import { Provider } from 'react-redux';
-import { store } from '../app/store';
+import { renderWithProviders } from './test-utils';
 import { act } from "react-dom/test-utils";
-import { BrowserRouter as Router } from 'react-router-dom';
+import signIn from '../components/Sign_In_Page/signInFn';
+import { getUsers } from '../components/retrieveFromCloud'
 
-const render = component => rtlRender(
-    <Router>
-        <Provider store={store}>
-            {component}
-            </Provider>
-            </Router>
-)
+
+const loggedInUser = { 
+    displayName: 'Algae Mountain', 
+    email: 'algae.mountain.988@example.com',
+    personalInfo: {
+        hasAccount: true,
+        profileInfo: {
+            followers: [],
+            following: [], 
+            likes: 0,
+            retweets: 0,
+            profilePicture: '',
+            coverPhoto: ''
+            }
+        }
+    }
+
+jest.mock('../components/Sign_In_Page/signInFn');
+jest.mock("react-router-dom", () => ({
+    ...jest.requireActual("react-router-dom"),
+    useLocation: () => ({
+      pathname: "localhost:3000/dashboard"
+    })
+  }));
+jest.mock('../components/retrieveFromCloud', () => {
+    const original = jest.requireActual('../components/retrieveFromCloud')
+    return {
+        ...original,
+        getUsers: jest.fn().mockReturnValue([loggedInUser])
+    }
+})
+
+const user = JSON.stringify({ 
+    displayName: 'Elizabeth', 
+    email: 'elizabeth.r.pinero@gmail.com',
+    personalInfo: {
+        name: 'userName',
+        hasAccount: true,
+        profileInfo: {
+            followers: [],
+            following: [], 
+            likes: 0,
+            coverPhoto: '',
+            profilePicture: '',
+        }
+    }
+})
+
 describe('SignInPg component', () => {
 
-    test('should render sign in button', async () => {
-        render (
+    test('should render sign in button', () => {
+        renderWithProviders (
             <SignInPg />
         );
    
-        act(() => {
-            const signInButton = screen.getByText('Sign In');
-            expect(signInButton).toBeInTheDocument();
-        })
-        
+        const signInButton = screen.getByText('Sign In');
+        expect(signInButton).toBeInTheDocument();
+        cleanup();
     });
 
-    // test('should call fetchUser action on sign in button click', async () => {
-    //     render (
-    //         <Router>
-    //             <Provider store={store}>
-    //                 <SignInPg />
-    //             </Provider>
-    //         </Router>
-    //     );
+    test('signIn should be called once when sign in button clicked', async () => {
+        renderWithProviders (
+            <SignInPg />
+        );
+        act(() => {
+            signIn.mockReturnValue(user);
+        })
 
-    //     const signInButton = screen.getByText('Sign In');
-    //     fireEvent.click(signInButton);
+        expect(signIn).toHaveBeenCalledTimes(0);
+        
+        const signInButton = screen.getByText('Sign In');
+        fireEvent.click(signInButton);
 
-    //     const actions = store.getActions();
-    //     expect(actions[0].type).toEqual('SignInPg/fetchUser');
-    // });
+        expect(signIn).toHaveBeenCalledTimes(1);
+        cleanup();
+    });
 
-    // test('should navigate to dashboard if user has an account', async () => {
+    test('should open sign up module if user does not have an account', async () => {
 
-    //     render (
-    //         <Router>
-    //             <Provider store={store}>
-    //                 <SignInPg />
-    //             </Provider>
-    //         </Router>
-    //     );
+        renderWithProviders (
+            <SignInPg />
+        );
+        
+        act(() => {
+            signIn.mockReturnValue(user);
+        })
 
-    //     const signInButton = screen.getByText('Sign In');
-    //     fireEvent.click(signInButton);
+        const signInButton = screen.getByText('Sign In');
+        fireEvent.click(signInButton);
 
-    //     await waitFor(() => {
-    //         expect(store.getActions()).toContainEqual({
-    //             type: 'router/navigate',
-    //             payload: '/dashboard',
-    //         });
-    //     });
-    // });
+        const fullName = await screen.findByText('Full Name');
+        const description = await screen.findByText('Description');
+        const profilePic = await screen.findByText('Add Profile Picture');
+        const coverPhoto = await screen.findByText('Add Cover Photo');
+        
+        expect(fullName).toBeInTheDocument();
+        expect(description).toBeInTheDocument();
+        expect(profilePic).toBeInTheDocument();
+        expect(coverPhoto).toBeInTheDocument();
+        cleanup();
+
+    });
+    it('should visit dashboard page if user has an account', async () => {
+        
+        const users = await getUsers();
+
+        renderWithProviders ( <SignInPg />, {
+            preloadedState: {
+                users
+            }
+        });
+
+        act(() => {
+            signIn.mockReturnValue(loggedInUser);
+        })
+
+        const signInButton = screen.getByText('Sign In');
+        fireEvent.click(signInButton);
+
+        const home = await screen.findByText('Home');
+        const profile = await screen.findByText('Profile');
+        const signOut = await screen.findByText('Sign Out');
+        const deleteAccount = await screen.findByText('Delete Account');
+        
+        expect(home).toBeInTheDocument();
+        expect(profile).toBeInTheDocument();
+        expect(signOut).toBeInTheDocument();
+        expect(deleteAccount).toBeInTheDocument();
+
+        cleanup();
+    })
 
     // test('should display edit profile info if user does not have an account', async () => {
 
-    //     render (
+    //     renderWithProviders (
     //         <Router>
     //             <Provider store={store}>
     //                 <SignInPg />

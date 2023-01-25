@@ -1,14 +1,13 @@
-import { app } from "./firebaseConfig";
-import { getFirestore, getDocs, query, collection, limit } from "firebase/firestore"; 
+import { db } from "./firebaseConfig";
+import { getDocs, query, collection, limit } from "firebase/firestore"; 
 import { doc, deleteDoc } from "firebase/firestore";
-
-const db = getFirestore(app);
 
 async function getUsers() {
     const querySnapshot = await getDocs(query(collection(db, "users")));
     const docArr = [];
     querySnapshot.forEach((doc) => {
-    docArr.push(doc.data().user);
+      docArr.push(doc.data().user);
+      console.log(doc.data().user);
   });
     return docArr;
   }

@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^13.5.0",
     "firebase": "^9.13.0",
     "firebaseui": "^6.0.1",
+    "flutter": "^0.0.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.4",
@@ -22,8 +23,9 @@
   "scripts": {
     "start": "react-scripts start --no-cache",
     "build": "react-scripts build",
-    "test": "react-scripts test --no-cache",
-    "eject": "react-scripts eject"
+    "test": "react-scripts test --no-cache --maxWorkers=25%",
+    "eject": "react-scripts eject",
+    "emulator": "firebase emulators:start"
   },
   "eslintConfig": {
     "extends": [
@@ -42,5 +44,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@firebase/rules-unit-testing": "^2.0.5",
+    "gp-firebase-emulator-unit-test": "^1.0.1",
+    "msw": "^0.49.2"
   }
 }
