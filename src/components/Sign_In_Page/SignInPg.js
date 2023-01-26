@@ -14,7 +14,6 @@ import useAuth from './useAuth';
 function checkIsUserInDatabase(user, users) {
         // Returns array with nested object
         const thisUser = users.filter((obj) => obj.email === user.email);
-        console.log(user, users);
         if(thisUser.length === 0) return false;
         return thisUser[0];
 }
@@ -42,6 +41,7 @@ export default function SignInPg() {
         if('personalInfo' in user === false || isSignedIn === false) return;
         
         if(isSignedIn && user.personalInfo.hasAccount === true) {
+            console.log('nav')
             nav('/dashboard');
             // Only store user in database after it has been changed.
             storeUsers(user);
@@ -56,7 +56,7 @@ export default function SignInPg() {
     const getUsersFromDatabase = async() => await getUsers().then((res) => {
         if(res[0] === undefined) return;
         dispatch(addUser(res))
-    });
+    }).catch(error => console.log(error));
 
     // If user is in database, return true, else add new user and return false
     const ifAddToDatabase = (user, users) => {

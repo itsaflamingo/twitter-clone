@@ -1,12 +1,10 @@
 import React from 'react';
 import '@testing-library/jest-dom'
-import { fireEvent, waitFor, screen, cleanup } from '@testing-library/react';
+import { fireEvent, screen, cleanup, waitFor } from '@testing-library/react';
 import SignInPg from '../components/Sign_In_Page/SignInPg';
 import { renderWithProviders } from './test-utils';
-import { act } from "react-dom/test-utils";
 import signIn from '../components/Sign_In_Page/signInFn';
-import { getUsers } from '../components/retrieveFromCloud'
-
+import useAuth from '../components/Sign_In_Page/useAuth'
 
 const loggedInUser = { 
     displayName: 'Algae Mountain', 
@@ -31,15 +29,8 @@ jest.mock("react-router-dom", () => ({
       pathname: "localhost:3000/dashboard"
     })
   }));
-jest.mock('../components/retrieveFromCloud', () => {
-    const original = jest.requireActual('../components/retrieveFromCloud')
-    return {
-        ...original,
-        getUsers: jest.fn().mockReturnValue([loggedInUser])
-    }
-})
 
-const user = JSON.stringify({ 
+const user = { 
     displayName: 'Elizabeth', 
     email: 'elizabeth.r.pinero@gmail.com',
     personalInfo: {
@@ -53,11 +44,15 @@ const user = JSON.stringify({
             profilePicture: '',
         }
     }
-})
+}
+jest.mock('../components/Sign_In_Page/useAuth')
+
 
 describe('SignInPg component', () => {
-
+    
     test('should render sign in button', () => {
+        useAuth.mockReturnValue({ isSignedIn: true, signedInUser: loggedInUser })
+
         renderWithProviders (
             <SignInPg />
         );
@@ -68,12 +63,14 @@ describe('SignInPg component', () => {
     });
 
     test('signIn should be called once when sign in button clicked', async () => {
+        useAuth.mockReturnValue({ isSignedIn: true, signedInUser: loggedInUser })
+
         renderWithProviders (
             <SignInPg />
         );
-        act(() => {
-            signIn.mockReturnValue(user);
-        })
+        
+        await signIn.mockResolvedValue(user);
+        
 
         expect(signIn).toHaveBeenCalledTimes(0);
         
@@ -86,56 +83,48 @@ describe('SignInPg component', () => {
 
     test('should open sign up module if user does not have an account', async () => {
 
+        useAuth.mockReturnValue({ isSignedIn: true, signedInUser: loggedInUser })
+
         renderWithProviders (
             <SignInPg />
         );
         
-        act(() => {
-            signIn.mockReturnValue(user);
-        })
+        await signIn.mockResolvedValue(user);
+        
 
         const signInButton = screen.getByText('Sign In');
         fireEvent.click(signInButton);
 
-        const fullName = await screen.findByText('Full Name');
-        const description = await screen.findByText('Description');
-        const profilePic = await screen.findByText('Add Profile Picture');
-        const coverPhoto = await screen.findByText('Add Cover Photo');
+        const fullName = await screen.findByText('Full Name')
+        const description = await screen.findByText('Description')
+        const profilePic = await screen.findByText('Add Profile Picture')
+        const coverPhoto = await screen.findByText('Add Cover Photo')
         
         expect(fullName).toBeInTheDocument();
         expect(description).toBeInTheDocument();
         expect(profilePic).toBeInTheDocument();
         expect(coverPhoto).toBeInTheDocument();
+
         cleanup();
 
     });
-    it('should visit dashboard page if user has an account', async () => {
+    it('should visit dashboard page if user has an account', async() => {   
+        useAuth.mockReturnValue({ isSignedIn: true, signedInUser: loggedInUser })
         
-        const users = await getUsers();
-
         renderWithProviders ( <SignInPg />, {
             preloadedState: {
-                users
-            }
+                users: [loggedInUser]
+            }   
         });
-
-        act(() => {
-            signIn.mockReturnValue(loggedInUser);
-        })
+        
+        await signIn.mockResolvedValue(loggedInUser);
 
         const signInButton = screen.getByText('Sign In');
+
         fireEvent.click(signInButton);
 
-        const home = await screen.findByText('Home');
-        const profile = await screen.findByText('Profile');
-        const signOut = await screen.findByText('Sign Out');
-        const deleteAccount = await screen.findByText('Delete Account');
+        await waitFor(() => expect(window.location.pathname).toEqual('/dashboard'))
         
-        expect(home).toBeInTheDocument();
-        expect(profile).toBeInTheDocument();
-        expect(signOut).toBeInTheDocument();
-        expect(deleteAccount).toBeInTheDocument();
-
         cleanup();
     })
 

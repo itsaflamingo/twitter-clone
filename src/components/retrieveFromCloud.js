@@ -3,12 +3,13 @@ import { getDocs, query, collection, limit } from "firebase/firestore";
 import { doc, deleteDoc } from "firebase/firestore";
 
 async function getUsers() {
-    const querySnapshot = await getDocs(query(collection(db, "users")));
     const docArr = [];
-    querySnapshot.forEach((doc) => {
-      docArr.push(doc.data().user);
-      console.log(doc.data().user);
-  });
+    await getDocs(query(collection(db, "users")))
+    .then(res => res.forEach((doc) => {
+      docArr.push(doc.data().user)
+    .catch(error => console.log(error))
+  }));
+    ;
     return docArr;
   }
 

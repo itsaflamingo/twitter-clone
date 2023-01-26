@@ -14,5 +14,5 @@ export default function useAuth() {
         return () => unregisterAuthObserver();
     }, [])
 
-    return { auth, ...authState}
+    return { ...authState }
 }
