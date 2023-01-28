@@ -12,6 +12,8 @@ import ProfilePicture from "../Profile/ProfilePicture";
 import determineTweetOrderNumber from "./determineTweetOrderNumber";
 
 const initialTweetState = (user) => {
+    if(user.length === 0) return {};
+
     return {
         name: user.personalInfo.name,
         handle: `@${user.personalInfo.handle}`,
@@ -31,7 +33,7 @@ const initialTweetState = (user) => {
 
 export default function CreateTweet(props) {
 
-    const { retweet, showRetweet } = props;
+    const { retweet, showRetweet, retweetAriaLabel, tweetButtonAriaLabel } = props;
 
     const tweets = useSelector(tweetsSelector);
     const user = useSelector(selectUser);
@@ -41,6 +43,7 @@ export default function CreateTweet(props) {
     const [input, setInput] = useState('');
     // When submit button clicked, input gets placed in tweet.
     const [tweet, setTweet] = useState(initialTweetState(user));
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -71,11 +74,11 @@ export default function CreateTweet(props) {
     return(
         <div id='create-tweet'>
             <div className="picture-create-tweet">
-                <ProfilePicture tweetImage={user.personalInfo.profileInfo.profilePicture} />
-                <TweetInput setInput={setInput} input={input} />
+                {user.length > 0 && (<ProfilePicture tweetImage={user.personalInfo.profileInfo.profilePicture} />)}
+                <TweetInput setInput={setInput} input={input} ariaLabel={retweetAriaLabel} />
             </div>
             <div id='tweet-add-ons'>
-                <CreateTweetOptions handleSubmit={handleSubmit} />
+                <CreateTweetOptions handleSubmit={handleSubmit} ariaLabel={tweetButtonAriaLabel} />
             </div>
         </div>
     )

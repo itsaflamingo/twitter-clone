@@ -4,12 +4,10 @@ import { doc, deleteDoc } from "firebase/firestore";
 
 async function getUsers() {
     const docArr = [];
-    await getDocs(query(collection(db, "users")))
-    .then(res => res.forEach((doc) => {
-      docArr.push(doc.data().user)
-    .catch(error => console.log(error))
-  }));
-    ;
+    const querySnapshot = await getDocs(query(collection(db, "users")));
+    querySnapshot.forEach((doc) => {
+      docArr.push(doc.data().user);
+  });
     return docArr;
   }
 

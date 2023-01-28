@@ -19,6 +19,7 @@ export default function TweetCounterWrapper(WrappedComponent) {
         const likesCounter = (tweet) => {
             // Result of tweet.likes+1 is added to updatedLikes without modifying tweet.likes. tweet.likes is then updated after dispatch
             const updatedLikes = tweet.likes + 1;
+
             //returns tweet that matches criteria
             const findTweet = (element) => element.id === tweet.id;
             // uses findIndex on tweets to find the index based on criteria set by callback

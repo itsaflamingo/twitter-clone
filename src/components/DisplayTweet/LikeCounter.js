@@ -8,7 +8,7 @@ function LikeCounter(props) {
     return (
         <div className="like-div">
             <img className='like' onClick={() => likesCounter(tweet)} src={heart} alt='like-btn' />
-            <div className="counter">
+            <div className="counter" aria-label="like counter">
                 {tweet.likes}
             </div>
         </div>

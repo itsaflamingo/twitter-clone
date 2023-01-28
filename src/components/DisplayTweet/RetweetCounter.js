@@ -10,7 +10,9 @@ function RetweetCounter(props) {
             <img className='retweet' src={retweet} 
             alt='retweet-btn'
             onClick={() => retweetCounter(tweet)} />
-            { tweet.retweets }
+            <div className="counter" aria-label="retweet counter">
+                { tweet.retweets }
+            </div>
         </div>
     )
 }

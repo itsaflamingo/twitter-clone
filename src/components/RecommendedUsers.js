@@ -3,14 +3,16 @@ import { usersSelector } from "./Dashboard/allUsersSlice";
 import ProfilePicture from "./Profile/ProfilePicture";
 import { selectUser } from "./Sign_In_Page/SignInPgSlice";
 
-const filterUsers = (users, name) => users.filter((user) => user.personalInfo.name !== name)
+const filterUsers = (users, activeUser) => users.filter((user) => {
+    if(activeUser.length === 0) return [];
+    return user.personalInfo.name !== activeUser.personalInfo.name})
 
 function RecommendedUsers() {
 
     const users = useSelector(usersSelector);
     const user = useSelector(selectUser);
 
-    const followableUsers = filterUsers(users, user.personalInfo.name)
+    const followableUsers = filterUsers(users, user);
 
     return (
         <div id='recommended-users' className='aside'>
