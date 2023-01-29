@@ -5,7 +5,7 @@ import Dashboard from '../components/Dashboard/Dashboard';
 import { renderWithProviders } from './test-utils';
 import useAuth from '../components/Sign_In_Page/useAuth';
 import userEvent from '@testing-library/user-event';
-import { deleteUserFromDb } from '../components/retrieveFromCloud';
+import * as retrieveFromCloud from '../components/retrieveFromCloud';
 
 const user = { 
     displayName: 'Algae Mountain', 
@@ -76,15 +76,14 @@ jest.mock("react-router-dom", () => ({
     })
   }));
 
-// jest.mock('../components/retrieveFromCloud', () => {
-//     return {
-//     ...jest.requireActual("../components/retrieveFromCloud"),
-//     deleteUserFromDb: jest.fn().mockImplementation(() => Promise.resolve())}
-// })
-
 jest.mock('../components/Sign_In_Page/useAuth')
 
 describe('Dashboard component', () => {
+
+    beforeEach(() => {
+        retrieveFromCloud.deleteUserFromDb = jest.fn().mockResolvedValue('res');
+    })
+
     it("should display all menu options", () => {
         
         useAuth.mockReturnValue({ isSignedIn: true, signedInUser: user })
@@ -290,7 +289,6 @@ describe('Dashboard component', () => {
 
     })
     it("when delete account clicked, deleteUserFromDb is called", async() => {
-        jest.spyOn(await deleteUserFromDb());
         useAuth.mockReturnValue({ isSignedIn: true, signedInUser: user })
         const users = [user];
         renderWithProviders ( <Dashboard />, {
@@ -306,7 +304,23 @@ describe('Dashboard component', () => {
         fireEvent.click(deleteAccount);
         
         await waitFor(() => expect(window.location.pathname).toEqual('/'))
-        await waitFor(() => expect(deleteUserFromDb).toHaveBeenCalled())
+        await waitFor(() => expect(retrieveFromCloud.deleteUserFromDb).toHaveBeenCalled());
     })
-    it.todo("visit profile page on profile button click")
+    it("visit profile page on profile button click", async() => {
+        useAuth.mockReturnValue({ isSignedIn: true, signedInUser: user })
+        const users = [user];
+        renderWithProviders ( <Dashboard />, {
+            preloadedState: {
+                users,
+                user: {
+                    user
+                },
+            }   
+        });
+
+        const profileBtn = screen.getByText('Profile');
+        fireEvent.click(profileBtn);
+
+        await waitFor(() => expect(window.location.pathname).toEqual('/profile'));
+    })
 })
