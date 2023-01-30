@@ -86,7 +86,7 @@ describe('Dashboard component', () => {
 
     it("should display all menu options", () => {
         
-        useAuth.mockReturnValue({ isSignedIn: true, signedInUser: user })
+        useAuth.mockReturnValue({ isSignedIn: true, signedInUser: user });
 
         renderWithProviders ( <Dashboard />, {
             preloadedState: {
@@ -111,7 +111,7 @@ describe('Dashboard component', () => {
     })
     it("should display tweets", () => {
 
-        useAuth.mockReturnValue({ isSignedIn: true, signedInUser: user })
+        useAuth.mockReturnValue({ isSignedIn: true, signedInUser: user });
 
         renderWithProviders ( <Dashboard />, {
             preloadedState: {
@@ -127,7 +127,7 @@ describe('Dashboard component', () => {
         expect(tweet).toBeInTheDocument();
     })
     it("should display recommended users", () => {
-        useAuth.mockReturnValue({ isSignedIn: true, signedInUser: user })
+        useAuth.mockReturnValue({ isSignedIn: true, signedInUser: user });
 
         renderWithProviders ( <Dashboard />, {
             preloadedState: {
@@ -143,7 +143,7 @@ describe('Dashboard component', () => {
     })
     it("when like button clicked, counter should be set to 1", () => {
         
-        useAuth.mockReturnValue({ isSignedIn: true, signedInUser: user })
+        useAuth.mockReturnValue({ isSignedIn: true, signedInUser: user });
 
         renderWithProviders ( <Dashboard />, {
             preloadedState: {
@@ -155,14 +155,14 @@ describe('Dashboard component', () => {
             }   
         });
 
-        const btn = screen.getByRole('img', {  name: /like-btn/i})
+        const btn = screen.getByRole('img', {  name: /like-btn/i });
         fireEvent.click(btn);
 
         const counter = screen.getByLabelText('like counter').innerHTML;
         expect(parseInt(counter)).toBe(1);
     })
     it("retweet should pop up when retweet clicked, and retweet counter set to one", () => {
-        useAuth.mockReturnValue({ isSignedIn: true, signedInUser: user })
+        useAuth.mockReturnValue({ isSignedIn: true, signedInUser: user });
 
         renderWithProviders ( <Dashboard />, {
             preloadedState: {
@@ -174,10 +174,10 @@ describe('Dashboard component', () => {
             }   
         });
 
-        const btn = screen.getByRole('img', {  name: /retweet-btn/i});
+        const btn = screen.getByRole('img', { name: /retweet-btn/i });
         fireEvent.click(btn);
 
-        const retweet = screen.getAllByRole('img', {  name: /retweet-btn/i});
+        const retweet = screen.getAllByRole('img', { name: /retweet-btn/i });
         const likes = screen.getAllByLabelText('like counter');
         const popUp = screen.getByLabelText('retweet pop up');
 
@@ -186,7 +186,7 @@ describe('Dashboard component', () => {
         expect(popUp).toBeInTheDocument();
     })
     it("when tweet created, should display tweet", async() => {
-        useAuth.mockReturnValue({ isSignedIn: true, signedInUser: user })
+        useAuth.mockReturnValue({ isSignedIn: true, signedInUser: user });
 
         renderWithProviders ( <Dashboard />, {
             preloadedState: {
@@ -197,9 +197,9 @@ describe('Dashboard component', () => {
             }   
         });
 
-        userEvent.type(screen.getByRole('textbox', {  name: /tweet input/i }), 'input test')
+        userEvent.type(screen.getByRole('textbox', { name: /tweet input/i }), 'input test');
 
-        expect(screen.getByRole('textbox', {  name: /tweet input/i })).toHaveValue('input test')
+        expect(screen.getByRole('textbox', { name: /tweet input/i })).toHaveValue('input test');
 
         const submit = screen.getByText('Tweet');
         fireEvent.click(submit);
@@ -219,19 +219,19 @@ describe('Dashboard component', () => {
             }   
         });
 
-        const box = screen.getByRole('searchbox')
-        userEvent.type(box, 'test')
+        const box = screen.getByRole('searchbox');
+        userEvent.type(box, 'test');
 
         expect(box).toHaveValue('test');
 
-        const searchBtn = screen.getByRole('img', {  name: /search/i})
+        const searchBtn = screen.getByRole('img', { name: /search/i });
         fireEvent.click(searchBtn);
 
         expect(screen.queryByText(userTweet.text)).toBeNull();
         expect(screen.getByText(tweet2.text)).toBeInTheDocument();
     })
     it("when tweet retweeted, should display retweet", async() => {
-        useAuth.mockReturnValue({ isSignedIn: true, signedInUser: user })
+        useAuth.mockReturnValue({ isSignedIn: true, signedInUser: user });
 
         renderWithProviders ( <Dashboard />, {
             preloadedState: {
@@ -244,7 +244,7 @@ describe('Dashboard component', () => {
         });
 
         // target retweet button
-        const btn = screen.getAllByRole('img', {  name: /retweet-btn/i});
+        const btn = screen.getAllByRole('img', { name: /retweet-btn/i });
         // click retweet
         fireEvent.click(btn[0]);
 
@@ -267,7 +267,7 @@ describe('Dashboard component', () => {
         expect(rt).toHaveLength(2);
     })
     it("when sign out clicked, switch to homepage", async() => {
-        useAuth.mockReturnValue({ isSignedIn: true, signedInUser: user })
+        useAuth.mockReturnValue({ isSignedIn: true, signedInUser: user });
 
         renderWithProviders ( <Dashboard />, {
             preloadedState: {
@@ -285,11 +285,11 @@ describe('Dashboard component', () => {
             fireEvent.click(signOut);
         })
 
-        await waitFor(() => expect(window.location.pathname).toEqual('/'))
+        await waitFor(() => expect(window.location.pathname).toEqual('/'));
 
     })
     it("when delete account clicked, deleteUserFromDb is called", async() => {
-        useAuth.mockReturnValue({ isSignedIn: true, signedInUser: user })
+        useAuth.mockReturnValue({ isSignedIn: true, signedInUser: user });
         const users = [user];
         renderWithProviders ( <Dashboard />, {
             preloadedState: {
@@ -307,7 +307,7 @@ describe('Dashboard component', () => {
         await waitFor(() => expect(retrieveFromCloud.deleteUserFromDb).toHaveBeenCalled());
     })
     it("visit profile page on profile button click", async() => {
-        useAuth.mockReturnValue({ isSignedIn: true, signedInUser: user })
+        useAuth.mockReturnValue({ isSignedIn: true, signedInUser: user });
         const users = [user];
         renderWithProviders ( <Dashboard />, {
             preloadedState: {

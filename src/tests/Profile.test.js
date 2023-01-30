@@ -1,13 +1,13 @@
 import React from 'react';
 import '@testing-library/jest-dom'
-import { fireEvent, screen, waitFor, act } from '@testing-library/react';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 import Profile from '../components/Profile/Profile';
-import { renderWithProviders, renderWithContextProviders } from './test-utils';
+import { renderWithContextProviders } from './test-utils';
 import useAuth from '../components/Sign_In_Page/useAuth';
 import userEvent from '@testing-library/user-event';
-import * as retrieveFromCloud from '../components/retrieveFromCloud';
-import { current } from '@reduxjs/toolkit';
 import { useLocation } from 'react-router-dom';
+import { editUser } from '../components/Sign_In_Page/SignInPgSlice';
+import { setupStore } from '../app/store'
 
 const user = { 
     displayName: 'Algae Mountain', 
@@ -44,6 +44,25 @@ const user2 = {
             }
         }
     }
+
+    const changedUser = { 
+        displayName: 'Algae Mountain', 
+        email: 'algae.mountain.988@example.com',
+        personalInfo: {
+            hasAccount: true,
+            name: 'test name',
+            handle: 'testHandle',
+            description: 'test description',
+            profileInfo: {
+                followers: [],
+                following: [], 
+                likes: 0,
+                retweets: 0,
+                profilePicture: '',
+                coverPhoto: ''
+                }
+            }
+        }
 
 const userTweet = {
     name: 'Algae Mountain', 
@@ -208,7 +227,6 @@ describe('Profile component', () => {
         expect(profilePic).toBeNull();
         expect(coverPic).toBeNull();
     })
-    it.todo('when profile information is edited, profile reflects that change')
     it('when follow button clicked once, followers increase by 1. If clicked again, follower count goes back to previous number', () => {
 
         useLocation.mockReturnValue({ state: 'Otter Algae' });
@@ -236,6 +254,7 @@ describe('Profile component', () => {
         expect(followerCount.innerHTML).toBe('0 ');
     })
     it('when home button clicked, can visit dashboard', () => {
+
         renderWithContextProviders ( <Profile />, {
             preloadedState: {
                 users: [user, user2],
@@ -253,4 +272,61 @@ describe('Profile component', () => {
 
         expect(window.location.pathname).toEqual('/dashboard');
     })
+    it('when profile information is edited, profile reflects that change', async() => {
+        useLocation.mockReturnValue({
+            state: 'test name'
+          })
+
+        const store = setupStore();
+
+        store.dispatch(editUser({
+            ...user,
+            personalInfo: {
+                ...changedUser.personalInfo,
+                profileInfo: {
+                    followers: [],
+                    following: [], 
+                    likes: 0,
+                    retweets: 0,
+                    profilePicture: '',
+                    coverPhoto: ''
+                }
+            }
+        }))
+        
+        renderWithContextProviders ( <Profile />,  
+            { store ,
+            providerProps: {
+                value: { user, userFn }
+            }});
+
+        const editProfile = screen.getByText('Edit profile');
+        fireEvent.click(editProfile);
+
+        const name = screen.getByRole('textbox', { name: /full name/i });
+        const handle = screen.getByRole('textbox', { name: /handle/i });
+        const description = screen.getByRole('textbox', { name: /description/i });
+        const submit = screen.getByRole('button', { name: /submit/i });
+        const home = screen.getByText('Home');
+        const profile = screen.getByText('Profile');
+
+        userEvent.type(name, 'test name');
+        userEvent.type(handle, 'testHandle');
+        userEvent.type(description, 'test description');
+        
+        fireEvent.click(submit);
+        fireEvent.click(home);
+        await waitFor(() => expect(window.location.pathname).toEqual('/dashboard'));
+        fireEvent.click(profile);
+        await waitFor(() => expect(window.location.pathname).toEqual('/profile'));
+
+        const newName = screen.getByText('test name');
+        const newHandle = screen.getByText('@testHandle');
+        const newDesc = screen.getByText('test description')
+
+        expect(newName).toBeInTheDocument();
+        expect(newHandle).toBeInTheDocument();
+        expect(newDesc).toBeInTheDocument();
+    })
+
 })
