@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import addUserInfoToUser from "../addUserInfoToUser";
 import EditProfileInfo from "../Sign_In_Page/EditProfileInfo";

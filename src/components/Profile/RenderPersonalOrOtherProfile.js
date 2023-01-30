@@ -7,7 +7,7 @@ export default function RenderPersonalOrOtherProfile(props) {
 
     const { userName } = props;
     const user = useSelector(selectUser);
-
+    
     if(userName !== user.personalInfo.name) {
         return <FollowButton />
     }
