@@ -301,6 +301,35 @@ describe('Dashboard component', () => {
         expect(thisTweet).toBeNull();
         await waitFor(() => expect(retrieveFromCloud.deleteTweetFromDb).toHaveBeenCalled());
     })
+    it('when delete tweet clicked on non logged in user tweet, nothing should happen', async () => {
+        
+        useAuth.mockReturnValue({ isSignedIn: true, signedInUser: user });
+
+        const tweets = [otterTweet, tweet2];
+        const otterTweets = [otterTweet];
+
+        renderWithProviders ( <Dashboard />, {
+            preloadedState: {
+                users: [user],
+                user: {
+                    user
+                },
+                tweets,
+                otterTweets
+            }   
+        });
+
+        const tweet = screen.queryByText(/Otter Algae/i);
+        expect(tweet).not.toBeNull();
+        
+        const deleteButton = screen.getAllByRole('button', { name: /x/i });
+        fireEvent.click(deleteButton[1]);
+
+        const thisTweet = screen.queryByText(/Otter Algae/i);
+        
+        expect(thisTweet).not.toBeNull();
+        await waitFor(() => expect(retrieveFromCloud.deleteTweetFromDb).not.toHaveBeenCalled());
+    })
     it("when sign out clicked, switch to homepage", async () => {
 
         useAuth.mockReturnValue({ isSignedIn: true, signedInUser: user });
