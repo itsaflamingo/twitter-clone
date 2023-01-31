@@ -1,6 +1,6 @@
 import React from 'react';
 import '@testing-library/jest-dom'
-import { fireEvent, screen, waitFor, act } from '@testing-library/react';
+import { fireEvent, screen, waitFor, act, cleanup } from '@testing-library/react';
 import Dashboard from '../components/Dashboard/Dashboard';
 import { renderWithProviders } from './test-utils';
 import useAuth from '../components/Sign_In_Page/useAuth';
@@ -40,7 +40,7 @@ const user2 = {
         }
     }
 
-const userTweet = {
+const otterTweet = {
     name: 'Otter Algae', 
     handle: 'otter',
     id: 'lcsa',
@@ -55,8 +55,8 @@ const userTweet = {
 }
 
 const tweet2 = {
-    name: 'Otter Algae', 
-    handle: 'otter',
+    name: 'Algae Mountain', 
+    handle: 'algae',
     id: 'lcsc',
     image: '',
     likes: '0',
@@ -83,6 +83,7 @@ describe('Dashboard component', () => {
 
     beforeEach(async () => {
         retrieveFromCloud.deleteUserFromDb = jest.fn().mockResolvedValue('res');
+        retrieveFromCloud.deleteTweetFromDb = jest.fn().mockResolvedValue('res');
     })
 
     it("should display all menu options", () => {
@@ -120,11 +121,11 @@ describe('Dashboard component', () => {
                 user: {
                     user
                 },
-                tweets: [userTweet]
+                tweets: [otterTweet]
             }   
         });
 
-        const tweet = screen.getByText(userTweet.name);
+        const tweet = screen.getByText(otterTweet.name);
         expect(tweet).toBeInTheDocument();
     })
     it("should display recommended users", () => {
@@ -153,7 +154,7 @@ describe('Dashboard component', () => {
                 user: {
                     user
                 },
-                tweets: [userTweet]
+                tweets: [otterTweet]
             }   
         });
 
@@ -173,7 +174,7 @@ describe('Dashboard component', () => {
                 user: {
                     user
                 },
-                tweets: [userTweet]
+                tweets: [otterTweet]
             }   
         });
 
@@ -188,7 +189,7 @@ describe('Dashboard component', () => {
         expect(likes.length).toBe(2);
         expect(popUp).toBeInTheDocument();
     })
-    it("when tweet created, should display tweet", async() => {
+    it("when tweet created, should display tweet", async () => {
 
         useAuth.mockReturnValue({ isSignedIn: true, signedInUser: user });
 
@@ -220,7 +221,7 @@ describe('Dashboard component', () => {
                 user: {
                     user
                 },
-                tweets: [userTweet, tweet2]
+                tweets: [otterTweet, tweet2]
             }   
         });
 
@@ -232,7 +233,7 @@ describe('Dashboard component', () => {
         const searchBtn = screen.getByRole('img', { name: /search/i });
         fireEvent.click(searchBtn);
 
-        expect(screen.queryByText(userTweet.text)).toBeNull();
+        expect(screen.queryByText(otterTweet.text)).toBeNull();
         expect(screen.getByText(tweet2.text)).toBeInTheDocument();
     })
     it("when tweet retweeted, should display retweet", () => {
@@ -245,14 +246,14 @@ describe('Dashboard component', () => {
                 user: {
                     user
                 },
-                tweets: [userTweet, tweet2]
+                tweets: [otterTweet, tweet2]
             }   
         });
 
         // target retweet button
         const btn = screen.getAllByRole('img', { name: /retweet-btn/i });
         // click retweet
-        fireEvent.click(btn[0]);
+        fireEvent.click(btn[1]);
 
         // target retweet textbox
         const retweetInput = screen.queryByLabelText('retweet-input');
@@ -266,17 +267,18 @@ describe('Dashboard component', () => {
         // click submit button
         fireEvent.click(submit);
 
-        const rt = screen.getAllByText(userTweet.text);
+        const rt = screen.getAllByText(otterTweet.text);
 
         expect(screen.getByText('rt test')).toBeInTheDocument();
         expect(screen.getAllByText('rt test')).toHaveLength(1);
         expect(rt).toHaveLength(2);
     })
-    it('when delete tweet button clicked on logged in user tweet, tweet should be removed from array of tweets and deleteTweetFromDb executed', () => {
+    it('when delete tweet button clicked on logged in user tweet, tweet should be removed from array of tweets and deleteTweetFromDb executed', async () => {
+        
         useAuth.mockReturnValue({ isSignedIn: true, signedInUser: user });
 
-        const tweets = [userTweet, tweet2];
-        const userTweets = [userTweet];
+        const tweets = [otterTweet, tweet2];
+        const otterTweets = [otterTweet];
 
         renderWithProviders ( <Dashboard />, {
             preloadedState: {
@@ -284,17 +286,22 @@ describe('Dashboard component', () => {
                 user: {
                     user
                 },
-                tweets
+                tweets,
+                otterTweets
             }   
         });
 
-        const deleteButton = screen.getAllByRole('button', { name: /x/i })
+        const tweet = screen.queryByText(/Algae Mountain/i);
+        expect(tweet).not.toBeNull();
+        
+        const deleteButton = screen.getAllByRole('button', { name: /x/i });
         fireEvent.click(deleteButton[0]);
-
-        expect(tweets.length).toBe(1);
-        expect(userTweets.length).toBe(0);
+        const thisTweet = screen.queryByText(/Algae Mountain/i);
+        
+        expect(thisTweet).toBeNull();
+        await waitFor(() => expect(retrieveFromCloud.deleteTweetFromDb).toHaveBeenCalled());
     })
-    it("when sign out clicked, switch to homepage", async() => {
+    it("when sign out clicked, switch to homepage", async () => {
 
         useAuth.mockReturnValue({ isSignedIn: true, signedInUser: user });
 
@@ -304,7 +311,7 @@ describe('Dashboard component', () => {
                 user: {
                     user
                 },
-                tweets: [userTweet]
+                tweets: [otterTweet]
             }   
         });
 
@@ -313,9 +320,7 @@ describe('Dashboard component', () => {
         act(() => {
             fireEvent.click(signOut);
         })
-        
         await waitFor(() => expect(window.location.pathname).toEqual('/'));
-
     })
     it("when delete account clicked, deleteUserFromDb is called", async() => {
 
@@ -338,7 +343,7 @@ describe('Dashboard component', () => {
         await waitFor(() => expect(window.location.pathname).toEqual('/'))
         await waitFor(() => expect(retrieveFromCloud.deleteUserFromDb).toHaveBeenCalled());
     })
-    it("visit profile page on profile button click", async() => {
+    it("visit profile page on profile button click", async () => {
 
         useAuth.mockReturnValue({ isSignedIn: true, signedInUser: user });
         
