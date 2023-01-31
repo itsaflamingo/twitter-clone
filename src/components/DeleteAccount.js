@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import deleteAccount from '../images/delete-account.png';
-import { changeTweets, tweetsSelector } from './Dashboard/CreateTweetSlice';
-import { deleteTweet, deleteUserFromDb } from './retrieveFromCloud';
+import { changeTweets, tweetsSelector } from './Dashboard/createTweetSlice';
+import { deleteTweetFromDb, deleteUserFromDb } from './retrieveFromCloud';
 import signOutUser from './signOutUser';
 import { resetUser } from './Sign_In_Page/SignInPgSlice';
 import useAuth from './Sign_In_Page/useAuth';
@@ -31,7 +31,7 @@ export default function DeleteAccount() {
 
         const newTweets = tweets.filter((tweet) => {
             if(tweet.email === email) {
-                deleteTweet(tweet.id);
+                deleteTweetFromDb(tweet.id);
             }
             return tweet.email !== email
         })

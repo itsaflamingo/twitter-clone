@@ -1,6 +1,6 @@
 import TweetInput from "../TweetInput";
 import { selectUser } from '../Sign_In_Page/SignInPgSlice'
-import { addTweet, tweetsSelector } from "./CreateTweetSlice";
+import { addTweet, tweetsSelector } from "./createTweetSlice";
 import { useSelector, useDispatch } from "react-redux"
 import { useEffect, useState } from "react";
 import { storeTweets } from "../storeInCloud";

@@ -1,7 +1,7 @@
 import { useReducer, useEffect } from "react";
 import { getTweets } from "../retrieveFromCloud";
 import { useDispatch, useSelector } from "react-redux";
-import { addTweet, tweetsSelector } from "./CreateTweetSlice";
+import { addTweet, tweetsSelector } from "./createTweetSlice";
 import { tweetIdsSelector, storeTweetId } from "./storeTweetIdSlice";
 
 

@@ -20,7 +20,7 @@ async function getTweets() {
     return docArr;
 }
 
-async function deleteTweet(id) {
+async function deleteTweetFromDb(id) {
   await deleteDoc(doc(db, "tweets", id));
 }
 
@@ -28,4 +28,4 @@ async function deleteUserFromDb(email) {
   await deleteDoc(doc(db, 'users', email))
 }
 
-export { getUsers, getTweets, deleteTweet, deleteUserFromDb }
+export { getUsers, getTweets, deleteTweetFromDb, deleteUserFromDb }

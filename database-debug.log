@@ -3,7 +3,5 @@ WARNING: Illegal reflective access by io.netty.util.internal.ReflectionUtil (fil
 WARNING: Please consider reporting this to the maintainers of io.netty.util.internal.ReflectionUtil
 WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
 WARNING: All illegal access operations will be denied in a future release
-11:37:47.890 [NamespaceSystem-akka.actor.default-dispatcher-6] INFO akka.event.slf4j.Slf4jLogger - Slf4jLogger started
-11:37:48.318 [main] INFO com.firebase.server.forge.App$ - Listening at 127.0.0.1:9000
-12:37:51.404 [Thread-0] INFO com.firebase.server.forge.App$ - Attempting graceful shutdown.
-12:37:52.821 [Thread-0] INFO com.firebase.server.forge.App$ - Graceful shutdown complete.
+06:16:49.369 [NamespaceSystem-akka.actor.default-dispatcher-6] INFO akka.event.slf4j.Slf4jLogger - Slf4jLogger started
+06:16:49.787 [main] INFO com.firebase.server.forge.App$ - Listening at 127.0.0.1:9000

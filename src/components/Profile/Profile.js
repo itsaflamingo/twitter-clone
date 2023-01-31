@@ -11,7 +11,7 @@ import { selectUser } from "../Sign_In_Page/SignInPgSlice"
 import { editUsers, usersSelector } from '../Dashboard/allUsersSlice';
 import { useLocation } from 'react-router-dom';
 import { ProfileProvider } from './profileContext';
-import { tweetsSelector } from '../Dashboard/CreateTweetSlice';
+import { tweetsSelector } from '../Dashboard/createTweetSlice';
 import { storeUsers } from '../storeInCloud';
 
 function Profile() {

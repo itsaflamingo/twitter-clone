@@ -1,6 +1,6 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import accountReducer from '../components/Sign_In_Page/SignInPgSlice';
-import tweetsReducer from '../components/Dashboard/CreateTweetSlice'
+import tweetsReducer from '../components/Dashboard/createTweetSlice'
 import usersReducer from '../components/Dashboard/allUsersSlice'
 import userTweetsReducer from '../components/Dashboard/userTweetsSlice';
 import storeTweetIdReducer from '../components/Dashboard/storeTweetIdSlice';

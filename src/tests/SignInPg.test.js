@@ -4,7 +4,7 @@ import { fireEvent, screen, cleanup, waitFor } from '@testing-library/react';
 import SignInPg from '../components/Sign_In_Page/SignInPg';
 import { renderWithProviders } from './test-utils';
 import signIn from '../components/Sign_In_Page/signInFn';
-import useAuth from '../components/Sign_In_Page/useAuth'
+import useAuth from '../components/Sign_In_Page/useAuth';
 
 const loggedInUser = { 
     displayName: 'Algae Mountain', 
@@ -23,6 +23,7 @@ const loggedInUser = {
     }
 
 jest.mock('../components/Sign_In_Page/signInFn');
+
 jest.mock("react-router-dom", () => ({
     ...jest.requireActual("react-router-dom"),
     useLocation: () => ({
@@ -47,10 +48,10 @@ const user = {
 }
 jest.mock('../components/Sign_In_Page/useAuth')
 
-
 describe('SignInPg component', () => {
     
     test('should render sign in button', () => {
+        
         useAuth.mockReturnValue({ isSignedIn: true, signedInUser: loggedInUser })
 
         renderWithProviders (
@@ -63,6 +64,7 @@ describe('SignInPg component', () => {
     });
 
     test('signIn should be called once when sign in button clicked', async () => {
+        
         useAuth.mockReturnValue({ isSignedIn: true, signedInUser: loggedInUser })
 
         renderWithProviders (
@@ -109,6 +111,7 @@ describe('SignInPg component', () => {
 
     });
     it('should visit dashboard page if user has an account', async() => {   
+        
         useAuth.mockReturnValue({ isSignedIn: true, signedInUser: loggedInUser })
         
         renderWithProviders ( <SignInPg />, {
@@ -127,22 +130,4 @@ describe('SignInPg component', () => {
         
         cleanup();
     })
-
-    // test('should display edit profile info if user does not have an account', async () => {
-
-    //     renderWithProviders (
-    //         <Router>
-    //             <Provider store={store}>
-    //                 <SignInPg />
-    //             </Provider>
-    //         </Router>
-    //     );
-
-    //     const signInButton = screen.getByText('Sign In');
-    //     fireEvent.click(signInButton);
-
-    //     await waitFor(() => {
-    //         expect(screen.getByTestId('edit-profile-info')).toBeInTheDocument();
-    //     });
-    // });
 });

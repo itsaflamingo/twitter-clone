@@ -2,13 +2,20 @@ import AddMenuAndAside from "../AddMenuAndAside";
 import CreateTweet from './CreateTweet'
 import DisplayTweets from "../DisplayTweet/DisplayTweets";
 import { useState, useEffect } from "react";
-import { tweetsSelector } from "./CreateTweetSlice";
+import { tweetsSelector } from "./createTweetSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { selectUser } from "../Sign_In_Page/SignInPgSlice"
 import { userAddTweets } from "./userTweetsSlice";
 import useGetTweetsFromDatabase from "./useGetTweetsFromDatabase";
 import { userTweetsSelector } from "./userTweetsSlice";
 import Search from "../Search";
+
+const filterTweets = (input, allTweets) => allTweets.filter((tweet) => 
+    tweet.text === input || 
+    tweet.name.toLowerCase() === input.toLowerCase() || 
+    tweet.handle.toLowerCase() === input.toLowerCase());
+
+const filterUserTweets = (tweets, user) => tweets.filter(tweet => tweet.id === user.personalInfo.id);
 
 function Dashboard() {
 
@@ -22,7 +29,6 @@ function Dashboard() {
     const dispatch = useDispatch();
 
     const addToUserTweets = (filteredTweets) => dispatch(userAddTweets(filteredTweets));
-    const filterUserTweets = (tweets, user) => tweets.filter(tweet => tweet.id === user.personalInfo.id);
     
     useGetTweetsFromDatabase();
 
@@ -45,10 +51,8 @@ function Dashboard() {
     const onSubmit = (e, input) => {
         e.preventDefault();
 
-        setTweets(filterTweets(input))
+        setTweets(filterTweets(input, allTweets))
     }
-
-    const filterTweets = (input) => allTweets.filter((tweet) => tweet.text === input || tweet.name.toLowerCase() === input.toLowerCase() || tweet.handle.toLowerCase() === input.toLowerCase());
 
     return (
         <div id='dashboard'>

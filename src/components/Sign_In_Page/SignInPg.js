@@ -41,7 +41,6 @@ export default function SignInPg() {
         if('personalInfo' in user === false || isSignedIn === false) return;
         
         if(isSignedIn && user.personalInfo.hasAccount === true) {
-            console.log('nav')
             nav('/dashboard');
             // Only store user in database after it has been changed.
             storeUsers(user);

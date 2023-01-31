@@ -63,12 +63,13 @@ const tweet2 = {
     retweets: '0',
     picture: '',
     retweet: [],
-    spot: 0,
+    spot: 1,
     text: 'test',
     words: 0
 }
 
 jest.mock('../components/Sign_In_Page/signInFn');
+
 jest.mock("react-router-dom", () => ({
     ...jest.requireActual("react-router-dom"),
     useLocation: () => ({
@@ -80,7 +81,7 @@ jest.mock('../components/Sign_In_Page/useAuth')
 
 describe('Dashboard component', () => {
 
-    beforeEach(() => {
+    beforeEach(async () => {
         retrieveFromCloud.deleteUserFromDb = jest.fn().mockResolvedValue('res');
     })
 
@@ -127,6 +128,7 @@ describe('Dashboard component', () => {
         expect(tweet).toBeInTheDocument();
     })
     it("should display recommended users", () => {
+        
         useAuth.mockReturnValue({ isSignedIn: true, signedInUser: user });
 
         renderWithProviders ( <Dashboard />, {
@@ -162,6 +164,7 @@ describe('Dashboard component', () => {
         expect(parseInt(counter)).toBe(1);
     })
     it("retweet should pop up when retweet clicked, and retweet counter set to one", () => {
+        
         useAuth.mockReturnValue({ isSignedIn: true, signedInUser: user });
 
         renderWithProviders ( <Dashboard />, {
@@ -186,6 +189,7 @@ describe('Dashboard component', () => {
         expect(popUp).toBeInTheDocument();
     })
     it("when tweet created, should display tweet", async() => {
+
         useAuth.mockReturnValue({ isSignedIn: true, signedInUser: user });
 
         renderWithProviders ( <Dashboard />, {
@@ -207,7 +211,8 @@ describe('Dashboard component', () => {
         expect(await screen.findByText(user.displayName)).toBeInTheDocument();
     })
     it("should filter tweets based on search input", () => {
-        useAuth.mockReturnValue({ isSignedIn: true, signedInUser: user })
+
+        useAuth.mockReturnValue({ isSignedIn: true, signedInUser: user });
 
         renderWithProviders ( <Dashboard />, {
             preloadedState: {
@@ -230,7 +235,8 @@ describe('Dashboard component', () => {
         expect(screen.queryByText(userTweet.text)).toBeNull();
         expect(screen.getByText(tweet2.text)).toBeInTheDocument();
     })
-    it("when tweet retweeted, should display retweet", async() => {
+    it("when tweet retweeted, should display retweet", () => {
+
         useAuth.mockReturnValue({ isSignedIn: true, signedInUser: user });
 
         renderWithProviders ( <Dashboard />, {
@@ -266,7 +272,30 @@ describe('Dashboard component', () => {
         expect(screen.getAllByText('rt test')).toHaveLength(1);
         expect(rt).toHaveLength(2);
     })
+    it('when delete tweet button clicked on logged in user tweet, tweet should be removed from array of tweets and deleteTweetFromDb executed', () => {
+        useAuth.mockReturnValue({ isSignedIn: true, signedInUser: user });
+
+        const tweets = [userTweet, tweet2];
+        const userTweets = [userTweet];
+
+        renderWithProviders ( <Dashboard />, {
+            preloadedState: {
+                users: [user],
+                user: {
+                    user
+                },
+                tweets
+            }   
+        });
+
+        const deleteButton = screen.getAllByRole('button', { name: /x/i })
+        fireEvent.click(deleteButton[0]);
+
+        expect(tweets.length).toBe(1);
+        expect(userTweets.length).toBe(0);
+    })
     it("when sign out clicked, switch to homepage", async() => {
+
         useAuth.mockReturnValue({ isSignedIn: true, signedInUser: user });
 
         renderWithProviders ( <Dashboard />, {
@@ -284,13 +313,16 @@ describe('Dashboard component', () => {
         act(() => {
             fireEvent.click(signOut);
         })
-
+        
         await waitFor(() => expect(window.location.pathname).toEqual('/'));
 
     })
     it("when delete account clicked, deleteUserFromDb is called", async() => {
+
         useAuth.mockReturnValue({ isSignedIn: true, signedInUser: user });
+        
         const users = [user];
+        
         renderWithProviders ( <Dashboard />, {
             preloadedState: {
                 users,
@@ -307,8 +339,11 @@ describe('Dashboard component', () => {
         await waitFor(() => expect(retrieveFromCloud.deleteUserFromDb).toHaveBeenCalled());
     })
     it("visit profile page on profile button click", async() => {
+
         useAuth.mockReturnValue({ isSignedIn: true, signedInUser: user });
+        
         const users = [user];
+
         renderWithProviders ( <Dashboard />, {
             preloadedState: {
                 users,

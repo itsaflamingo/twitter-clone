@@ -14,7 +14,7 @@ export default function DisplayTweet(props) {
     }
     
     return (
-        <div className="tweet" key={tweet.id}>
+        <div className="tweet" id={tweet.id} key={tweet.id}>
             <div className="tweet-content">
             <ProfilePicture tweetImage={tweet.picture} />
             <div className="tweet-written">

@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import addUserInfoToUser from "../addUserInfoToUser";
 import EditProfileInfo from "../Sign_In_Page/EditProfileInfo";
 import { addUser } from "../Dashboard/allUsersSlice";
 import { editUser, selectUser } from "../Sign_In_Page/SignInPgSlice";
-import { tweetsSelector, updateTweet } from "../Dashboard/CreateTweetSlice";
+import { tweetsSelector, updateTweet } from "../Dashboard/createTweetSlice";
 
 export default function EditProfileButton() {
     const [seeEditProfile, setSeeEditProfile] = useState(false);
