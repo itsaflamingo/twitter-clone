@@ -1,6 +1,6 @@
 import React from 'react';
 import '@testing-library/jest-dom'
-import { fireEvent, screen, waitFor, act, cleanup } from '@testing-library/react';
+import { fireEvent, screen, waitFor, act } from '@testing-library/react';
 import Dashboard from '../components/Dashboard/Dashboard';
 import { renderWithProviders } from './test-utils';
 import useAuth from '../components/Sign_In_Page/useAuth';

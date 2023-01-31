@@ -33,7 +33,7 @@ function Profile() {
     useEffect(() => {
         if(location.state === user.personalInfo.name) return;
         setUser(changeUser(users, location)[0]);
-    }, [user])
+    }, [location, user])
 
     useEffect(() => {
         setTweets(changeUserTweets(allTweets, user));

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteTweet, tweetsSelector } from "../Dashboard/createTweetSlice";
+import { deleteTweet } from "../Dashboard/createTweetSlice";
 import { userDeleteTweet } from "../Dashboard/userTweetsSlice";
 import { selectUser } from "../Sign_In_Page/SignInPgSlice";
 import { deleteTweetFromDb } from "../retrieveFromCloud";
@@ -9,7 +9,6 @@ export default function TweetOptions() {
 
     const dispatch = useDispatch();
     const user = useSelector(selectUser);
-    const tweets = useSelector(tweetsSelector);
 
     const [tweetInfo, setTweetInfo] = useState({
         id: '',

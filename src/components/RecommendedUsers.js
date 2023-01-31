@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { usersSelector } from "./Dashboard/allUsersSlice";
-import ProfilePicture from "./Profile/ProfilePicture";
+import RecommendedUser from "./RecommendedUser";
 import { selectUser } from "./Sign_In_Page/SignInPgSlice";
 
 const filterUsers = (users, activeUser) => users.filter((user) => {
@@ -11,8 +12,13 @@ function RecommendedUsers() {
 
     const users = useSelector(usersSelector);
     const user = useSelector(selectUser);
+    const navigate = useNavigate();
 
     const followableUsers = filterUsers(users, user);
+
+    const navigateToProfile = (target) => {
+        navigate('/profile', { state: target });
+    }
 
     return (
         <div id='recommended-users' className='aside'>
@@ -20,17 +26,10 @@ function RecommendedUsers() {
             { followableUsers.map((user, index) => {
                 if(index <= 5) {
                     return (
-                        <div className="recommended-user">
-                            <ProfilePicture tweetImage={user.personalInfo.profileInfo.profilePicture} />
-                            <div className="user-info">
-                                <p className='name'>{user.personalInfo.name}</p>
-                                <p className='font-grey'>@{user.personalInfo.handle}</p>
-                            </div>
-                            <button className="follow">Follow</button>
-                        </div>
+                        <RecommendedUser user={user} index={index} navigateToProfile={navigateToProfile} />
                     )
                 }
-            }) }
+                }) }
         </div>
     )
 }
