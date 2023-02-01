@@ -1,14 +1,14 @@
-import AddMenuAndAside from "../AddMenuAndAside";
+import AddMenuAndAside from "../Menu_and_Aside/AddMenuAndAside";
 import CreateTweet from './CreateTweet'
 import DisplayTweets from "../DisplayTweet/DisplayTweets";
 import { useState, useEffect } from "react";
-import { tweetsSelector } from "./createTweetSlice";
+import { tweetsSelector } from "../redux/createTweetSlice";
 import { useSelector, useDispatch } from "react-redux";
-import { selectUser } from "../Sign_In_Page/SignInPgSlice"
-import { userAddTweets } from "./userTweetsSlice";
+import { selectUser } from "../redux/SignInPgSlice"
+import { userAddTweets } from "../redux/userTweetsSlice";
 import useGetTweetsFromDatabase from "./useGetTweetsFromDatabase";
-import { userTweetsSelector } from "./userTweetsSlice";
-import Search from "../Search";
+import { userTweetsSelector } from "../redux/userTweetsSlice";
+import Search from "./Search";
 
 const filterTweets = (input, allTweets) => allTweets.filter((tweet) => 
     tweet.text === input || 

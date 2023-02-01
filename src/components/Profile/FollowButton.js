@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { selectUser, editUser } from "../Sign_In_Page/SignInPgSlice";
+import { selectUser, editUser } from "../redux/SignInPgSlice";
 import { ProfileContext } from "./profileContext";
 import useToggleFollowButton from "./useToggleFollowButton";
 

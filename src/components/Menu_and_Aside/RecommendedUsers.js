@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { usersSelector } from "./Dashboard/allUsersSlice";
+import { usersSelector } from "../redux/allUsersSlice";
 import RecommendedUser from "./RecommendedUser";
-import { selectUser } from "./Sign_In_Page/SignInPgSlice";
+import { selectUser } from "../redux/SignInPgSlice";
 
 const filterUsers = (users, activeUser) => users.filter((user) => {
     if(activeUser.length === 0) return [];
@@ -16,9 +16,8 @@ function RecommendedUsers() {
 
     const followableUsers = filterUsers(users, user);
 
-    const navigateToProfile = (target) => {
-        navigate('/profile', { state: target });
-    }
+    const navigateToProfile = (target) => navigate('/profile', { state: target });
+    
 
     return (
         <div id='recommended-users' className='aside'>

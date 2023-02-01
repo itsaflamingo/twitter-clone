@@ -1,9 +1,9 @@
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom'
-import logo from '../images/twitter.webp'
-import { selectUser } from './Sign_In_Page/SignInPgSlice';
-import userIcon from '../images/user.png'
-import home from '../images/home-black.png'
+import logo from '../../images/twitter.webp'
+import { selectUser } from '../redux/SignInPgSlice';
+import userIcon from '../../images/user.png'
+import home from '../../images/home-black.png'
 import SignOut from './SignOut';
 import DeleteAccount from './DeleteAccount';
 

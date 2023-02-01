@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import Input from './Input'
-import search from '../images/search.png'
+import Input from '../forms/Input'
+import search from '../../images/search.png'
 
 export default function Search(props) {
 

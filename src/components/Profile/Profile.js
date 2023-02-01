@@ -1,18 +1,18 @@
-import AddMenuAndAside from '../AddMenuAndAside'
+import AddMenuAndAside from '../Menu_and_Aside/AddMenuAndAside'
 import ProfilePictures from './ProfilePictures';
-import FollowersAndFollowing from '../FollowersAndFollowing';
+import FollowersAndFollowing from './FollowersAndFollowing';
 import RenderPersonalOrOtherProfile from './RenderPersonalOrOtherProfile';
 import { useEffect, useState } from 'react';
 import DisplayUserInfo from './DisplayUserInfo';
 import DisplayTweets from '../DisplayTweet/DisplayTweets';
 import { useDispatch, useSelector } from 'react-redux';
-import { userTweetsSelector } from '../Dashboard/userTweetsSlice';
-import { selectUser } from "../Sign_In_Page/SignInPgSlice"
-import { editUsers, usersSelector } from '../Dashboard/allUsersSlice';
+import { userTweetsSelector } from '../redux/userTweetsSlice';
+import { selectUser } from "../redux/SignInPgSlice"
+import { editUsers, usersSelector } from '../redux/allUsersSlice';
 import { useLocation } from 'react-router-dom';
 import { ProfileProvider } from './profileContext';
-import { tweetsSelector } from '../Dashboard/createTweetSlice';
-import { storeUsers } from '../storeInCloud';
+import { tweetsSelector } from '../redux/createTweetSlice';
+import { storeUsers } from '../firebase/manageDbUsers';
 
 function Profile() {
 

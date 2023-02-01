@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { tweetsSelector } from "../Dashboard/createTweetSlice";
-import { updateTweet } from "../Dashboard/createTweetSlice";
-import { storeTweets } from "../storeInCloud";
+import { tweetsSelector } from "../redux/createTweetSlice";
+import { updateTweet } from "../redux/createTweetSlice";
+import { storeTweets } from "../firebase/manageDbTweets";
 
 export default function TweetCounterWrapper(WrappedComponent) {
     return function Counter(props) {

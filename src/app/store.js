@@ -1,9 +1,9 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import accountReducer from '../components/Sign_In_Page/SignInPgSlice';
-import tweetsReducer from '../components/Dashboard/createTweetSlice'
-import usersReducer from '../components/Dashboard/allUsersSlice'
-import userTweetsReducer from '../components/Dashboard/userTweetsSlice';
-import storeTweetIdReducer from '../components/Dashboard/storeTweetIdSlice';
+import accountReducer from '../components/redux/SignInPgSlice';
+import tweetsReducer from '../components/redux/createTweetSlice'
+import usersReducer from '../components/redux/allUsersSlice'
+import userTweetsReducer from '../components/redux/userTweetsSlice';
+import storeTweetIdReducer from '../components/redux/storeTweetIdSlice';
   
   // STORE -> GLOBALIZED STATE
   const rootReducer = combineReducers({
