@@ -1,4 +1,4 @@
-import logo from '../../images/twitter.webp'
+import owl from '../../images/icon.png'
 import { fetchUser, editUser, selectUser, selectError, selectStatus } from "../redux/SignInPgSlice"
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux"
@@ -89,12 +89,12 @@ export default function SignInPg() {
             <div id='sign-in-box'>
                 <div id='sign-in-logo'
                 style={{
-                    backgroundImage: `url(${logo})`,
+                    backgroundImage: `url(${owl})`,
                     backgroundSize: 'contain',
                     backgroundRepeat: 'no-repeat'
                 }}></div>
                 <div id='heading-btn'>
-                    <p className='sign-in-heading'>Welcome to TwitterClone</p>
+                    <p className='sign-in-heading'>Welcome to Hooter</p>
                     <button id='sign-in'
                     onClick={() => dispatch(fetchUser())}>Sign In With Google</button>
                 </div>

@@ -43,7 +43,7 @@ export default function TweetOptions() {
     return (
         <button className="delete-tweet"
         onClick={(e) => updateTweetInfo(e)}>
-            X
+            x
         </button>
     )
 }

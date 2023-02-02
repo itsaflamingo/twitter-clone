@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 * {
-    --twitter-blue: #1D9BF0;
+    --hooter-blue: rgb(49, 190, 186);
     --grey: #f1f5f6;
     --font-grey: #616c74;
     --medium-grey: #CFD9DE;
@@ -38,7 +38,7 @@ body {
     align-items: center;
     background-color: var(--grey);
     border-radius: 20px;
-    box-shadow: var(--box-shadow)
+    box-shadow: var(--box-shadow);
 }
 #sign-in-logo {
     height: 15vh;
@@ -56,11 +56,11 @@ body {
 .sign-in-heading {
     text-align: center;
     color: var(--font-grey);
-    font-size: 2rem;
+    font-size: 2.5rem;
 }
 #sign-in {
     border: none;
-    background-color: rgb(165, 84, 232);
+    background-color: var(--hooter-blue);
     height: 50px;
     width: 35%;
     border-radius: 30px;
@@ -112,7 +112,7 @@ body {
     border: none;
     font-weight: 700;
     font-size: 15px;
-    background-color: var(--twitter-blue);
+    background-color: var(--hooter-blue);
     border-radius: 20px;
     color: white;
 }
@@ -149,7 +149,7 @@ body {
     min-width: 140px;
 }
 #logo {
-    width: 20%;
+    width: 50px;
 }
 #menu-options {
     display: flex;
@@ -178,6 +178,18 @@ body {
 }
 .user-icon {
     width: 20px;
+}
+.logo-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 80px;
+    border-radius: 50px;
+}
+.logo-wrapper:hover {
+    cursor: pointer;
+    background-color: rgb(49, 190, 186, 0.1);
 }
 /* TWEET DISPLAY */
 #app {
@@ -324,7 +336,7 @@ button:hover, a:hover {
     height: 38px;
     border-radius: 30px;
     border: none;
-    background-color: var(--twitter-blue);
+    background-color: var(--hooter-blue);
     color: white;
     font-weight: 900;
     font-size: 15px;
@@ -519,7 +531,7 @@ input:focus {
     height: 30px;
     width: 80px;
     border: none;
-    background-color: var(--twitter-blue);
+    background-color: var(--hooter-blue);
     border-radius: 20px;
     font-weight: 700;
     color: white;

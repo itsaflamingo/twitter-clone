@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom'
-import logo from '../../images/twitter.webp'
+import logo from '../../images/icon.png'
 import { selectUser } from '../redux/SignInPgSlice';
 import userIcon from '../../images/user.png'
 import home from '../../images/home-black.png'
@@ -17,10 +17,12 @@ export default function Menu() {
 
     return (
         <div id='menu'>
-            <img id='logo' 
-                src={logo} 
-                alt='logo' 
-                onClick={() => goHome()}/>
+            <div className='logo-wrapper'>
+                <img id='logo' 
+                    src={logo} 
+                    alt='logo' 
+                    onClick={() => goHome()}/>
+                </div>
             <div id='menu-options'>
                 <button className='menu-btn'
                 onClick={() => goHome()}>
