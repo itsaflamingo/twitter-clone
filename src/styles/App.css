@@ -262,6 +262,9 @@ body {
 .like:hover, .retweet:hover {
     cursor: pointer;
 }
+#tweet-container {
+    width: 100%;
+}
 #tweet {
     height: 8vh;
     width: 100%;
@@ -341,7 +344,7 @@ button:hover, a:hover {
     font-weight: 900;
     font-size: 15px;
 }
-input:focus {
+input:focus, textarea:focus {
     outline: none;
 }
 .counter {
@@ -357,6 +360,7 @@ input:focus {
     width: 400px;
     background-color: white;
     border-radius: 20px;
+    box-shadow: var(--box-shadow);
 }
 .retweet-pop-up .tweet {
     padding: 10px;
@@ -386,6 +390,7 @@ input:focus {
 #profile {
     height: 100%;
     min-width: 600px;
+    max-width: 700px;
     border: 1px solid var(--grey);
     display: flex;
     flex-direction: column;
@@ -425,7 +430,7 @@ input:focus {
     width: 130px;
 }
 .profile-btns {
-    max-width: 300px;
+    max-width: 100%;
 }
 .follow-btn, .edit-btn {
     border: none;
@@ -448,7 +453,7 @@ input:focus {
 }
 #profile .follow-btn, #profile .edit-btn {
     margin-top: 35px;
-    margin-left: 450px;
+    margin-left: 70%;
     width: 25%;
 }
 #user-info, #followers-following{
@@ -548,7 +553,6 @@ input:focus {
 /* FOOTER */
 footer {
     width: 100%;
-    height: 75px;
     justify-content: center;
     gap: 5px;
 }
@@ -568,6 +572,9 @@ a {
     text-decoration: none;
     color: black;
     gap: 5px;
+}
+.freepik, .freepik > * {
+    color: var(--font-grey);
 }
 @media (max-width: 620px) {
     #app {

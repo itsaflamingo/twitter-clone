@@ -10,6 +10,7 @@
     "firebase": "^9.13.0",
     "firebaseui": "^6.0.1",
     "flutter": "^0.0.5",
+    "gh-pages": "^5.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.4",
@@ -27,6 +28,7 @@
     "eject": "react-scripts eject",
     "emulator": "firebase emulators:start"
   },
+  "homepage": "https://itsaflamingo.github.io/twitter-clone",
   "eslintConfig": {
     "extends": [
       "react-app",

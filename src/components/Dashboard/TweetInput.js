@@ -21,7 +21,7 @@ export default function TweetInput(props) {
             name="makeTweetForm"
             >
                 <label htmlFor='tweet' />
-                <input 
+                <textarea 
                 type={type}
                 id='tweet' 
                 value={input}
