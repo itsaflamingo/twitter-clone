@@ -6,7 +6,7 @@ import { renderWithContextProviders } from './test-utils';
 import useAuth from '../components/Sign_In_Page/useAuth';
 import userEvent from '@testing-library/user-event';
 import { useLocation } from 'react-router-dom';
-import { editUser } from '../components/Sign_In_Page/SignInPgSlice';
+import { editUser } from '../components/redux/SignInPgSlice';
 import { setupStore } from '../app/store'
 
 const user = { 

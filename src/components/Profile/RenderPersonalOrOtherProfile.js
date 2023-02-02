@@ -1,7 +1,7 @@
 import FollowButton from './FollowButton';
 import EditProfileButton from './EditProfileButton';
 import { useSelector } from 'react-redux';
-import { selectUser } from '../Sign_In_Page/SignInPgSlice';
+import { selectUser } from '../redux/SignInPgSlice';
 
 export default function RenderPersonalOrOtherProfile(props) {
 

@@ -1,14 +1,13 @@
 import logo from '../../images/twitter.webp'
-import { fetchUser, editUser, selectUser, selectError, selectStatus } from "./SignInPgSlice"
+import { fetchUser, editUser, selectUser, selectError, selectStatus } from "../redux/SignInPgSlice"
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux"
 import { useEffect, useState } from 'react';
-import { usersSelector, addUser } from '../Dashboard/allUsersSlice';
-import { storeUsers } from '../storeInCloud';
-import { getUsers } from '../retrieveFromCloud';
-import EditProfileInfo from './EditProfileInfo';
+import { usersSelector, addUser } from '../redux/allUsersSlice';
+import { getUsers, storeUsers } from '../firebase/manageDbUsers';
+import EditProfileInfo from '../ManageUser/EditProfileInfo';
 import Footer from '../Footer';
-import addUserInfoToUser from '../addUserInfoToUser';
+import addUserInfoToUser from '../ManageUser/addUserInfoToUser';
 import useAuth from './useAuth';
 
 function checkIsUserInDatabase(user, users) {

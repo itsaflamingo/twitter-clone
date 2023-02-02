@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
-import hasProfanity from "../hasProfanity";
-import Input from "../Input"
-import UploadPicture from "./UploadPicture";
+import hasProfanity from "./hasProfanity";
+import Input from "../forms/Input"
+import UploadPicture from "../Sign_In_Page/UploadPicture";
 import validator from 'validator'
 
 export default function EditProfileInfo(props) {

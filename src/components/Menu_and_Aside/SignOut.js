@@ -1,8 +1,8 @@
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import signOut from '../images/sign-out.png';
-import signOutUser from './signOutUser';
-import { resetUser } from './Sign_In_Page/SignInPgSlice';
+import signOut from '../../images/sign-out.png';
+import signOutUser from '../ManageUser/signOutUser';
+import { resetUser } from '../redux/SignInPgSlice';
 
 export default function SignOut() {
 

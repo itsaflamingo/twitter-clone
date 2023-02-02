@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { ProfileContext } from "./profileContext";
 import calendar from '../../images/icons8-calendar-100.png'
 

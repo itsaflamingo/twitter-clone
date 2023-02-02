@@ -160,8 +160,6 @@ body {
 }
 /* TWEET DISPLAY */
 #app {
-    height: 100vh;
-    width: 100vw;
     display: flex;
     justify-content: center;
 }
@@ -320,7 +318,7 @@ input:focus {
 /* PROFILE */
 #profile {
     height: 100%;
-    width: 50%;
+    min-width: 600px;
     border: 1px solid var(--grey);
     display: flex;
     flex-direction: column;
@@ -360,7 +358,7 @@ input:focus {
     width: 130px;
 }
 .profile-btns {
-    max-width: 600px;
+    max-width: 300px;
 }
 .follow-btn, .edit-btn {
     border: none;
@@ -368,19 +366,21 @@ input:focus {
     border-radius: 20px;
     font-weight: 700;
     font-size: 15px;
-    background-color: black;
+    background-color: #000000;
     color: white;
+    min-width: 130px;
 }
 .edit-btn {
     background-color: white;
     border: 1px solid var(--medium-grey);
+    color: #616c74;
 }
 .edit-btn:hover {
     background-color: var(--grey);
 }
 #profile .follow-btn, #profile .edit-btn {
     margin-top: 35px;
-    margin-left: 600px;
+    margin-left: 450px;
     width: 25%;
 }
 #user-info, #followers-following{
@@ -460,7 +460,7 @@ input:focus {
     height: 50px;
     width: 50px;
 }
-.follow {
+.visit-profile {
     height: 30px;
     width: 80px;
     border: none;
@@ -490,3 +490,14 @@ footer, .links {
 .links {
     max-height: 100%;
 }
+/* @media (max-width: 480px) {
+    #root {
+        width: 100%;
+    }
+    #app {
+        display: flex;
+        flex-direction: column;
+        min-width: 320px;
+        overflow-x: hidden;
+    }
+} */

@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, createAction } from "@reduxjs/toolkit";
-import addUserInfo  from './addUserInfo';
-import signIn from "./signInFn";
+import addUserInfo  from '../Sign_In_Page/addUserInfo';
+import signIn from "../Sign_In_Page/signInFn";
 
 const initialState  = {
     status: '',
