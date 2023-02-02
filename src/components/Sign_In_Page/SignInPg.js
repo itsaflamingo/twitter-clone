@@ -39,7 +39,7 @@ export default function SignInPg() {
     useEffect(() => {
         if('personalInfo' in user === false || isSignedIn === false) return;
         
-        if(isSignedIn && user.personalInfo.hasAccount === true) {
+        if(isSignedIn && user.personalInfo.hasAccount === true && status !== 'loading') {
             nav('/dashboard');
             // Only store user in database after it has been changed.
             storeUsers(user);
@@ -94,9 +94,9 @@ export default function SignInPg() {
                     backgroundRepeat: 'no-repeat'
                 }}></div>
                 <div id='heading-btn'>
-                    <p className='sign-in-heading'>Welcome to Twitter Clone!</p>
+                    <p className='sign-in-heading'>Welcome to TwitterClone</p>
                     <button id='sign-in'
-                    onClick={() => dispatch(fetchUser())}>Sign In</button>
+                    onClick={() => dispatch(fetchUser())}>Sign In With Google</button>
                 </div>
             </div>
             <Footer />

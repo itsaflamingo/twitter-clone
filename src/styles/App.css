@@ -4,6 +4,8 @@
     --grey: #f1f5f6;
     --font-grey: #616c74;
     --medium-grey: #CFD9DE;
+    --box-shadow: 0 0 10px 0px rgba(90, 128, 128, 0.773);
+    --transition: all .2s ease-in-out;
     font-family: 'Roboto', sans-serif;
 }
 body {
@@ -18,7 +20,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: var(--twitter-blue);
+    background-color: var(--grey);
 }
 #sign-in-container footer {
     position: absolute;
@@ -26,7 +28,7 @@ body {
 }
 #sign-in-box {
     height: 420px;
-    width: 40vw;
+    width: 35vw;
     min-width: 300px;
     border: 1px solid var(--grey);
     display: flex;
@@ -36,6 +38,7 @@ body {
     align-items: center;
     background-color: var(--grey);
     border-radius: 20px;
+    box-shadow: var(--box-shadow)
 }
 #sign-in-logo {
     height: 15vh;
@@ -65,6 +68,12 @@ body {
     font-weight: bold;
     color: white;
     min-width: 120px;
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+}
+#sign-in:hover {
+    cursor: pointer; 
+    transform: scale(1.1);
 }
 #sign-up {
     position: absolute;
@@ -77,17 +86,24 @@ body {
     left: 50%;
     margin-left: -175px;
 
-    height: 400px;
+    height: 500px;
     width: 350px;
 
     background-color: white;
     border-radius: 20px;
     z-index: 10;
+    box-shadow: var(--box-shadow);
+}
+#sign-up .input {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
 #sign-up form {
     display: flex;
     flex-direction: column;
     gap: 15px;
+    width: 80%;
 }
 #sign-up button {
     width: 40%;
@@ -231,6 +247,9 @@ body {
 .like, .retweet {
     width: 18px;
 }
+.like:hover, .retweet:hover {
+    cursor: pointer;
+}
 #tweet {
     height: 8vh;
     width: 100%;
@@ -239,14 +258,29 @@ body {
     padding: 0;
     font-size: 18px;
 }
+button:hover, a:hover {
+    cursor: pointer;
+}
 .delete-tweet {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
     top: 5%;
     left: 95%;
     border: none;
     background-color: white;
     color: var(--font-grey);
+    border: 1px solid var(--medium-grey);
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    transition: var(--transition); 
 }
+.delete-tweet:hover {
+    background-color: grey;
+    color: white;
+} 
 .tweet-date {
     color: var(--font-grey);
 }
@@ -392,6 +426,7 @@ input:focus {
     background-color: white;
     border: 1px solid var(--medium-grey);
     color: #616c74;
+    transition: var(--transition);
 }
 .edit-btn:hover {
     background-color: var(--grey);
@@ -509,6 +544,15 @@ footer, .links {
 }
 .links {
     max-height: 100%;
+}
+.visit-github {
+    display: flex;
+    align-items: center;
+}
+a {
+    text-decoration: none;
+    color: black;
+    gap: 5px;
 }
 @media (max-width: 620px) {
     #app {

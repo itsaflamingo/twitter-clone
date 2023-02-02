@@ -74,10 +74,6 @@ export default function CreateTweet(props) {
         setTweet(initialTweetState(user));
     }, [tweet])
 
-    useEffect(() => {
-        console.log(charCount);
-    }, [charCount])
-
     return(
         <div id='create-tweet'>
             <div className="picture-create-tweet">

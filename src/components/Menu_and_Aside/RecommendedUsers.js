@@ -26,7 +26,9 @@ function RecommendedUsers() {
             { followableUsers.map((user, index) => {
                 if(index <= 4) {
                     return (
-                        <RecommendedUser user={user} index={index} navigateToProfile={navigateToProfile} />
+                        <div key={index}>
+                            <RecommendedUser user={user} index={index} navigateToProfile={navigateToProfile} />
+                        </div>
                     )
                 }
                 }) }

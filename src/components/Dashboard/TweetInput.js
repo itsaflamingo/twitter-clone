@@ -3,13 +3,17 @@ export default function TweetInput(props) {
     
     const { type, setInput, input, ariaLabel, setChars, chars } = props;
 
-    const setTweetInput = (e) => {
-        let charsCount = chars;
-        setInput(e.target.value);
-        const charLength = input.length;
-        setChars(charsCount - 1);
-    };
+    const setTweetInput = (e) => setInput(e.target.value);
 
+    const handleKeyDown = (e) => {
+        if(e.key === "Backspace") {
+            return setChars(chars + 1);
+        }
+        // Ensure key is printable
+        else if (e.key.length === 1) {
+            return setChars(chars - 1);
+        }
+    }
     return (
         <div id='tweet-container'>
             <form
@@ -24,6 +28,7 @@ export default function TweetInput(props) {
                 name='make tweet'
                 placeholder="What's happening?"
                 onChange={(e) => setTweetInput(e)}
+                onKeyDown={(e) => handleKeyDown(e)}
                 aria-label={ariaLabel} />
             </form>
         </div>

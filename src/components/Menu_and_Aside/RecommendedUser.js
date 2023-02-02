@@ -6,7 +6,7 @@ export default function RecommendedUser(props) {
     const { user, navigateToProfile, index } = props;
 
     return (
-        <div className="recommended-user" key={index}>
+        <div className="recommended-user">
             <ProfilePicture tweetImage={user.personalInfo.profileInfo.profilePicture} />
             <UserInfo user={user} />
             <button className="visit-profile"

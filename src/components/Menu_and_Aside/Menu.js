@@ -25,12 +25,12 @@ export default function Menu() {
                 <button className='menu-btn'
                 onClick={() => goHome()}>
                     <img className='user-icon' src={home} alt='home' />
-                    <p class='menu-title'>Home</p>
+                    <p className='menu-title'>Home</p>
                     </button>
                 <button className='menu-btn' 
                 onClick={() => visitProfile()}>
                     <img className='user-icon' src={userIcon} alt='user' />
-                    <p class='menu-title'>Profile</p>
+                    <p className='menu-title'>Profile</p>
                     </button>
                 <SignOut />
                 <DeleteAccount />
