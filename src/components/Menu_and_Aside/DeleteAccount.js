@@ -44,7 +44,7 @@ export default function DeleteAccount() {
         <button className='menu-btn'
         onClick={() => signOutAndDeleteUser()}>
             <img className='user-icon' src={deleteAccount} alt='delete account' />
-                Delete Account
+                <p class='menu-title'>Delete Account</p>
                 </button>
     )
 }

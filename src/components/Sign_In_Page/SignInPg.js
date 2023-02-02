@@ -94,7 +94,7 @@ export default function SignInPg() {
                     backgroundRepeat: 'no-repeat'
                 }}></div>
                 <div id='heading-btn'>
-                    <h1>Welcome to Twitter Clone!</h1>
+                    <p className='sign-in-heading'>Welcome to Twitter Clone!</p>
                     <button id='sign-in'
                     onClick={() => dispatch(fetchUser())}>Sign In</button>
                 </div>

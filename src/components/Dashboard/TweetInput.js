@@ -1,9 +1,14 @@
 
 export default function TweetInput(props) {
     
-    const { type, setInput, input, ariaLabel } = props;
+    const { type, setInput, input, ariaLabel, setChars, chars } = props;
 
-    const setTweetInput = (e) => setInput(e.target.value);
+    const setTweetInput = (e) => {
+        let charsCount = chars;
+        setInput(e.target.value);
+        const charLength = input.length;
+        setChars(charsCount - 1);
+    };
 
     return (
         <div id='tweet-container'>

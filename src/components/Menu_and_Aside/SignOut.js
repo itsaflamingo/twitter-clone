@@ -20,7 +20,7 @@ export default function SignOut() {
         <button className='menu-btn'
         onClick={() => signOutAndReset()}>
             <img className='user-icon' src={signOut} alt='sign out' />
-                Sign Out
-            </button>
+                <p class='menu-title'>Sign Out</p>
+                </button>
     )
 }

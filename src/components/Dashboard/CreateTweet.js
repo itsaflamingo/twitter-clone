@@ -44,10 +44,11 @@ export default function CreateTweet(props) {
     const [input, setInput] = useState('');
     // When submit button clicked, input gets placed in tweet.
     const [tweet, setTweet] = useState(initialTweetState(user));
-
+    const [charCount, setCharCount] = useState(280);
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        if(input.length > charCount) return;
         setTweet({
             ...tweet, 
             text: input,
@@ -57,6 +58,7 @@ export default function CreateTweet(props) {
             retweet,
         })
         setInput('');
+        setCharCount(280);
     }
 
     useEffect(() => {
@@ -72,14 +74,18 @@ export default function CreateTweet(props) {
         setTweet(initialTweetState(user));
     }, [tweet])
 
+    useEffect(() => {
+        console.log(charCount);
+    }, [charCount])
+
     return(
         <div id='create-tweet'>
             <div className="picture-create-tweet">
                 {user.length > 0 && (<ProfilePicture tweetImage={user.personalInfo.profileInfo.profilePicture} />)}
-                <TweetInput setInput={setInput} input={input} ariaLabel={retweetAriaLabel} />
+                <TweetInput setInput={setInput} input={input} ariaLabel={retweetAriaLabel} setChars={setCharCount} chars={charCount} />
             </div>
             <div id='tweet-add-ons'>
-                <CreateTweetOptions handleSubmit={handleSubmit} ariaLabel={tweetButtonAriaLabel} />
+                <CreateTweetOptions handleSubmit={handleSubmit} ariaLabel={tweetButtonAriaLabel} chars={charCount} />
             </div>
         </div>
     )

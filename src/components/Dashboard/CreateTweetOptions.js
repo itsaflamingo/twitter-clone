@@ -1,7 +1,10 @@
 export default function CreateTweetOptions(props) {
-    const { handleSubmit, ariaLabel } = props;
+
+    const { handleSubmit, ariaLabel, chars } = props;
+
     return (
         <div className="tweet-options">
+            <div className='char-count'>{chars}</div>
             <button 
                 type='submit'
                 className='submit-tweet'
