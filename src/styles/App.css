@@ -344,6 +344,9 @@ button:hover, a:hover {
 input:focus {
     outline: none;
 }
+.counter {
+    color: var(--font-grey)
+}
 /* RETWEET */
 .retweet-pop-up {
     position: absolute;

@@ -1,13 +1,13 @@
+import { useEffect } from 'react';
 import TweetCounterWrapper from "../DisplayTweet/TweetCounterWrapper"
-import heart from '../../images/heart.svg'
 
 function LikeCounter(props) {
 
-    const { likesCounter, tweet } = props;
+    const { likesCounter, tweet, icon } = props;
 
     return (
         <div className="like-div">
-            <img className='like' onClick={() => likesCounter(tweet)} src={heart} alt='like-btn' />
+            <img className='like' onClick={() => likesCounter(tweet)} src={icon} alt='like-btn' />
             <div className="counter" aria-label="like counter">
                 {tweet.likes}
             </div>

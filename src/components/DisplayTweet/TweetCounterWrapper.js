@@ -1,9 +1,12 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { tweetsSelector } from "../redux/createTweetSlice";
 import { updateTweet } from "../redux/createTweetSlice";
 import { storeTweets } from "../firebase/manageDbTweets";
 import { selectUser } from "../redux/SignInPgSlice";
+import unlikedHeart from '../../images/heart.svg'
+import likedHeart from '../../images/colored-heart.png'
+
 
 export default function TweetCounterWrapper(WrappedComponent) {
     return function Counter(props) {
@@ -13,6 +16,7 @@ export default function TweetCounterWrapper(WrappedComponent) {
         const user = useSelector(selectUser);
         const tweets = useSelector(tweetsSelector);
         const dispatch = useDispatch();
+        const [likeIcon, setLikeIcon] = useState(initialIcon(tweet, user));
 
         useEffect(() => {
             storeTweets(tweet);
@@ -22,14 +26,15 @@ export default function TweetCounterWrapper(WrappedComponent) {
 
             const obj = {
                 likedBy: tweet.likedBy,
-                isLiked: tweet.likedBy.includes(tweet.email),
+                isLiked: tweet.likedBy.includes(user.email),
                 updatedLikes: '',
                 updatedLikedBy: [],
                 tweet,
                 user
             }
             
-            obj.updatedLikes = obj.isLiked ? unlikeTweet(obj) : likeTweet(obj)
+            obj.updatedLikes = obj.isLiked ? unlikeTweet(obj) : likeTweet(obj);
+            setLikeIcon(obj.updatedLikes ? likedHeart :  unlikedHeart) 
             
             //returns tweet that matches criteria
             const findTweet = (element) => element.id === tweet.id;
@@ -56,7 +61,7 @@ export default function TweetCounterWrapper(WrappedComponent) {
         }
 
         return (
-            <WrappedComponent tweet={tweet} likesCounter={likesCounter} retweetCounter={retweetCounter} showRetweet={showRetweet} />
+            <WrappedComponent tweet={tweet} likesCounter={likesCounter} retweetCounter={retweetCounter} showRetweet={showRetweet} icon={likeIcon} />
         )
     }
 }
@@ -72,3 +77,8 @@ function unlikeTweet({updatedLikes, tweet, updatedLikedBy, user, likedBy}) {
     updatedLikedBy = likedBy.filter(email => email !== user.email);
     return updatedLikes;
 };
+
+function initialIcon(tweet, user) {
+    const isLiked = tweet.likedBy.includes(user.email);
+    return isLiked ? likedHeart : unlikedHeart;
+}
