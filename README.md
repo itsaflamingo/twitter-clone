@@ -14,8 +14,8 @@ Twitter Clone created with React & Firebase.
 
 ## Screenshots
 
-![profile](./src/images/screenshots/profile.png)
-![dashboard](./src/images/screenshots/dashboard.png)
+![profile](./src/images/screenshots/prof.png)
+![dashboard](./src/images/screenshots/dash.png)
 
 ## Built With
 
