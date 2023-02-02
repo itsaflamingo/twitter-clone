@@ -8,8 +8,9 @@ Twitter Clone created with React & Firebase.
 - Google sign in
 - Create and delete tweets & retweets
 - Individual user profiles
-- Follow/Unfollow capability
+- Follow/Unfollow
 - Sign out/Delete account 
+- Search tweets
 - Responsive design
 
 ## Screenshots
