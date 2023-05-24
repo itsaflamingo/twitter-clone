@@ -1,14 +1,15 @@
-import AddMenuAndAside from "../Menu_and_Aside/AddMenuAndAside";
-import CreateTweet from './CreateTweet'
-import DisplayTweets from "../DisplayTweet/DisplayTweets";
 import { useState, useEffect } from "react";
 import { tweetsSelector } from "../redux/createTweetSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { selectUser } from "../redux/SignInPgSlice"
 import { userAddTweets } from "../redux/userTweetsSlice";
-import useGetTweetsFromDatabase from "./useGetTweetsFromDatabase";
 import { userTweetsSelector } from "../redux/userTweetsSlice";
+import useGetTweetsFromDatabase from "./useGetTweetsFromDatabase";
 import Search from "./Search";
+import Header from "./Header";
+import AddMenuAndAside from "../Menu_and_Aside/AddMenuAndAside";
+import CreateTweet from './CreateTweet'
+import DisplayTweets from "../DisplayTweet/DisplayTweets";
 
 const filterTweets = (input, allTweets) => allTweets.filter((tweet) => 
     tweet.text === input || 
@@ -19,15 +20,18 @@ const filterUserTweets = (tweets, user) => tweets.filter(tweet => tweet.id === u
 
 function Dashboard() {
 
+    // Import redux variables
     const allTweets = useSelector(tweetsSelector);
     const user = useSelector(selectUser);
     const userTweets = useSelector(userTweetsSelector);
 
+    // Create showTweets and tweets states
     const [showTweets, setShowTweets] = useState(true);
     const [tweets, setTweets] = useState([]);
 
     const dispatch = useDispatch();
 
+    // Update user tweets
     const addToUserTweets = (filteredTweets) => dispatch(userAddTweets(filteredTweets));
     
     useGetTweetsFromDatabase();
@@ -44,21 +48,18 @@ function Dashboard() {
     }, [tweets])
 
     useEffect(() => {
-        if(tweets.length === 0 || userTweets.length > 0) return;
+        if(tweets.length === 0 || userTweets.length > 0 || user.length === 0) return;
         addToUserTweets(filterUserTweets(tweets, user));
     }, [tweets])
 
     const onSubmit = (e, input) => {
         e.preventDefault();
-
         setTweets(filterTweets(input, allTweets))
     }
 
     return (
         <div id='dashboard'>
-            <div id='header'>
-                <h2>Home</h2>
-            </div>
+            <Header />
             <Search onSubmit={onSubmit} />
             <CreateTweet retweet={[]} showRetweet={null} retweetAriaLabel='create tweet input' tweetButtonAriaLabel='create tweet submit' />
             {showTweets && (<DisplayTweets tweets={tweets} />)}

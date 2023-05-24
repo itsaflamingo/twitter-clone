@@ -2,6 +2,7 @@ import { useState } from "react";
 import DisplayTweet from "./DisplayTweet";
 import RetweetPopUp from "../Dashboard/RetweetPopUp";
 import orderTweets from "../Dashboard/orderTweets";
+import uniqid from 'uniqid';
 
 export default function DisplayTweets(props) {
     
@@ -16,7 +17,7 @@ export default function DisplayTweets(props) {
         <div id='tweet-display'>
             {orderedTweets.map((tweet, index) => {
                 return (
-                    <div className="tweet-wrapper" key={tweet.id}>
+                    <div className="tweet-wrapper" key={uniqid()}>
                         <DisplayTweet 
                         tweet={tweet} 
                         showRetweet={() => setShowRetweetDiv(index)}

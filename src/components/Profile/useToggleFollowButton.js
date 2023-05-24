@@ -5,9 +5,9 @@ export default function useToggleFollowButton(props) {
     const checkIfFollowing = () => followers.some(obj => obj.name === userFollowing.personalInfo.name);
     
     if(checkIfFollowing()) {
-        return 'Following'
+        return 'Following';
     }
     else {
-        return 'Follow'
+        return 'Follow';
     }
 }

@@ -22,6 +22,8 @@ export default function TweetCounterWrapper(WrappedComponent) {
             storeTweets(tweet);
         }, [tweet])
 
+        console.log(tweets, user);
+
         const likesCounter = (tweet) => {
 
             const obj = {
@@ -79,6 +81,7 @@ function unlikeTweet({updatedLikes, tweet, updatedLikedBy, user, likedBy}) {
 };
 
 function initialIcon(tweet, user) {
+    if(user.length === 0) return unlikedHeart;
     const isLiked = tweet.likedBy.includes(user.email);
     return isLiked ? likedHeart : unlikedHeart;
 }

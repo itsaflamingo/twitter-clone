@@ -8,7 +8,7 @@ import signOutUser from '../ManageUser/signOutUser';
 import { resetUser } from '../redux/SignInPgSlice';
 import useAuth from '../Sign_In_Page/useAuth';
 
-export default function DeleteAccount() {
+export default function DeleteAccount({ setShowSignInPopUp }) {
 
     const { signedInUser } = useAuth();
 
@@ -42,9 +42,9 @@ export default function DeleteAccount() {
     
     return (
         <button className='menu-btn'
-        onClick={() => signOutAndDeleteUser()}>
+        onClick={signedInUser ? () => signOutAndDeleteUser() : () => setShowSignInPopUp(true)}>
             <img className='user-icon' src={deleteAccount} alt='delete account' />
-                <p class='menu-title'>Delete Account</p>
-                </button>
+                <p className='menu-title'>Delete Account</p>
+        </button>
     )
 }
