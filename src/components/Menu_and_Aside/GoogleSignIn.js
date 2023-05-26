@@ -29,7 +29,9 @@ export default function GoogleSignIn() {
 
     // Keep track of whether logged in user has account, and is signed in
     const [hasAccount, setHasAccount] = useState(false);
-    const { isSignedIn } = useAuth();
+    const { isSignedIn, signedInUser } = useAuth();
+
+    console.log('signedInUser', signedInUser);
 
     useEffect(() => {
         if(status !== 'succeed') return;

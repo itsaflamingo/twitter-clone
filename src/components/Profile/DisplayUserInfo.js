@@ -3,7 +3,6 @@ import { ProfileContext } from "./profileContext";
 import calendar from '../../images/icons8-calendar-100.png'
 
 export default function DisplayUserInfo() {
-
     // use context provided by Profile.js
     const { user } = useContext(ProfileContext);
         

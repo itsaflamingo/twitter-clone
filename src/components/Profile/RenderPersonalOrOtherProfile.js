@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import { selectUser } from '../redux/SignInPgSlice';
 
 export default function RenderPersonalOrOtherProfile(props) {
-
     const { userName } = props;
     const user = useSelector(selectUser);
     

@@ -16,7 +16,6 @@ export default function Menu() {
     const user = useSelector(selectUser);
     const { signedInUser } = useAuth();
     const [showSignInPopUp, setShowSignInPopUp] = useState(false);
-    console.log(user);
 
     const nav = useNavigate();
     const goHome = () => nav('/dashboard');
@@ -31,7 +30,7 @@ export default function Menu() {
                     onClick={() => goHome()}/>
                 </div>
             <div id='menu-options'>
-                {!signedInUser && <GoogleSignIn />}
+                {(user.length === 0) && <GoogleSignIn />}
                 <button className='menu-btn'
                 onClick={() => goHome()}>
                     <img className='user-icon' src={home} alt='home' />
@@ -44,7 +43,7 @@ export default function Menu() {
                     </button>
                 <SignOut setShowSignInPopUp={setShowSignInPopUp} />
                 <DeleteAccount setShowSignInPopUp={setShowSignInPopUp} />
-                {showSignInPopUp && <SignInPopup showPopUp={showSignInPopUp} setShowPopUp={setShowSignInPopUp} />}
+                {(user.length === 0) && <SignInPopup showPopUp={showSignInPopUp} setShowPopUp={setShowSignInPopUp} />}
             </div>
         </div>
     )

@@ -19,16 +19,18 @@ function checkIsUserInDatabase(user, users) {
 
 export default function SignInPg() {
 
-    const [hasAccount, setHasAccount] = useState(false);
-    const { isSignedIn } = useAuth();
+    const dispatch = useDispatch();
+    const nav = useNavigate();
 
+    // Get state from redux store
     const user = useSelector(selectUser);
     const status = useSelector(selectStatus);
     const error = useSelector(selectError);
     const users = useSelector(usersSelector);
-    const dispatch = useDispatch();
 
-    const nav = useNavigate();
+    // Keep track of whether logged in user has account, and is signed in
+    const [hasAccount, setHasAccount] = useState(false);
+    const { isSignedIn, signedInUser } = useAuth();
 
     useEffect(() => {
         if(status !== 'succeed') return;
@@ -37,7 +39,7 @@ export default function SignInPg() {
     }, [status])
 
     useEffect(() => {
-        if('personalInfo' in user === false || isSignedIn === false) return;
+        if('personalInfo' in user === false || !isSignedIn) return;
         
         if(isSignedIn && user.personalInfo.hasAccount === true && status !== 'loading') {
             nav('/dashboard');
