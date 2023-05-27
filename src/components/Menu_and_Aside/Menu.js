@@ -14,7 +14,7 @@ import GoogleSignIn from './GoogleSignIn';
 export default function Menu() {
 
     const user = useSelector(selectUser);
-    const { signedInUser } = useAuth();
+    const userLength = user.length;
     const [showSignInPopUp, setShowSignInPopUp] = useState(false);
 
     const nav = useNavigate();
@@ -30,20 +30,20 @@ export default function Menu() {
                     onClick={() => goHome()}/>
                 </div>
             <div id='menu-options'>
-                {(user.length === 0) && <GoogleSignIn />}
+                {userLength === 0 && <GoogleSignIn />}
                 <button className='menu-btn'
                 onClick={() => goHome()}>
                     <img className='user-icon' src={home} alt='home' />
                     <p className='menu-title'>Home</p>
                     </button>
                 <button className='menu-btn' 
-                onClick={signedInUser ? () => visitProfile() : () => setShowSignInPopUp(true)}>
+                onClick={userLength === 0 ? () => visitProfile() : () => setShowSignInPopUp(true)}>
                     <img className='user-icon' src={userIcon} alt='user' />
                     <p className='menu-title'>Profile</p>
                     </button>
                 <SignOut setShowSignInPopUp={setShowSignInPopUp} />
                 <DeleteAccount setShowSignInPopUp={setShowSignInPopUp} />
-                {(user.length === 0) && <SignInPopup showPopUp={showSignInPopUp} setShowPopUp={setShowSignInPopUp} />}
+                {userLength === 0 && <SignInPopup showPopUp={showSignInPopUp} setShowPopUp={setShowSignInPopUp} />}
             </div>
         </div>
     )

@@ -12,6 +12,7 @@ export default function SignOut({ setShowSignInPopUp }) {
     const { signedInUser } = useAuth();
 
     const signOutAndReset = async() => {
+        console.log('sign out');
         await signOutUser()
             .then(() => {
                 nav('/');

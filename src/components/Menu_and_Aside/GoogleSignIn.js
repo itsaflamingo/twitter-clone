@@ -9,13 +9,7 @@ import EditProfileInfo from '../ManageUser/EditProfileInfo';
 import Footer from '../Footer';
 import addUserInfoToUser from '../ManageUser/addUserInfoToUser';
 import useAuth from '../Sign_In_Page/useAuth';
-
-function checkIsUserInDatabase(user, users) {
-    // Returns array with nested object
-    const thisUser = users.filter((obj) => obj.email === user.email);
-    if(thisUser.length === 0) return false;
-    return thisUser[0];
-}
+import checkIsUserInDatabase from '../../functions/checkIsUserInDatabase';
 
 export default function GoogleSignIn() {
     const dispatch = useDispatch();
@@ -30,8 +24,6 @@ export default function GoogleSignIn() {
     // Keep track of whether logged in user has account, and is signed in
     const [hasAccount, setHasAccount] = useState(false);
     const { isSignedIn, signedInUser } = useAuth();
-
-    console.log('signedInUser', signedInUser);
 
     useEffect(() => {
         if(status !== 'succeed') return;
@@ -63,7 +55,7 @@ export default function GoogleSignIn() {
     const ifAddToDatabase = (user, users) => {
         // If exists, will return object, otherwise will return false.
         const existingUser = checkIsUserInDatabase(user, users);
-
+        // If no existing user, return true to add to database
         if(existingUser === false) return true;
 
         // If user already exists, combine user and personalInfo section of existingUser and return false.
@@ -72,7 +64,6 @@ export default function GoogleSignIn() {
             personalInfo: {
                 ...existingUser.personalInfo,
             }}))
-            
         // If has account, it will return true and navigate to dashboard, otherwise false and account will be created.
         return user.personalInfo.hasAccount;
     }

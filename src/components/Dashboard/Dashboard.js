@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { tweetsSelector } from "../redux/createTweetSlice";
 import { useSelector, useDispatch } from "react-redux";
-import { selectUser } from "../redux/SignInPgSlice"
+import { editUser, selectUser } from "../redux/SignInPgSlice"
 import { userAddTweets } from "../redux/userTweetsSlice";
 import { userTweetsSelector } from "../redux/userTweetsSlice";
 import useGetTweetsFromDatabase from "./useGetTweetsFromDatabase";
@@ -10,6 +10,10 @@ import Header from "./Header";
 import AddMenuAndAside from "../Menu_and_Aside/AddMenuAndAside";
 import CreateTweet from './CreateTweet'
 import DisplayTweets from "../DisplayTweet/DisplayTweets";
+import useAuth from "../Sign_In_Page/useAuth";
+import checkIsUserInDatabase from "../../functions/checkIsUserInDatabase";
+import { addUser, usersSelector } from "../redux/allUsersSlice";
+import { getUsers } from "../firebase/manageDbUsers";
 
 const filterTweets = (input, allTweets) => allTweets.filter((tweet) => 
     tweet.text === input || 
@@ -23,7 +27,9 @@ function Dashboard() {
     // Import redux variables
     const allTweets = useSelector(tweetsSelector);
     const user = useSelector(selectUser);
+    const users = useSelector(usersSelector);
     const userTweets = useSelector(userTweetsSelector);
+    const { signedInUser, isSignedIn } = useAuth();
 
     // Create showTweets and tweets states
     const [showTweets, setShowTweets] = useState(true);
@@ -35,6 +41,19 @@ function Dashboard() {
     const addToUserTweets = (filteredTweets) => dispatch(userAddTweets(filteredTweets));
     
     useGetTweetsFromDatabase();
+
+    useEffect(() => {
+        if(users.length === 0) return;
+        if(isSignedIn === true && user.length === 0) {
+            const existingUser = checkIsUserInDatabase(signedInUser, users);
+            console.log('existingUser', existingUser)
+            dispatch(editUser({
+                ...existingUser, 
+                personalInfo: {
+                    ...existingUser.personalInfo,
+                }}))
+        }
+    }, [isSignedIn, users])
 
     useEffect(() => {
         if(allTweets.length === 0) return;
@@ -51,6 +70,16 @@ function Dashboard() {
         if(tweets.length === 0 || userTweets.length > 0 || user.length === 0) return;
         addToUserTweets(filterUserTweets(tweets, user));
     }, [tweets])
+
+    useEffect(() => {
+        // Retrieve users from database
+        getUsersFromDatabase();
+    }, [])
+
+    const getUsersFromDatabase = async() => await getUsers().then((res) => {
+        if(res[0] === undefined) return;
+        dispatch(addUser(res))
+    }).catch(error => console.log(error));
 
     const onSubmit = (e, input) => {
         e.preventDefault();

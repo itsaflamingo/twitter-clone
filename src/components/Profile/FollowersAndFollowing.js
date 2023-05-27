@@ -2,6 +2,7 @@ import { useContext } from "react"
 import { ProfileContext } from "../Profile/profileContext";
 
 export default function FollowersAndFollowing() {
+
     const { user } = useContext(ProfileContext);
 
     return (

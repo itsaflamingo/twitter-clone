@@ -27,11 +27,13 @@ function Profile() {
     const [user, setUser] = useState(userSelector);
     const [tweets, setTweets] = useState(userTweets);
     
+    console.log(user);
     // Getting value passed via useNavigate from DisplayTweet component.
     const location = useLocation();
 
     useEffect(() => {
         if(location.state === user.personalInfo.name) return;
+        console.log('location state', location.state);
         setUser(changeUser(users, location)[0]);
     }, [location, user])
 
