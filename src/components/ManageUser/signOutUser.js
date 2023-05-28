@@ -4,7 +4,7 @@ import { app } from "../firebase/firebaseConfig";
 const auth = getAuth(app);
 
 export default async function signOutUser() {
-    await signOut(auth).then(() => {
+    await auth.signOut().then(() => {
         return true;
       }).catch((error) => {
         return error;

@@ -78,7 +78,7 @@ function Dashboard() {
 
     const getUsersFromDatabase = async() => await getUsers().then((res) => {
         if(res[0] === undefined) return;
-        dispatch(addUser(res))
+        dispatch(addUser(res));
     }).catch(error => console.log(error));
 
     const onSubmit = (e, input) => {

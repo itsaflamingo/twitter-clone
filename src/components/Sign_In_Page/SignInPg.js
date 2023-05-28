@@ -32,12 +32,14 @@ export default function SignInPg() {
     const [hasAccount, setHasAccount] = useState(false);
     const { isSignedIn, signedInUser } = useAuth();
 
+    // Once google sign in is complete, check whether to add user to database
     useEffect(() => {
         if(status !== 'succeed') return;
         // IfAddToDatabase adds unknown user to Redux, returns boolean depending on whether user exists or not.
         setHasAccount(ifAddToDatabase(user, users));
     }, [status])
 
+    // Once user successfully signs in (no loading & hasAccount is true), nav to dashboard and add user to Users 
     useEffect(() => {
         if('personalInfo' in user === false || !isSignedIn) return;
         
@@ -62,6 +64,8 @@ export default function SignInPg() {
     const ifAddToDatabase = (user, users) => {
         // If exists, will return object, otherwise will return false.
         const existingUser = checkIsUserInDatabase(user, users);
+
+        console.log(existingUser);
 
         if(existingUser === false) return true;
 

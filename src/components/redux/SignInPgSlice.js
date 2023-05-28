@@ -30,6 +30,7 @@ const accountSlice = createSlice({
             })
             builder.addCase(EDIT_USER, (state, action) => {
                 state.user = {...action.payload};
+                console.log('user is edited');
             })
             builder.addCase(RESET_USER, (state) => {
                 state.user = [];

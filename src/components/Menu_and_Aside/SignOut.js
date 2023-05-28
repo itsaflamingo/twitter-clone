@@ -12,7 +12,6 @@ export default function SignOut({ setShowSignInPopUp }) {
     const { signedInUser } = useAuth();
 
     const signOutAndReset = async() => {
-        console.log('sign out');
         await signOutUser()
             .then(() => {
                 nav('/');
@@ -22,7 +21,7 @@ export default function SignOut({ setShowSignInPopUp }) {
 
     return (
         <button className='menu-btn'
-        onClick={signedInUser ? () => setShowSignInPopUp(true) : () => signOutAndReset() }>
+        onClick={signedInUser ? () => signOutAndReset() : () => setShowSignInPopUp(true) }>
             <img className='user-icon' src={signOut} alt='sign out' />
                 <p className='menu-title'>Sign Out</p>
                 </button>

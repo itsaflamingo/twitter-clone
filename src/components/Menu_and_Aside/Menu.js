@@ -8,13 +8,14 @@ import SignOut from './SignOut';
 import DeleteAccount from './DeleteAccount';
 import { useState } from 'react';
 import SignInPopup from '../Dashboard/SignInPopup';
-import useAuth from '../Sign_In_Page/useAuth';
 import GoogleSignIn from './GoogleSignIn';
 
 export default function Menu() {
 
     const user = useSelector(selectUser);
+    const isUserObj = typeof user === 'object';
     const userLength = user.length;
+
     const [showSignInPopUp, setShowSignInPopUp] = useState(false);
 
     const nav = useNavigate();
@@ -37,7 +38,7 @@ export default function Menu() {
                     <p className='menu-title'>Home</p>
                     </button>
                 <button className='menu-btn' 
-                onClick={userLength === 0 ? () => visitProfile() : () => setShowSignInPopUp(true)}>
+                onClick={userLength === 0 ? () => setShowSignInPopUp(true) : () => visitProfile()}>
                     <img className='user-icon' src={userIcon} alt='user' />
                     <p className='menu-title'>Profile</p>
                     </button>

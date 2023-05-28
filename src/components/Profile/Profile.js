@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { userTweetsSelector } from '../redux/userTweetsSlice';
 import { selectUser } from "../redux/SignInPgSlice"
 import { editUsers, usersSelector } from '../redux/allUsersSlice';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { ProfileProvider } from './profileContext';
 import { tweetsSelector } from '../redux/createTweetSlice';
 import { storeUsers } from '../firebase/manageDbUsers';
@@ -21,19 +21,20 @@ function Profile() {
     const users = useSelector(usersSelector);
     const userSelector = useSelector(selectUser);
     const allTweets = useSelector(tweetsSelector);
+    
     const dispatch = useDispatch();
+    const nav = useNavigate();
 
     // User and tweets change based on profile click
     const [user, setUser] = useState(userSelector);
     const [tweets, setTweets] = useState(userTweets);
     
-    console.log(user);
     // Getting value passed via useNavigate from DisplayTweet component.
     const location = useLocation();
 
     useEffect(() => {
+        if(!user.personalInfo.name) returnToDashboard();
         if(location.state === user.personalInfo.name) return;
-        console.log('location state', location.state);
         setUser(changeUser(users, location)[0]);
     }, [location, user])
 
@@ -47,8 +48,8 @@ function Profile() {
     }, [userSelector, allTweets])
 
     const changeUser = (users, location) => users.filter(user => user.personalInfo.name === location.state);
-
     const changeUserTweets = (tweets, user) => tweets.filter(tweet => tweet.name === user.personalInfo.name);
+    const returnToDashboard = () => nav('/dashboard');
 
     // Function to change user through context API.
     const updateUser = (obj) => setUser(obj);
