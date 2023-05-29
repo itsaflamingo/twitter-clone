@@ -6,7 +6,7 @@ import validator from 'validator'
 
 export default function EditProfileInfo(props) {
 
-    const { saveToDatabase, user } = props;
+    const { saveToDatabase, user, setShowEditInfo } = props;
     
     const [profileInfo, setProfileInfo] = useState({
         hasAccount: true,
@@ -138,6 +138,13 @@ export default function EditProfileInfo(props) {
         }
     }
 
+    const submitInfo = (e) => {
+        e.preventDefault();
+
+        saveToDatabase(e, user, profileInfo)
+        setShowEditInfo(false);
+    }
+
     return (
         <div id='sign-up'>
             <form>
@@ -165,7 +172,7 @@ export default function EditProfileInfo(props) {
                     <Input type='url' onChange={onChangeInput} id='Add Cover Photo' placeholder='https://www.fakelink.com'/>
                 </div>
                 <button type='submit'
-                onClick={(e) => saveToDatabase(e, user, profileInfo)}className={isNotClickable}>Submit</button>
+                onClick={(e) => submitInfo(e)}className={isNotClickable}>Submit</button>
             </form>
         </div>
     )

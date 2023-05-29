@@ -34,6 +34,7 @@ export default function Menu() {
 
     // Keep track of whether logged in user has account, and is signed in
     const [hasAccount, setHasAccount] = useState(null);
+    const [showEditInfo, setShowEditInfo] = useState(false);
     const { isSignedIn } = useAuth();
 
     useEffect(() => {
@@ -53,10 +54,16 @@ export default function Menu() {
     useEffect(() => {
         // Retrieve users from database
         getUsersFromDatabase();
-        if(isSignedIn === true) {
-            setHasAccount(true);
+        if(isSignedIn === true && user.length > 0) {
+            setHasAccount(user.personalInfo.hasAccount);
         }
     }, [isSignedIn])
+
+    useEffect(() => {
+        if(hasAccount === false) {
+            setShowEditInfo(true);
+        }
+    }, [hasAccount])
 
     const getUsersFromDatabase = async() => await getUsers().then((res) => {
         if(res[0] === undefined) return;
@@ -112,7 +119,7 @@ export default function Menu() {
                 <SignOut setShowSignInPopUp={setShowSignInPopUp} />
                 <DeleteAccount setShowSignInPopUp={setShowSignInPopUp} />
                 {userLength === 0 && <SignInPopup showPopUp={showSignInPopUp} setShowPopUp={setShowSignInPopUp} />}
-                {hasAccount === false && (<EditProfileInfo user={user} saveToDatabase={saveNewUserToDatabase} />)}
+                {showEditInfo && (<EditProfileInfo user={user} saveToDatabase={saveNewUserToDatabase} setShowEditInfo={setShowEditInfo} />)}
             </div>
         </div>
     )

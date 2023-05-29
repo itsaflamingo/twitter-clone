@@ -46,7 +46,6 @@ function Dashboard() {
         if(users.length === 0) return;
         if(isSignedIn === true && user.length === 0) {
             const existingUser = checkIsUserInDatabase(signedInUser, users);
-            console.log('existingUser', existingUser)
             dispatch(editUser({
                 ...existingUser, 
                 personalInfo: {

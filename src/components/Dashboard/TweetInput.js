@@ -6,7 +6,7 @@ export default function TweetInput(props) {
     const setTweetInput = (e) => setInput(e.target.value);
 
     const handleKeyDown = (e) => {
-        if(e.key === "Backspace") {
+        if(e.key === "Backspace" && input.length > 0) {
             return setChars(chars + 1);
         }
         // Ensure key is printable
@@ -14,6 +14,7 @@ export default function TweetInput(props) {
             return setChars(chars - 1);
         }
     }
+
     return (
         <div id='tweet-container'>
             <form
