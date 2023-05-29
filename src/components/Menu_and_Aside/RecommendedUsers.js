@@ -24,7 +24,7 @@ function RecommendedUsers() {
             <h3 className="heading">Recommended Users</h3>
             <div className='recommended-users-list'>
             { followableUsers.map((user, index) => {
-                if(index <= 4) {
+                if(index <= 3) {
                     return (
                         <div key={index}>
                             <RecommendedUser user={user} index={index} navigateToProfile={navigateToProfile} />

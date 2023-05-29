@@ -3,7 +3,7 @@ import UserInfo from "../ManageUser/UserInfo";
 
 export default function RecommendedUser(props) {
 
-    const { user, navigateToProfile, index } = props;
+    const { user, navigateToProfile } = props;
 
     return (
         <div className="recommended-user">
