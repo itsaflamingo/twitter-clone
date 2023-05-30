@@ -12,8 +12,7 @@ import CreateTweet from './CreateTweet'
 import DisplayTweets from "../DisplayTweet/DisplayTweets";
 import useAuth from "../Sign_In_Page/useAuth";
 import checkIsUserInDatabase from "../../functions/checkIsUserInDatabase";
-import { addUser, usersSelector } from "../redux/allUsersSlice";
-import { getUsers } from "../firebase/manageDbUsers";
+import { usersSelector } from "../redux/allUsersSlice";
 
 const filterTweets = (input, allTweets) => allTweets.filter((tweet) => 
     tweet.text === input || 
@@ -69,16 +68,6 @@ function Dashboard() {
         if(tweets.length === 0 || userTweets.length > 0 || user.length === 0) return;
         addToUserTweets(filterUserTweets(tweets, user));
     }, [tweets])
-
-    useEffect(() => {
-        // Retrieve users from database
-        getUsersFromDatabase();
-    }, [])
-
-    const getUsersFromDatabase = async() => await getUsers().then((res) => {
-        if(res[0] === undefined) return;
-        dispatch(addUser(res));
-    }).catch(error => console.log(error));
 
     const onSubmit = (e, input) => {
         e.preventDefault();

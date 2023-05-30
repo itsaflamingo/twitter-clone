@@ -1,4 +1,3 @@
-
 export default function TweetInput(props) {
     
     const { type, setInput, input, ariaLabel, setChars, chars } = props;

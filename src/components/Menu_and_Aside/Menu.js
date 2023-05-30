@@ -11,10 +11,11 @@ import SignInPopup from '../Dashboard/SignInPopup';
 import GoogleSignIn from './GoogleSignIn';
 import { addUser, usersSelector } from '../redux/allUsersSlice';
 import useAuth from '../Sign_In_Page/useAuth';
-import { getUsers, storeUsers } from '../firebase/manageDbUsers';
+import { storeUsers } from '../firebase/manageDbUsers';
 import checkIsUserInDatabase from '../../functions/checkIsUserInDatabase';
 import addUserInfoToUser from '../ManageUser/addUserInfoToUser';
 import EditProfileInfo from '../ManageUser/EditProfileInfo';
+import useGetUsersFromDatabase from '../customHooks/userGetUsersFromDatabase';
 
 export default function Menu() {
 
@@ -24,18 +25,19 @@ export default function Menu() {
     const error = useSelector(selectError);
     const users = useSelector(usersSelector);
 
-    const [showSignInPopUp, setShowSignInPopUp] = useState(null);
-
     const dispatch = useDispatch();
     const nav = useNavigate();
 
-    const goHome = () => nav('/dashboard');
+    const goHome = () => nav('/');
     const visitProfile = () => nav('/profile', { state: user.personalInfo.name });
+    const { isSignedIn } = useAuth();
 
     // Keep track of whether logged in user has account, and is signed in
     const [hasAccount, setHasAccount] = useState(null);
     const [showEditInfo, setShowEditInfo] = useState(false);
-    const { isSignedIn } = useAuth();
+    const [showSignInPopUp, setShowSignInPopUp] = useState(null);
+
+    useGetUsersFromDatabase();
 
     useEffect(() => {
         if(status !== 'succeed') return;
@@ -52,23 +54,16 @@ export default function Menu() {
     }, [user, isSignedIn])
 
     useEffect(() => {
-        // Retrieve users from database
-        getUsersFromDatabase();
         if(isSignedIn === true && user.length > 0) {
             setHasAccount(user.personalInfo.hasAccount);
         }
-    }, [isSignedIn])
+    }, [])
 
     useEffect(() => {
         if(hasAccount === false) {
             setShowEditInfo(true);
         }
     }, [hasAccount])
-
-    const getUsersFromDatabase = async() => await getUsers().then((res) => {
-        if(res[0] === undefined) return;
-        dispatch(addUser(res))
-    }).catch(error => console.log(error));
 
     // If user is in database, return true, else add new user and return false
     const ifAddToDatabase = (user, users) => {

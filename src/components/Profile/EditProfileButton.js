@@ -18,6 +18,7 @@ export default function EditProfileButton() {
         editTweets(tweets, user, updatedUser);
         //Store in database & add to users array
         dispatch(addUser(updatedUser));
+        //Add to current users array
         dispatch(editUser(updatedUser));
     }
 
