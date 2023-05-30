@@ -512,15 +512,16 @@ input:focus, textarea:focus {
 }
 /* RECOMMENDED USERS */
 #recommended-users {
-    margin-top: 100px;
     background-color: var(--grey);
     border-radius: 20px;
-    max-height: 500px;
-    margin-left: 20px;
+    max-height: 450px;
     width: 300px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-bottom: 20px;
+    margin-left: 20px;
+    margin-top: 100px;
 }
 .recommended-user {
     height: 80px;
