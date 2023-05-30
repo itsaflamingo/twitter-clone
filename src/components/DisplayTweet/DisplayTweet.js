@@ -3,10 +3,15 @@ import TweetContent from "./TweetContent";
 import LikeCounter from "./LikeCounter";
 import RetweetCounter from "./RetweetCounter";
 import TweetOptions from "./TweetOptions";
+import { useSelector } from "react-redux";
+import { selectUser } from "../redux/SignInPgSlice";
 
 export default function DisplayTweet(props) {
     const { tweet, showRetweet } = props;
     const navigate = useNavigate();
+    const user = useSelector(selectUser);
+    const userEmail = user.email;
+    const tweetEmail = tweet.email;
 
     const navigateToProfile = (e) => {
         const target = e.target.id;
@@ -21,7 +26,7 @@ export default function DisplayTweet(props) {
                     <RetweetCounter tweet={tweet} showRetweet={showRetweet} />
                     <div className="tweet-date">{tweet.date}</div>
                 </div>
-                <TweetOptions />
+                {(userEmail === tweetEmail) && <TweetOptions />}
             </div>
     )
 }
