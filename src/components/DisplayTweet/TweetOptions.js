@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteTweet } from "../redux/createTweetSlice";
-import { userDeleteTweet } from "../redux/userTweetsSlice";
-import { selectUser } from "../redux/SignInPgSlice";
-import { deleteTweetFromDb } from "../firebase/manageDbTweets";
+import { deleteTweet } from "../../redux/createTweetSlice";
+import { userDeleteTweet } from "../../redux/userTweetsSlice";
+import { selectUser } from "../../redux/SignInPgSlice";
+import { deleteTweetFromDb } from "../../firebase/manageDbTweets";
 
 export default function TweetOptions() {
 

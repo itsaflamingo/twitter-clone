@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { usersSelector } from "../redux/allUsersSlice";
+import { usersSelector } from "../../redux/allUsersSlice";
 import RecommendedUser from "./RecommendedUser";
-import { selectUser } from "../redux/SignInPgSlice";
+import { selectUser } from "../../redux/SignInPgSlice";
 
 const filterUsers = (users, activeUser) => users.filter((user) => {
     if(activeUser.length === 0) return [];

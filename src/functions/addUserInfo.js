@@ -1,4 +1,4 @@
-import getDateTime from "../ManageUser/getDateTime"
+import getDateTime from "./getDateTime"
 
 export default function addUserInfo(user) {
         return {...user, 

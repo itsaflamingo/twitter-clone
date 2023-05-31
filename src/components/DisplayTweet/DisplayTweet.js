@@ -4,7 +4,7 @@ import LikeCounter from "./LikeCounter";
 import RetweetCounter from "./RetweetCounter";
 import TweetOptions from "./TweetOptions";
 import { useSelector } from "react-redux";
-import { selectUser } from "../redux/SignInPgSlice";
+import { selectUser } from "../../redux/SignInPgSlice";
 
 export default function DisplayTweet(props) {
     const { tweet, showRetweet } = props;

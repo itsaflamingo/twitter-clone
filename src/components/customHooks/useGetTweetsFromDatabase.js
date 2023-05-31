@@ -1,8 +1,8 @@
 import { useEffect } from "react";
-import { getTweets } from "../firebase/manageDbTweets";
+import { getTweets } from "../../firebase/manageDbTweets";
 import { useDispatch, useSelector } from "react-redux";
-import { addTweet, tweetsSelector } from "../redux/createTweetSlice";
-import { tweetIdsSelector, storeTweetId } from "../redux/storeTweetIdSlice";
+import { addTweet, tweetsSelector } from "../../redux/createTweetSlice";
+import { tweetIdsSelector, storeTweetId } from "../../redux/storeTweetIdSlice";
 
 
 export default function useGetTweetsFromDatabase() {

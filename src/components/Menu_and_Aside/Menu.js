@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom'
 import logo from '../../images/icon.png'
-import { editUser, selectError, selectStatus, selectUser } from '../redux/SignInPgSlice';
+import { editUser, selectError, selectStatus, selectUser } from '../../redux/SignInPgSlice';
 import userIcon from '../../images/user.png'
 import home from '../../images/home-black.png'
 import SignOut from './SignOut';
@@ -9,13 +9,13 @@ import DeleteAccount from './DeleteAccount';
 import { useEffect, useState } from 'react';
 import SignInPopup from '../Dashboard/SignInPopup';
 import GoogleSignIn from './GoogleSignIn';
-import { addUser, usersSelector } from '../redux/allUsersSlice';
-import useAuth from '../Sign_In_Page/useAuth';
-import { storeUsers } from '../firebase/manageDbUsers';
+import { addUser, usersSelector } from '../../redux/allUsersSlice';
+import useAuth from '../customHooks/useAuth';
+import { storeUsers } from '../../firebase/manageDbUsers';
 import checkIsUserInDatabase from '../../functions/checkIsUserInDatabase';
-import addUserInfoToUser from '../ManageUser/addUserInfoToUser';
+import addUserInfoToUser from '../../functions/addUserInfoToUser';
 import EditProfileInfo from '../ManageUser/EditProfileInfo';
-import useGetUsersFromDatabase from '../customHooks/userGetUsersFromDatabase';
+import useGetUsersFromDatabase from '../customHooks/useGetUsersFromDatabase';
 
 export default function Menu() {
 

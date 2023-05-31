@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import TweetCounterWrapper from "../DisplayTweet/TweetCounterWrapper";
-import useAuth from '../Sign_In_Page/useAuth';
+import useAuth from '../customHooks/useAuth';
 import SignInPopup from '../Dashboard/SignInPopup';
 
 function LikeCounter(props) {

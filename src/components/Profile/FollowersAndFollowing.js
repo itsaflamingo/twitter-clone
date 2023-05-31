@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import { ProfileContext } from "../Profile/profileContext";
+import { ProfileContext } from "../contexts/profileContext";
 
 export default function FollowersAndFollowing() {
 

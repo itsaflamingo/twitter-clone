@@ -1,12 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import deleteAccount from '../../images/delete-account.png';
-import { changeTweets, tweetsSelector } from '../redux/createTweetSlice';
-import { deleteUserFromDb } from '../firebase/manageDbUsers';
-import { deleteTweetFromDb } from '../firebase/manageDbTweets';
-import signOutUser from '../ManageUser/signOutUser';
-import { resetUser } from '../redux/SignInPgSlice';
-import useAuth from '../Sign_In_Page/useAuth';
+import { changeTweets, tweetsSelector } from '../../redux/createTweetSlice';
+import { deleteUserFromDb } from '../../firebase/manageDbUsers';
+import { deleteTweetFromDb } from '../../firebase/manageDbTweets';
+import signOutUser from '../../firebase/signOutUser';
+import { resetUser } from '../../redux/SignInPgSlice';
+import useAuth from '../customHooks/useAuth';
 
 export default function DeleteAccount({ setShowSignInPopUp }) {
 

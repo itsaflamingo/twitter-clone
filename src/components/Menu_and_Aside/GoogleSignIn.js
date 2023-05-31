@@ -1,4 +1,4 @@
-import { fetchUser } from "../redux/SignInPgSlice"
+import { fetchUser } from "../../redux/SignInPgSlice"
 import { useDispatch } from "react-redux"
 
 export default function GoogleSignIn() {

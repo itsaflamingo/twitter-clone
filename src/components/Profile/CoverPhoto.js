@@ -1,6 +1,6 @@
-import { useContext, useEffect, useRef, useState } from "react";
-import { useChangeProfilePicture } from "../Sign_In_Page/useChangeProfilePicture";
-import { ProfileContext } from "./profileContext";
+import { useContext, useEffect, useState } from "react";
+import { useChangeProfilePicture } from "../customHooks/useChangeProfilePictures";
+import { ProfileContext } from "../contexts/profileContext";
 
 export default function CoverPhoto() {
 

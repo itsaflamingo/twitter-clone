@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { auth } from '../firebase/firebaseConfig'
+import { auth } from '../../firebase/firebaseConfig'
 
 export default function useAuth() {
 

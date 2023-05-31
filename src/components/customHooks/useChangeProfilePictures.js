@@ -3,9 +3,8 @@ import defaultPicture from '../../images/twitter-user-default.png'
 import defaultCoverPhoto from '../../images/default-cover-photo.png'
 
 function useChangeProfilePicture(props) {
-
     const { profile, cover } = props;
-     
+
     const [profilePicture, setProfilePicture] = useState(defaultPicture);
     const [coverPhoto, setCoverPhoto] = useState(defaultCoverPhoto);
 

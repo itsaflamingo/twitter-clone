@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import hasProfanity from "./hasProfanity";
+import hasProfanity from "../../functions/hasProfanity";
 import Input from "../forms/Input"
 import UploadPicture from "../Sign_In_Page/UploadPicture";
 import validator from 'validator'

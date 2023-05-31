@@ -1,15 +1,15 @@
 import TweetInput from "./TweetInput";
-import { selectUser } from '../redux/SignInPgSlice'
-import { addTweet, tweetsSelector } from "../redux/createTweetSlice";
 import { useSelector, useDispatch } from "react-redux"
 import { useEffect, useState } from "react";
-import { storeTweets } from "../firebase/manageDbTweets";
+import { storeTweets } from "../../firebase/manageDbTweets";
 import uniqid from 'uniqid'
 import CreateTweetOptions from "./CreateTweetOptions";
-import getDateTime from "../ManageUser/getDateTime";
-import { userAddTweets } from "../redux/userTweetsSlice";
+import getDateTime from "../../functions/getDateTime";
+import { userAddTweets } from "../../redux/userTweetsSlice";
+import { selectUser } from '../../redux/SignInPgSlice'
+import { addTweet, tweetsSelector } from "../../redux/createTweetSlice";
 import ProfilePicture from "../Profile/ProfilePicture";
-import determineTweetOrderNumber from "./determineTweetOrderNumber";
+import determineTweetOrderNumber from "../../functions/determineTweetOrderNumber";
 
 const initialTweetState = (user) => {
     if(user.length === 0) return {};

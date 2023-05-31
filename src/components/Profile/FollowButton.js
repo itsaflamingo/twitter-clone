@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { selectUser, editUser } from "../redux/SignInPgSlice";
-import { ProfileContext } from "./profileContext";
-import useToggleFollowButton from "./useToggleFollowButton";
+import { selectUser, editUser } from "../../redux/SignInPgSlice";
+import { ProfileContext } from "../contexts/profileContext";
+import useToggleFollowButton from "../customHooks/useToggleFollowButton";
 
 export default function FollowButton() {
 

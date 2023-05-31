@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import { ProfileContext } from "./profileContext";
+import { ProfileContext } from "../contexts/profileContext";
 import calendar from '../../images/icons8-calendar-100.png'
 
 export default function DisplayUserInfo() {

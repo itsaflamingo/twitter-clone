@@ -24,8 +24,7 @@ export default async function signIn() {
                     // The AuthCredential type that was used.
                     const credential = GoogleAuthProvider.credentialFromError(error);
                     // ...
-                    console.log(error);
-                    return error
+                    return { errorCode, errorMessage, credential, email }
                 })
     return userInfo;
 }

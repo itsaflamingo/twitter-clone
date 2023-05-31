@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
-import { addUser, usersSelector } from "../redux/allUsersSlice";
+import { addUser, usersSelector } from "../../redux/allUsersSlice";
 import { useEffect } from "react";
-import { getUsers } from "../firebase/manageDbUsers";
+import { getUsers } from "../../firebase/manageDbUsers";
 
 export default function useGetUsersFromDatabase() {
     const users = useSelector(usersSelector);
@@ -16,7 +16,6 @@ export default function useGetUsersFromDatabase() {
                 if(!ignore) {
                     await getUsers().then((res) => {
                         if(res[0] === undefined) return;
-                        console.log('user retrieved');
                         dispatch(addUser(res))
                     }).catch(error => console.log(error));
                 }

@@ -1,18 +1,18 @@
 import { useState, useEffect } from "react";
-import { tweetsSelector } from "../redux/createTweetSlice";
 import { useSelector, useDispatch } from "react-redux";
-import { editUser, selectUser } from "../redux/SignInPgSlice"
-import { userAddTweets } from "../redux/userTweetsSlice";
-import { userTweetsSelector } from "../redux/userTweetsSlice";
-import useGetTweetsFromDatabase from "./useGetTweetsFromDatabase";
+import { editUser, selectUser } from "../../redux/SignInPgSlice"
+import { userAddTweets } from "../../redux/userTweetsSlice";
+import { userTweetsSelector } from "../../redux/userTweetsSlice";
+import { tweetsSelector } from "../../redux/createTweetSlice";
+import { usersSelector } from "../../redux/allUsersSlice";
+import useGetTweetsFromDatabase from "../customHooks/useGetTweetsFromDatabase";
 import Search from "./Search";
 import Header from "./Header";
 import AddMenuAndAside from "../Menu_and_Aside/AddMenuAndAside";
 import CreateTweet from './CreateTweet'
 import DisplayTweets from "../DisplayTweet/DisplayTweets";
-import useAuth from "../Sign_In_Page/useAuth";
+import useAuth from "../customHooks/useAuth";
 import checkIsUserInDatabase from "../../functions/checkIsUserInDatabase";
-import { usersSelector } from "../redux/allUsersSlice";
 
 const filterTweets = (input, allTweets) => allTweets.filter((tweet) => 
     tweet.text === input || 

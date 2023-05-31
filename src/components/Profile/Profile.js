@@ -6,13 +6,13 @@ import { useEffect, useState } from 'react';
 import DisplayUserInfo from './DisplayUserInfo';
 import DisplayTweets from '../DisplayTweet/DisplayTweets';
 import { useDispatch, useSelector } from 'react-redux';
-import { userTweetsSelector } from '../redux/userTweetsSlice';
-import { selectUser } from "../redux/SignInPgSlice"
-import { editUsers, usersSelector } from '../redux/allUsersSlice';
+import { userTweetsSelector } from '../../redux/userTweetsSlice';
+import { selectUser } from "../../redux/SignInPgSlice"
+import { editUsers, usersSelector } from '../../redux/allUsersSlice';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { ProfileProvider } from './profileContext';
-import { tweetsSelector } from '../redux/createTweetSlice';
-import { storeUsers } from '../firebase/manageDbUsers';
+import { ProfileProvider } from '../contexts/profileContext';
+import { tweetsSelector } from '../../redux/createTweetSlice';
+import { storeUsers } from '../../firebase/manageDbUsers';
 
 function Profile() {
 
@@ -36,7 +36,6 @@ function Profile() {
         if(!user.personalInfo.name) returnToDashboard();
         if(location.state === user.personalInfo.name) return;
         setUser(changeUser(users, location)[0]);
-        console.log(changeUser(users, location)[0]);
     }, [location, user])
 
     useEffect(() => {
@@ -50,7 +49,7 @@ function Profile() {
 
     const changeUser = (users, location) => users.filter(user => user.personalInfo.name === location.state);
     const changeUserTweets = (tweets, user) => tweets.filter(tweet => tweet.name === user.personalInfo.name);
-    const returnToDashboard = () => nav('/dashboard');
+    const returnToDashboard = () => nav('/');
 
     // Function to change user through context API.
     const updateUser = (obj) => setUser(obj);

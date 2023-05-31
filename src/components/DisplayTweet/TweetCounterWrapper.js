@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { tweetsSelector } from "../redux/createTweetSlice";
-import { updateTweet } from "../redux/createTweetSlice";
-import { storeTweets } from "../firebase/manageDbTweets";
-import { selectUser } from "../redux/SignInPgSlice";
+import { tweetsSelector } from "../../redux/createTweetSlice";
+import { updateTweet } from "../../redux/createTweetSlice";
+import { storeTweets } from "../../firebase/manageDbTweets";
+import { selectUser } from "../../redux/SignInPgSlice";
 import unlikedHeart from '../../images/heart.svg'
 import likedHeart from '../../images/colored-heart.png'
 
