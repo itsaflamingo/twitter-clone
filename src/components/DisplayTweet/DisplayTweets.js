@@ -1,7 +1,7 @@
 import { useState } from "react";
 import DisplayTweet from "./DisplayTweet";
 import RetweetPopUp from "../Dashboard/RetweetPopUp";
-import orderTweets from "../Dashboard/orderTweets";
+import orderTweets from "../../functions/orderTweets";
 import uniqid from 'uniqid';
 
 export default function DisplayTweets(props) {

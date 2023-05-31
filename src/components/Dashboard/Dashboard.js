@@ -15,7 +15,7 @@ import useAuth from "../customHooks/useAuth";
 import checkIsUserInDatabase from "../../functions/checkIsUserInDatabase";
 
 const filterTweets = (input, allTweets) => allTweets.filter((tweet) => 
-    tweet.text === input || 
+    tweet.text.includes(input) || 
     tweet.name.toLowerCase() === input.toLowerCase() || 
     tweet.handle.toLowerCase() === input.toLowerCase());
 
