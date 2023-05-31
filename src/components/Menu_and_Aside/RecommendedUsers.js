@@ -17,7 +17,6 @@ function RecommendedUsers() {
     const followableUsers = filterUsers(users, user);
 
     const navigateToProfile = (target) => navigate('/profile', { state: target });
-    
 
     return (
         <div id='recommended-users' className='aside'>
