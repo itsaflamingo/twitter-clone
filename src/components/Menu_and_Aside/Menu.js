@@ -36,6 +36,7 @@ export default function Menu() {
     const [hasAccount, setHasAccount] = useState(null);
     const [showEditInfo, setShowEditInfo] = useState(false);
     const [showSignInPopUp, setShowSignInPopUp] = useState(null);
+    const [userUpdated, setUserUpdated] = useState(false);
 
     useGetUsersFromDatabase();
 
@@ -47,7 +48,7 @@ export default function Menu() {
 
     useEffect(() => {
         if('personalInfo' in user === false || !isSignedIn) return;
-        if(isSignedIn && user.personalInfo.hasAccount === true && status !== 'loading') {
+        if(isSignedIn && user.personalInfo.hasAccount === true && status !== 'loading' && userUpdated) {
             // Only store user in database after it has been changed.
             storeUsers(user);
         }
@@ -114,7 +115,7 @@ export default function Menu() {
                 <SignOut setShowSignInPopUp={setShowSignInPopUp} />
                 <DeleteAccount setShowSignInPopUp={setShowSignInPopUp} />
                 {userLength === 0 && <SignInPopup showPopUp={showSignInPopUp} setShowPopUp={setShowSignInPopUp} />}
-                {showEditInfo && (<EditProfileInfo user={user} saveToDatabase={saveNewUserToDatabase} setShowEditInfo={setShowEditInfo} />)}
+                {showEditInfo && (<EditProfileInfo user={user} saveToDatabase={saveNewUserToDatabase} setShowEditInfo={setShowEditInfo} setUserUpdated={setUserUpdated} />)}
             </div>
         </div>
     )

@@ -6,7 +6,7 @@ import validator from 'validator'
 
 export default function EditProfileInfo(props) {
 
-    const { saveToDatabase, user, setShowEditInfo } = props;
+    const { saveToDatabase, user, setShowEditInfo, setUserUpdated } = props;
     const userExists = user.personalInfo.hasOwnProperty('name');
     
     const [profileInfo, setProfileInfo] = useState({
@@ -141,8 +141,8 @@ export default function EditProfileInfo(props) {
 
     const submitInfo = (e) => {
         e.preventDefault();
-        console.log(e, user, profileInfo);
         saveToDatabase(e, user, profileInfo);
+        setUserUpdated(true);
         setShowEditInfo(false);
     }
 

@@ -10,13 +10,19 @@ function useChangeProfilePicture(props) {
     const [coverPhoto, setCoverPhoto] = useState(defaultCoverPhoto);
 
     useEffect(() => {
-        if(profile.length === 0) return;
-        setProfilePicture(profile);
+        if (!profile) {
+            setProfilePicture(defaultPicture);
+        } else {
+            setProfilePicture(profile);
+        }
     }, [profile])
 
     useEffect(() => {
-        if(cover.length === 0) return;
-        setCoverPhoto(cover);
+        if (!cover) {
+            setCoverPhoto(defaultCoverPhoto);
+        } else {
+            setCoverPhoto(cover);
+        }
     }, [cover])
 
     return { profilePicture, coverPhoto };

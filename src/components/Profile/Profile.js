@@ -36,6 +36,7 @@ function Profile() {
         if(!user.personalInfo.name) returnToDashboard();
         if(location.state === user.personalInfo.name) return;
         setUser(changeUser(users, location)[0]);
+        console.log(changeUser(users, location)[0]);
     }, [location, user])
 
     useEffect(() => {
