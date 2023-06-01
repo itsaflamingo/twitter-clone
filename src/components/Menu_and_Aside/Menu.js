@@ -6,7 +6,7 @@ import userIcon from '../../images/user.png'
 import home from '../../images/home-black.png'
 import SignOut from './SignOut';
 import DeleteAccount from './DeleteAccount';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import SignInPopup from '../Dashboard/SignInPopup';
 import GoogleSignIn from './GoogleSignIn';
 import { addUser, usersSelector } from '../../redux/allUsersSlice';
@@ -16,6 +16,7 @@ import checkIsUserInDatabase from '../../functions/checkIsUserInDatabase';
 import addUserInfoToUser from '../../functions/addUserInfoToUser';
 import EditProfileInfo from '../ManageUser/EditProfileInfo';
 import useGetUsersFromDatabase from '../customHooks/useGetUsersFromDatabase';
+import { ShowSignInPopupContext } from '../contexts/signInPopupContext';
 
 export default function Menu() {
 
@@ -35,8 +36,10 @@ export default function Menu() {
     // Keep track of whether logged in user has account, and is signed in
     const [hasAccount, setHasAccount] = useState(null);
     const [showEditInfo, setShowEditInfo] = useState(false);
-    const [showSignInPopUp, setShowSignInPopUp] = useState(null);
     const [userUpdated, setUserUpdated] = useState(false);
+
+    const { showPopup, setShowPopup } = useContext(ShowSignInPopupContext);
+
 
     useGetUsersFromDatabase();
 
@@ -108,13 +111,13 @@ export default function Menu() {
                     <p className='menu-title'>Home</p>
                     </button>
                 <button className='menu-btn' 
-                onClick={userLength === 0 ? () => setShowSignInPopUp(true) : () => visitProfile()}>
+                onClick={userLength === 0 ? () => setShowPopup(true) : () => visitProfile()}>
                     <img className='user-icon' src={userIcon} alt='user' />
                     <p className='menu-title'>Profile</p>
                     </button>
-                <SignOut setShowSignInPopUp={setShowSignInPopUp} />
-                <DeleteAccount setShowSignInPopUp={setShowSignInPopUp} />
-                {userLength === 0 && <SignInPopup showPopUp={showSignInPopUp} setShowPopUp={setShowSignInPopUp} />}
+                <SignOut />
+                <DeleteAccount />
+                {userLength === 0 && <SignInPopup />}
                 {showEditInfo && (<EditProfileInfo user={user} saveToDatabase={saveNewUserToDatabase} setShowEditInfo={setShowEditInfo} setUserUpdated={setUserUpdated} />)}
             </div>
         </div>

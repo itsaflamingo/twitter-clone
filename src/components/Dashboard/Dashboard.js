@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { editUser, selectUser } from "../../redux/SignInPgSlice"
 import { userAddTweets } from "../../redux/userTweetsSlice";
@@ -13,6 +13,8 @@ import CreateTweet from './CreateTweet'
 import DisplayTweets from "../DisplayTweet/DisplayTweets";
 import useAuth from "../customHooks/useAuth";
 import checkIsUserInDatabase from "../../functions/checkIsUserInDatabase";
+import { ShowSignInPopupContext } from "../contexts/signInPopupContext";
+import SignInPopup from "./SignInPopup";
 
 const filterTweets = (input, allTweets) => allTweets.filter((tweet) => 
     tweet.text.includes(input) || 
@@ -28,6 +30,9 @@ function Dashboard() {
     const user = useSelector(selectUser);
     const users = useSelector(usersSelector);
     const userTweets = useSelector(userTweetsSelector);
+
+    const { showPopup, setShowPopup } = useContext(ShowSignInPopupContext);
+    
     const { signedInUser, isSignedIn } = useAuth();
 
     // Create showTweets and tweets states
@@ -80,6 +85,7 @@ function Dashboard() {
             <Search onSubmit={onSubmit} />
             <CreateTweet retweet={[]} showRetweet={null} retweetAriaLabel='create tweet input' tweetButtonAriaLabel='create tweet submit' />
             {showTweets && (<DisplayTweets tweets={tweets} />)}
+            {showPopup && <SignInPopup />}
         </div>
     )
 }
