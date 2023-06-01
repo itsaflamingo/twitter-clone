@@ -64,6 +64,7 @@ export default function Menu() {
     }, [])
 
     useEffect(() => {
+        if(status !== 'succeed') return;
         if(hasAccount === false) {
             setShowEditInfo(true);
         }
@@ -117,7 +118,6 @@ export default function Menu() {
                     </button>
                 <SignOut />
                 <DeleteAccount />
-                {userLength === 0 && <SignInPopup />}
                 {showEditInfo && (<EditProfileInfo user={user} saveToDatabase={saveNewUserToDatabase} setShowEditInfo={setShowEditInfo} setUserUpdated={setUserUpdated} />)}
             </div>
         </div>

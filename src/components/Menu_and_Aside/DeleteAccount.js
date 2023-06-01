@@ -7,12 +7,16 @@ import { deleteTweetFromDb } from '../../firebase/manageDbTweets';
 import signOutUser from '../../firebase/signOutUser';
 import { resetUser } from '../../redux/SignInPgSlice';
 import useAuth from '../customHooks/useAuth';
+import { useContext } from 'react';
+import { ShowSignInPopupContext } from '../contexts/signInPopupContext';
 
-export default function DeleteAccount({ setShowSignInPopUp }) {
+export default function DeleteAccount() {
 
     const { signedInUser } = useAuth();
 
     const tweets = useSelector(tweetsSelector);
+
+    const { setShowPopup } = useContext(ShowSignInPopupContext);
 
     const nav = useNavigate();
     const dispatch = useDispatch();
@@ -42,7 +46,7 @@ export default function DeleteAccount({ setShowSignInPopUp }) {
     
     return (
         <button className='menu-btn'
-        onClick={signedInUser ? () => signOutAndDeleteUser() : () => setShowSignInPopUp(true)}>
+        onClick={signedInUser ? () => signOutAndDeleteUser() : () => setShowPopup(true)}>
             <img className='user-icon' src={deleteAccount} alt='delete account' />
                 <p className='menu-title'>Delete Account</p>
         </button>

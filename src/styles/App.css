@@ -76,7 +76,7 @@ body {
     transform: scale(1.1);
 }
 #sign-up {
-    position: absolute;
+    position: fixed;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -195,6 +195,7 @@ body {
 #app {
     display: flex;
     justify-content: center;
+    position: relative;
 }
 #dashboard {
     height: 100%;
@@ -205,6 +206,21 @@ body {
     border-left: 1px solid var(--grey);
     border-right: 1px solid var(--grey);
     position: relative;
+}
+.sign-in-popup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    left: 50%;
+    bottom: 50%;
+    transform: translate(-50%, -50%); 
+    z-index: 20;
+    background-color: white;
+    border-radius: 20px;
+    z-index: 10;
+    box-shadow: var(--box-shadow);
+    padding: 15px;
 }
 #tweet-display {
     height: 60%;
@@ -334,15 +350,20 @@ button:hover, a:hover {
     max-width: 100%;
     max-height: 100%;
 }
-.submit-tweet {
-    width: 90px;
-    height: 38px;
+.submit-tweet, .sign-in {
     border-radius: 30px;
     border: none;
     background-color: var(--hooter-blue);
     color: white;
     font-weight: 900;
     font-size: 15px;
+}
+.submit-tweet {
+    width: 90px;
+    height: 38px;
+}
+.sign-in {
+    padding: 15px;
 }
 input:focus, textarea:focus {
     outline: none;

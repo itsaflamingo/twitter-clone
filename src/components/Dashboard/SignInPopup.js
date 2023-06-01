@@ -6,7 +6,7 @@ export default function SignInPopup() {
     const { setShowPopup } = useContext(ShowSignInPopupContext);
 
     return (
-    <div>
+    <div className="sign-in-popup">
         <h4>Sorry, log in to gain full access</h4>
         <button>Sign In</button>
         <button onClick={() => setShowPopup(false)}>No, thanks</button>

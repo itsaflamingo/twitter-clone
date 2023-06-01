@@ -1,13 +1,20 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import hasProfanity from "../../functions/hasProfanity";
 import Input from "../forms/Input"
 import UploadPicture from "../Sign_In_Page/UploadPicture";
 import validator from 'validator'
+import { ShowSignInPopupContext } from "../contexts/signInPopupContext";
 
 export default function EditProfileInfo(props) {
 
     const { saveToDatabase, user, setShowEditInfo, setUserUpdated } = props;
+    const { setShowPopup } = useContext(ShowSignInPopupContext);
+
     const userExists = user.personalInfo.hasOwnProperty('name');
+
+    useEffect(() => {
+        setShowPopup(false);
+    }, [])
     
     const [profileInfo, setProfileInfo] = useState({
         hasAccount: true,

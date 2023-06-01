@@ -85,7 +85,7 @@ function Dashboard() {
             <Search onSubmit={onSubmit} />
             <CreateTweet retweet={[]} showRetweet={null} retweetAriaLabel='create tweet input' tweetButtonAriaLabel='create tweet submit' />
             {showTweets && (<DisplayTweets tweets={tweets} />)}
-            {showPopup && <SignInPopup />}
+            {showPopup === true && <SignInPopup />}
         </div>
     )
 }
