@@ -350,7 +350,11 @@ button:hover, a:hover {
     max-width: 100%;
     max-height: 100%;
 }
-.submit-tweet, .sign-in {
+.popup-button-container {
+    display: flex;
+    gap: 15px;
+}
+.submit-tweet, .sign-in, .close-popup {
     border-radius: 30px;
     border: none;
     background-color: var(--hooter-blue);
@@ -362,8 +366,12 @@ button:hover, a:hover {
     width: 90px;
     height: 38px;
 }
+.close-popup {
+    padding: 15px;
+}
 .sign-in {
     padding: 15px;
+    background-color: rgb(250,68,167);
 }
 input:focus, textarea:focus {
     outline: none;
