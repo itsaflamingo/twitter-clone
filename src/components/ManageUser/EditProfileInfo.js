@@ -10,8 +10,6 @@ export default function EditProfileInfo(props) {
     const { saveToDatabase, user, setShowEditInfo, setUserUpdated } = props;
     const { setShowPopup } = useContext(ShowSignInPopupContext);
 
-    const userExists = user.personalInfo.hasOwnProperty('name');
-
     useEffect(() => {
         setShowPopup(false);
     }, [])

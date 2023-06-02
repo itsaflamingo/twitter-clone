@@ -68,7 +68,7 @@ export default function Menu() {
         if(hasAccount === false) {
             setShowEditInfo(true);
         }
-    }, [hasAccount])
+    }, [user])
 
     // If user is in database, return true, else add new user and return false
     const ifAddToDatabase = (user, users) => {
