@@ -7,7 +7,6 @@ import home from '../../images/home-black.png'
 import SignOut from './SignOut';
 import DeleteAccount from './DeleteAccount';
 import { useContext, useEffect, useState } from 'react';
-import SignInPopup from '../Dashboard/SignInPopup';
 import GoogleSignIn from './GoogleSignIn';
 import { addUser, usersSelector } from '../../redux/allUsersSlice';
 import useAuth from '../customHooks/useAuth';
@@ -38,8 +37,7 @@ export default function Menu() {
     const [showEditInfo, setShowEditInfo] = useState(false);
     const [userUpdated, setUserUpdated] = useState(false);
 
-    const { showPopup, setShowPopup } = useContext(ShowSignInPopupContext);
-
+    const { setShowPopup } = useContext(ShowSignInPopupContext);
 
     useGetUsersFromDatabase();
 
