@@ -15,13 +15,7 @@ import useAuth from "../customHooks/useAuth";
 import checkIsUserInDatabase from "../../functions/checkIsUserInDatabase";
 import { ShowSignInPopupContext } from "../contexts/signInPopupContext";
 import SignInPopup from "./SignInPopup";
-
-const filterTweets = (input, allTweets) => allTweets.filter((tweet) => 
-    tweet.text.includes(input) || 
-    tweet.name.toLowerCase() === input.toLowerCase() || 
-    tweet.handle.toLowerCase() === input.toLowerCase());
-
-const filterUserTweets = (tweets, user) => tweets.filter(tweet => tweet.id === user.personalInfo.id);
+import { filterUserTweets } from "../../functions/filterTweets";
 
 function Dashboard() {
 
@@ -31,7 +25,7 @@ function Dashboard() {
     const users = useSelector(usersSelector);
     const userTweets = useSelector(userTweetsSelector);
 
-    const { showPopup, setShowPopup } = useContext(ShowSignInPopupContext);
+    const { showPopup } = useContext(ShowSignInPopupContext);
     
     const { signedInUser, isSignedIn } = useAuth();
 
@@ -74,15 +68,10 @@ function Dashboard() {
         addToUserTweets(filterUserTweets(tweets, user));
     }, [tweets])
 
-    const onSubmit = (e, input) => {
-        e.preventDefault();
-        setTweets(filterTweets(input, allTweets))
-    }
-
     return (
         <div id='dashboard'>
             <Header />
-            <Search onSubmit={onSubmit} />
+            <Search setTweets={setTweets} />
             <CreateTweet retweet={[]} showRetweet={null} retweetAriaLabel='create tweet input' tweetButtonAriaLabel='create tweet submit' />
             {showTweets && (<DisplayTweets tweets={tweets} />)}
             {showPopup === true && <SignInPopup />}
