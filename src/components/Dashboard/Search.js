@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import Input from '../forms/Input';
 import search from '../../images/search.png';
 import { filterTweets } from '../../functions/filterTweets';
@@ -19,9 +18,9 @@ export default function Search(props) {
     return (
         <div className="search" tabIndex='1'>
             <Input type='search' onChange={onChange} placeholder='Search Hooter' />
-            <button type='submit' className='search-btn'>
+            <div className='search-btn'>
                 <img className='search-icon' src={search} alt='search' />
-            </button>
+            </div>
         </div>
     )
 }
